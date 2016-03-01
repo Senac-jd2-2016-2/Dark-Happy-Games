@@ -11,14 +11,24 @@ namespace maryu
     {
         public static personagem[] enemy = new personagem[3];
 
-        public static personagem hero = new personagem(150, 240);
+        public static personagem hero = new personagem(15, 24);
+
+        public static tiles[] normalbrick = new tiles[40];
 
         public static Texture2D background;
+
+        
 
         public static void inicializar(ContentManager content)
         {
             hero.textura = content.Load<Texture2D>("vine");
             background = content.Load<Texture2D>("kermit");
+
+            for (int i = 0; i < normalbrick.Length; i++)
+            {
+                normalbrick[i] = new tiles(10 + (i * 20), 14);
+                normalbrick[i].tilesimagem = content.Load<Texture2D>("brick");
+            }
 
             for (int i = 0; i < enemy.Length; i++)
             {
