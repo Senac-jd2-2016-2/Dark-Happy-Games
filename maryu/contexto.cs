@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace maryu
         public static personagem hero = new personagem(150, 240);
 
         public static Texture2D background;
+        public static Rectangle fundo = new Rectangle(0, 0, 1000, 1000);
+        
 
         public static void inicializar(ContentManager content)
         {

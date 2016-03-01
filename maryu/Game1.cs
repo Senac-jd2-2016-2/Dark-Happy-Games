@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -29,7 +30,9 @@ namespace maryu
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            graphics.PreferredBackBufferWidth = 1000;
+            graphics.PreferredBackBufferHeight = 700;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -41,7 +44,7 @@ namespace maryu
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            contexto.inicializar(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -68,21 +71,21 @@ namespace maryu
             Keys[] keys = Keyboard.GetState().GetPressedKeys();
             foreach (Keys k in keys)
             {
-                if (k.Equals(Keys.Up))
+                if (k.Equals(Keys.A))
                 {
-                    contexto.hero.gohorizotal(-2);
+                    contexto.hero.gohorizotal(-5);
                 }
-                if (k.Equals(Keys.Down))
+                if (k.Equals(Keys.D))
                 {
-                    contexto.hero.gohorizotal(2);
+                    contexto.hero.gohorizotal(5);
                 }
-                if (k.Equals(Keys.Right))
+                if (k.Equals(Keys.S))
                 {
-                    contexto.hero.govertical(2);
+                    contexto.hero.govertical(5);
                 }
-                if (k.Equals(Keys.Left))
+                if (k.Equals(Keys.W))
                 {
-                    contexto.hero.govertical(-2);
+                    contexto.hero.govertical(-5);
                 }
             }
             // TODO: Add your update logic here
@@ -99,12 +102,12 @@ namespace maryu
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(contexto.background, new Rectangle(0, 0, 800, 480), Color.White);
+            spriteBatch.Draw(contexto.background, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
 
             spriteBatch.Draw(contexto.hero.textura, contexto.hero.getVector(), Color.White);
             foreach (personagem p in contexto.enemy)
             {
-                spriteBatch.Draw(p.textura, p.getVector(), Color.White);
+                spriteBatch.Draw(p.textura, p.getVector(), Color.Red);
             }
 
             spriteBatch.End();
