@@ -29,12 +29,10 @@ namespace maryu
         /// </summary>
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 1000;  // set this value to the desired width of your window
-            graphics.PreferredBackBufferHeight = 700;   // set this value to the desired height of your window
-            graphics.ApplyChanges();
-
             // TODO: Add your initialization logic here
-
+            graphics.PreferredBackBufferWidth = 1000;
+            graphics.PreferredBackBufferHeight = 700;
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -46,11 +44,7 @@ namespace maryu
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
             contexto.inicializar(Content);
-           
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -114,10 +108,6 @@ namespace maryu
             foreach (personagem p in contexto.enemy)
             {
                 spriteBatch.Draw(p.textura, p.getVector(), Color.Red);
-            }
-            foreach (personagem k in contexto.enemy)
-            {
-                spriteBatch.Draw(k.tilesimagem, k.getVector(), Color.Red);
             }
 
             spriteBatch.End();

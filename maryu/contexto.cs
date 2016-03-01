@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,8 @@ namespace maryu
         public static tiles[] normalbrick = new tiles[40];
 
         public static Texture2D background;
+        public static Rectangle fundo = new Rectangle(0, 0, 1000, 1000);
+        
 
         
 
@@ -32,7 +35,7 @@ namespace maryu
 
             for (int i = 0; i < enemy.Length; i++)
             {
-                enemy[i] = new personagem(100 + (i * 200), 140);
+                enemy[i] = new personagem(10 + (i * 20), 14);
                 enemy[i].textura = content.Load<Texture2D>("vine");
             }
         }
