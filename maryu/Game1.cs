@@ -45,6 +45,7 @@ namespace maryu
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             contexto.inicializar(Content);
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -109,7 +110,11 @@ namespace maryu
             {
                 spriteBatch.Draw(p.textura, p.getVector(), Color.Red);
             }
-
+            
+            foreach (tiles t in tiles.tijolinhos)
+            {
+                spriteBatch.Draw(t.tilesimagem, t.getVector(), Color.White);
+            }
             spriteBatch.End();
 
             // TODO: Add your drawing code here
