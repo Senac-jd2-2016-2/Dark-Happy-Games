@@ -14,7 +14,8 @@ namespace maryu
 
         public static personagem hero = new personagem(15, 24);
 
-        public static tiles normalbrick;
+        public static tiles normalbrick = new tiles(15, 24);
+        public static Texture2D tilesimagem;
 
         public static Texture2D background;
         public static Rectangle fundo = new Rectangle(0, 0, 1000, 1000);
@@ -25,6 +26,7 @@ namespace maryu
         {
             hero.textura = content.Load<Texture2D>("vine");
             background = content.Load<Texture2D>("kermit");
+            normalbrick.textura = content.Load<Texture2D>("brick");
              
          
             for (int i = 0; i < enemy.Length; i++)

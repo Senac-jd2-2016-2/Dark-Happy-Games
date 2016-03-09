@@ -113,7 +113,7 @@ namespace maryu
             
             foreach (tiles t in tiles.tijolinhos)
             {
-                spriteBatch.Draw(t.tilesimagem, t.getVector(), Color.White);
+                spriteBatch.Draw(t.textura, t.getVector(), Color.White);
             }
             spriteBatch.End();
 

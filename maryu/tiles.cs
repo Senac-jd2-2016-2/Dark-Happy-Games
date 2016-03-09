@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,12 @@ namespace maryu
 
         public int tilesy;
 
-        public Texture2D tilesimagem;
-        public  static Rectangle tijolos = new Rectangle(0, 0, 100, 100);
+        
+        public static Rectangle tijolos = new Rectangle(0, 0, 100, 100);
         public static List<tiles> tijolinhos = new List<tiles>();
-        
-        
+
+        public Texture2D textura;
+
         public tiles(int x1,int y1)
         {
             tilesx = x1;
@@ -28,8 +30,10 @@ namespace maryu
             return new Vector2(tilesx, tilesy);
         }
 
-        void inicializarLista()
+        void inicializarLista(ContentManager content)
         {
+        
+            
             for (int i = 0; i < 5; i++)
             {
                 tiles rect = new tiles(10,10);
