@@ -111,10 +111,10 @@ namespace maryu
                 spriteBatch.Draw(p.textura, p.getVector(), Color.Red);
             }
             
-            foreach (tiles t in tiles.tijolinhos)
+            foreach (tiles t in contexto.tijolinhos)
             {
-                spriteBatch.Draw(t.tilesimagem, t.getVector(), Color.White);
-            }
+                spriteBatch.Draw(tiles.normalbrick, t.getVector() , Color.White);
+            } 
             spriteBatch.End();
 
             // TODO: Add your drawing code here
