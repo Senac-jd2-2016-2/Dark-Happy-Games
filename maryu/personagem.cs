@@ -7,7 +7,7 @@ using System.Text;
 
 namespace maryu
 {
-    class personagem
+    class Personagem
     {
          public int x;
 
@@ -15,7 +15,7 @@ namespace maryu
 
         public Texture2D textura;
 
-        public personagem(int x1, int y1)
+        public Personagem(int x1, int y1)
         {
 
             x = x1;

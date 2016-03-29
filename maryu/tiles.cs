@@ -8,7 +8,7 @@ using System.Text;
 
 namespace maryu
 {
-    class tiles
+    class Tiles
     {
         public int tilesx;
 
@@ -18,7 +18,7 @@ namespace maryu
         public  static Rectangle tijolos = new Rectangle(500, 500, 100, 100);
         
         
-        public tiles(int x1,int y1)
+        public Tiles(int x1,int y1)
         {
             tilesx = x1;
             tilesy = y1;
@@ -27,14 +27,8 @@ namespace maryu
         {
             return new Vector2(tilesx, tilesy);
         }
-        public static void inicializar(ContentManager content)
-        {
-            normalbrick = content.Load<Texture2D>("brick");
-        }
-        void inicializarLista()
-        {
-           
-        }
+        
+
          
     }
 }

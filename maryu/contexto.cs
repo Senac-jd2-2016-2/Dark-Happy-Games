@@ -8,58 +8,55 @@ using System.Text;
 
 namespace maryu
 {
-    class contexto
+    class Contexto
     {
-        public static personagem[] enemy = new personagem[3];
-
-        public static personagem hero = new personagem(15, 24);
-
-        
+        public static Personagem[] enemy = new Personagem[3];
+        public static Personagem hero = new Personagem(15, 24);     
 
         public static Texture2D background;
         public static Rectangle fundo = new Rectangle(0, 0, 1000, 1000);
 
-        public static List<tiles> tijolinhos = new List<tiles>();
+        public static List<Tiles> tijolinhos = new List<Tiles>();
 
       
 
-
+        //>>>>>------PARA CARREGAR AS IMAGENS N SHIT------<<<<<
         public static void inicializar(ContentManager content)
         {
             hero.textura = content.Load<Texture2D>("vine");
             background = content.Load<Texture2D>("kermit");
-            tiles.normalbrick =  content.Load<Texture2D>("brick");
+            Tiles.normalbrick = content.Load<Texture2D>("brick");
            
              
          
             for (int i = 0; i < enemy.Length; i++)
             {
-                enemy[i] = new personagem(10 + (i * 20), 14);
+                enemy[i] = new Personagem(10 + (i * 20), 14);
                 enemy[i].textura = content.Load<Texture2D>("vine");
             }
 
             for (int i = 0; i < 5; i++)
             {
-                tiles rect = new tiles(0, 200);
+                Tiles rect = new Tiles(0, 200);
                 tijolinhos.Add(rect);
                 if (i == 1)
                 {
-                    tiles rect1 = new tiles(250, 200);
+                    Tiles rect1 = new Tiles(250, 200);
                     tijolinhos.Add(rect1);
                 }
                 if (i == 2)
                 {
-                    tiles rect3 = new tiles(450, 200);
+                    Tiles rect3 = new Tiles(450, 200);
                     tijolinhos.Add(rect3);
                 }
                 if (i == 3)
                 {
-                    tiles rect2 = new tiles(650, 200);
+                    Tiles rect2 = new Tiles(650, 200);
                     tijolinhos.Add(rect2);
                 }
                 if (i == 4)
                 {
-                    tiles rect4 = new tiles(850, 200);
+                    Tiles rect4 = new Tiles(850, 200);
                     tijolinhos.Add(rect4);
                 }
             }

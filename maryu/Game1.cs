@@ -30,6 +30,11 @@ namespace maryu
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            //>>>>>--------------NOME--------------<<<<<
+            this.Window.Title = "Russian Attack 2";
+
+            //>>>>>-----------TAMANHO DA TELA-----------<<<<<
             graphics.PreferredBackBufferWidth = 1000;
             graphics.PreferredBackBufferHeight = 700;
             graphics.ApplyChanges();
@@ -44,7 +49,7 @@ namespace maryu
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            contexto.inicializar(Content);
+            Contexto.inicializar(Content);
             
             // TODO: use this.Content to load your game content here
         }
@@ -68,25 +73,25 @@ namespace maryu
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
+            //---MOVIMENTO DO DIMITRI
             Keys[] keys = Keyboard.GetState().GetPressedKeys();
             foreach (Keys k in keys)
             {
                 if (k.Equals(Keys.A))
                 {
-                    contexto.hero.gohorizotal(-5);
+                    Contexto.hero.gohorizotal(-5);
                 }
                 if (k.Equals(Keys.D))
                 {
-                    contexto.hero.gohorizotal(5);
+                    Contexto.hero.gohorizotal(5);
                 }
                 if (k.Equals(Keys.S))
                 {
-                    contexto.hero.govertical(5);
+                    Contexto.hero.govertical(5);
                 }
                 if (k.Equals(Keys.W))
                 {
-                    contexto.hero.govertical(-5);
+                    Contexto.hero.govertical(-5);
                 }
             }
             // TODO: Add your update logic here
@@ -103,17 +108,17 @@ namespace maryu
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(contexto.background, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            spriteBatch.Draw(Contexto.background, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
 
-            spriteBatch.Draw(contexto.hero.textura, contexto.hero.getVector(), Color.White);
-            foreach (personagem p in contexto.enemy)
+            spriteBatch.Draw(Contexto.hero.textura, Contexto.hero.getVector(), Color.White);
+            foreach (Personagem p in Contexto.enemy)
             {
                 spriteBatch.Draw(p.textura, p.getVector(), Color.Red);
             }
             
-            foreach (tiles t in contexto.tijolinhos)
+            foreach (Tiles t in Contexto.tijolinhos)
             {
-                spriteBatch.Draw(tiles.normalbrick, t.getVector() , Color.White);
+                spriteBatch.Draw(Tiles.normalbrick, t.getVector() , Color.White);
             } 
             spriteBatch.End();
 
