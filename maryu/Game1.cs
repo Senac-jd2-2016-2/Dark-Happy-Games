@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 namespace maryu
 {
     /// <summary>
@@ -12,15 +11,11 @@ namespace maryu
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -30,17 +25,14 @@ namespace maryu
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             //>>>>>--------------NOME--------------<<<<<
             this.Window.Title = "Russian Attack 2";
-
             //>>>>>-----------TAMANHO DA TELA-----------<<<<<
             graphics.PreferredBackBufferWidth = 1000;
             graphics.PreferredBackBufferHeight = 700;
             graphics.ApplyChanges();
             base.Initialize();
         }
-
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -49,11 +41,9 @@ namespace maryu
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Contexto.inicializar(Content);
-            
+            Contexto.inicializar(Content); 
             // TODO: use this.Content to load your game content here
         }
-
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.
@@ -62,7 +52,6 @@ namespace maryu
         {
             // TODO: Unload any non ContentManager content here
         }
-
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -72,7 +61,6 @@ namespace maryu
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
             //---MOVIMENTO DO DIMITRI
             Keys[] keys = Keyboard.GetState().GetPressedKeys();
             foreach (Keys k in keys)
@@ -95,10 +83,8 @@ namespace maryu
                 }
             }
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
-
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -106,24 +92,19 @@ namespace maryu
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             spriteBatch.Begin();
             spriteBatch.Draw(Contexto.background, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
-
             spriteBatch.Draw(Contexto.hero.textura, Contexto.hero.getVector(), Color.White);
             foreach (Personagem p in Contexto.enemy)
             {
                 spriteBatch.Draw(p.textura, p.getVector(), Color.Red);
-            }
-            
+            }          
             foreach (Tiles t in Contexto.tijolinhos)
             {
                 spriteBatch.Draw(Tiles.normalbrick, t.getVector() , Color.White);
             } 
             spriteBatch.End();
-
             // TODO: Add your drawing code here
-
             base.Draw(gameTime);
         }
     }

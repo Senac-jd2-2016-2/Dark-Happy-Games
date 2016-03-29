@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace maryu
 {
 #if WINDOWS || LINUX

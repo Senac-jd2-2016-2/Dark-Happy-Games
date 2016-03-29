@@ -5,20 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 namespace maryu
 {
     class Tiles
     {
         public int tilesx;
-
         public int tilesy;
         public static Texture2D normalbrick;
-        
-        public  static Rectangle tijolos = new Rectangle(500, 500, 100, 100);
-        
-        
-        public Tiles(int x1,int y1)
+        public Tiles(int x1, int y1)
         {
             tilesx = x1;
             tilesy = y1;
@@ -27,8 +21,5 @@ namespace maryu
         {
             return new Vector2(tilesx, tilesy);
         }
-        
-
-         
     }
 }
