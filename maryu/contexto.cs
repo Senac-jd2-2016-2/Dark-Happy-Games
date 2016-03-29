@@ -40,26 +40,26 @@ namespace maryu
 
             for (int i = 0; i < 5; i++)
             {
-                tiles rect = new tiles(10, 100);
+                tiles rect = new tiles(0, 200);
                 tijolinhos.Add(rect);
                 if (i == 1)
                 {
-                    tiles rect1 = new tiles(20, 200);
+                    tiles rect1 = new tiles(250, 200);
                     tijolinhos.Add(rect1);
                 }
                 if (i == 2)
                 {
-                    tiles rect3 = new tiles(30, 300);
+                    tiles rect3 = new tiles(450, 200);
                     tijolinhos.Add(rect3);
                 }
                 if (i == 3)
                 {
-                    tiles rect2 = new tiles(40, 400);
+                    tiles rect2 = new tiles(650, 200);
                     tijolinhos.Add(rect2);
                 }
                 if (i == 4)
                 {
-                    tiles rect4 = new tiles(50, 500);
+                    tiles rect4 = new tiles(850, 200);
                     tijolinhos.Add(rect4);
                 }
             }

@@ -15,7 +15,7 @@ namespace maryu
         public int tilesy;
         public static Texture2D normalbrick;
         
-        public  static Rectangle tijolos = new Rectangle(0, 0, 100, 100);
+        public  static Rectangle tijolos = new Rectangle(500, 500, 100, 100);
         
         
         public tiles(int x1,int y1)
