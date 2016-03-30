@@ -10,6 +10,7 @@ namespace maryu
     {
         public int x;
         public int y;
+
         public Texture2D textura;
         public Personagem(int x1, int y1)
         {

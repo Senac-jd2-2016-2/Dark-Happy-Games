@@ -11,7 +11,6 @@ namespace maryu
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -94,16 +93,16 @@ namespace maryu
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            spriteBatch.Draw(Contexto.background, new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            spriteBatch.Draw(Contexto.background, Contexto.fundo, Color.White);
             spriteBatch.Draw(Contexto.hero.textura, Contexto.hero.getVector(), Color.White);
             foreach (Personagem p in Contexto.enemy)
             {
-                //------------------TTTTTTIIIIIIIJOOOOOOOOOLLLLLLOOOOOOOOS---------
                 spriteBatch.Draw(p.textura, p.getVector(), Color.Red);
             }          
             foreach (Tiles t in Contexto.tijolinhos)
             {
-                spriteBatch.Draw(Tiles.normalbrick, Contexto.tijolos , Color.White);
+                //--------------------------->esquece, eu mudei o tamanho da foto do tijolos
+                spriteBatch.Draw(Tiles.normalbrick, t.getVector(),Color.BlueViolet);
             } 
             spriteBatch.End();
             // TODO: Add your drawing code here
