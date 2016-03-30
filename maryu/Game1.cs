@@ -11,6 +11,7 @@ namespace maryu
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -97,11 +98,12 @@ namespace maryu
             spriteBatch.Draw(Contexto.hero.textura, Contexto.hero.getVector(), Color.White);
             foreach (Personagem p in Contexto.enemy)
             {
+                //------------------TTTTTTIIIIIIIJOOOOOOOOOLLLLLLOOOOOOOOS---------
                 spriteBatch.Draw(p.textura, p.getVector(), Color.Red);
             }          
             foreach (Tiles t in Contexto.tijolinhos)
             {
-                spriteBatch.Draw(Tiles.normalbrick, t.getVector() , Color.White);
+                spriteBatch.Draw(Tiles.normalbrick, Contexto.tijolos , Color.White);
             } 
             spriteBatch.End();
             // TODO: Add your drawing code here
