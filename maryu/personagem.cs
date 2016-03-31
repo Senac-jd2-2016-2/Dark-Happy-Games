@@ -8,10 +8,10 @@ namespace maryu
 {
     class Personagem
     {
-        public int x;
-        public int y;
+        public float x;
+        public float y;
 
-        public Texture2D textura;
+        public Texture2D herotextura;
         public Personagem(int x1, int y1)
         {
             x = x1;
