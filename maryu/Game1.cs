@@ -16,8 +16,6 @@ namespace maryu
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Rectangle terra;
-        
         bool Jump;
 
         public Game1()
@@ -35,9 +33,6 @@ namespace maryu
             graphics.PreferredBackBufferWidth = 1200;
             graphics.PreferredBackBufferHeight = 750;
             graphics.ApplyChanges();
-
-
-            terra = new Rectangle(700, 200 , 500, 500);
             base.Initialize();
         }
        
@@ -45,8 +40,7 @@ namespace maryu
         {
            
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Contexto.inicializar(Content);
-            
+            Contexto.inicializar(Content); 
             
         }
         
@@ -75,12 +69,13 @@ namespace maryu
             {
                 Jump = true;
             }
-            //if (Jump)
-            //{
-            //   Contexto.herogravy.jump (Contexto.hero, Jump);
-            //    Jump = Contexto.herogravy.jump(Contexto.hero, Jump); 
-            //}
-            //Contexto.herogravy.gravidad(Contexto.hero);
+            if (Jump)
+            {
+                Contexto.herogravy.jump (Contexto.hero, Jump);
+                Jump = Contexto.herogravy.jump(Contexto.hero, Jump);
+                Contexto.herogravy.gravidad(Contexto.hero);
+            }
+            
 
             //---COLISAO
 
@@ -97,17 +92,16 @@ namespace maryu
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(Contexto.background, new Rectangle(0,0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
-            spriteBatch.Draw(Contexto.hero.herotextura, new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y,50,50) , Color.White);
+            spriteBatch.Draw(Contexto.hero.herotextura, new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y,30,30) , Color.White);
             foreach (Personagem p in Contexto.enemy)
             {
                 spriteBatch.Draw(p.herotextura, p.getVector(), Color.Red);
             }          
             foreach (Tiles t in Contexto.tijolinhos)
             {
-
-                spriteBatch.Draw(Tiles.normalbrick, t.getVector(), Color.White);
-            }
-            //spriteBatch.Draw(Tiles.terratextura, terra, Color.White);
+                
+                spriteBatch.Draw(Tiles.normalbrick, t.getVector(),Color.BlueViolet);
+            } 
             spriteBatch.End();
 
             base.Draw(gameTime);
