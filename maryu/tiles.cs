@@ -12,6 +12,7 @@ namespace maryu
         public int tilesx;
         public int tilesy;
         public static Texture2D normalbrick;
+        public static Texture2D terratextura;
 
         public Tiles(int x1, int y1)
         {
