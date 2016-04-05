@@ -24,7 +24,7 @@ namespace maryu
 
             if (x.y <= heightjump)
             {
-                x.y += 20;
+                x.y += 50;
                 jumpyn = false;
 
             }

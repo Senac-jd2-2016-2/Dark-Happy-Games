@@ -72,9 +72,10 @@ namespace maryu
             if (Jump)
             {
                 Contexto.herogravy.jump (Contexto.hero, Jump);
-                Jump = Contexto.herogravy.jump(Contexto.hero, Jump); 
+                Jump = Contexto.herogravy.jump(Contexto.hero, Jump);
+                Contexto.herogravy.gravidad(Contexto.hero);
             }
-            Contexto.herogravy.gravidad(Contexto.hero);
+            
 
             //---COLISAO
 
