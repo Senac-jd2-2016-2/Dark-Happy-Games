@@ -7,7 +7,7 @@ namespace maryu
 {
     class Fisica
     {
-        public float gravy = 5;
+        public float gravy = 20;
 
         public void gravidad (Personagem x)
         {

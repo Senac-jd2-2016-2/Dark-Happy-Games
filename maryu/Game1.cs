@@ -83,6 +83,7 @@ namespace maryu
             }
             
 
+
             //---COLISAO
            
             
@@ -96,12 +97,14 @@ namespace maryu
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            spriteBatch.Draw(Contexto.background, new Rectangle(0,0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
-            spriteBatch.Draw(Contexto.hero.herotextura, new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y,30,30) , Color.White);
+            //spriteBatch.Draw(Contexto.background, new Rectangle(0,0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            spriteBatch.Draw(Contexto.hero.herotextura, new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y,75,150) , Color.White);
+            /*
             foreach (Personagem p in Contexto.enemy)
             {
                 spriteBatch.Draw(p.herotextura, p.getVector(), Color.Red);
             }          
+            */
             foreach (Tiles t in Contexto.tijolinhos)
             {
                 

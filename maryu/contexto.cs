@@ -10,7 +10,7 @@ namespace maryu
     class Contexto
     {
         public static Personagem[] enemy = new Personagem[3];
-        public static Personagem hero = new Personagem(666, 24);
+        public static Personagem hero = new Personagem(100, 24);
         public static Texture2D background;
         public static Fisica herogravy = new Fisica();
         public static Rectangle tijolos = new Rectangle(500, 500, 100, 100);
@@ -20,14 +20,17 @@ namespace maryu
         public static void inicializar(ContentManager content)
         {
             Tiles.terratextura = content.Load<Texture2D>("CenarioRetoGrande");
-            hero.herotextura = content.Load<Texture2D>("vine");
+            hero.herotextura = content.Load<Texture2D>("russo (1)");
             background = content.Load<Texture2D>("kermit");
             Tiles.normalbrick = content.Load<Texture2D>("brick");
+
+            /*
             for (int i = 0; i < enemy.Length; i++)
             {
-                enemy[i] = new Personagem(10 + (i * 20), 14);
+                enemy[i] = new Personagem(10 + (i * 200), 14);
                 enemy[i].herotextura = content.Load<Texture2D>("vine");
             }
+            */
 
             for (int i = 0; i < 13; i++)
             {
