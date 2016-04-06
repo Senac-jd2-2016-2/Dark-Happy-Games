@@ -18,7 +18,7 @@ namespace maryu
 
         public bool jump(Personagem x, bool jumpyn)
         {
-            float heightjump = 50;
+            float heightjump = 20;
             x.y = x.y - 5;
 
 

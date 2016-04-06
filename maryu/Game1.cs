@@ -16,6 +16,8 @@ namespace maryu
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Rectangle dimitri;
+        Rectangle[] terra = new Rectangle[3];
         bool Jump;
 
         public Game1()
@@ -33,6 +35,10 @@ namespace maryu
             graphics.PreferredBackBufferWidth = 1200;
             graphics.PreferredBackBufferHeight = 750;
             graphics.ApplyChanges();
+            dimitri = new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y, 30, 30);
+            terra[0] = new Rectangle(0, 600, 500, 500);
+            terra[1] = new Rectangle(500, 600, 500, 500);
+            terra[2] = new Rectangle(1000, 600, 500, 500);
             base.Initialize();
         }
        
@@ -78,9 +84,8 @@ namespace maryu
             
 
             //---COLISAO
-
-
-
+           
+            
 
 
 
@@ -101,7 +106,10 @@ namespace maryu
             {
                 
                 spriteBatch.Draw(Tiles.normalbrick, t.getVector(),Color.BlueViolet);
-            } 
+            }
+            spriteBatch.Draw(Tiles.terratextura, terra[0], Color.White);
+            spriteBatch.Draw(Tiles.terratextura, terra[1], Color.White);
+            spriteBatch.Draw(Tiles.terratextura, terra[2], Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
