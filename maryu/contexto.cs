@@ -15,6 +15,7 @@ namespace maryu
         public static Fisica herogravy = new Fisica();
         public static Rectangle tijolos = new Rectangle(500, 500, 100, 100);
         public static List<Tiles> tijolinhos = new List<Tiles>();
+        public static List<Tiles> terrinha = new List<Tiles>();
 
         //>>>>>------PARA CARREGAR AS IMAGENS N SHIT------<<<<<
         public static void inicializar(ContentManager content)
@@ -34,7 +35,7 @@ namespace maryu
 
             for (int i = 0; i < 7; i++)
             {
-                Tiles rect1 = new Tiles(500 + (i * 50), 300);
+                Tiles rect1 = new Tiles(500 + (i * 50), 500);
                 tijolinhos.Add(rect1);
 
 
@@ -101,86 +102,6 @@ namespace maryu
                 //    tijolinhos.Add(rect11);
                 //}
                 ////==================
-
-                /*
-                if (i == 12)
-                {
-                    Tiles rect12 = new Tiles(850, 600);
-                    tijolinhos.Add(rect12);
-                }
-                
-                if (i == 13)
-                {
-                    Tiles rect13 = new Tiles(900, 600);
-                    tijolinhos.Add(rect13);
-                }
-                
-                if (i == 14)
-                {
-                    Tiles rect14 = new Tiles(1400, 600);
-                    tijolinhos.Add(rect14);
-                }
-                if (i == 15)
-                {
-                    Tiles rect15 = new Tiles(1500, 600);
-                    tijolinhos.Add(rect15);
-                }
-                if (i == 16)
-                {
-                    Tiles rect16 = new Tiles(1600, 600);
-                    tijolinhos.Add(rect16);
-                }
-                if (i == 17)
-                {
-                    Tiles rect17 = new Tiles(1700, 600);
-                    tijolinhos.Add(rect17);
-                }
-                if (i == 18)
-                {
-                    Tiles rect18 = new Tiles(1800, 600);
-                    tijolinhos.Add(rect18);
-                }
-                if (i == 19)
-                {
-                    Tiles rect19 = new Tiles(1900, 600);
-                    tijolinhos.Add(rect19);
-                }
-                if (i == 20)
-                {
-                    Tiles rect20 = new Tiles(2000, 600);
-                    tijolinhos.Add(rect20);
-                }
-                if (i == 21)
-                {
-                    Tiles rect21 = new Tiles(2100, 600);
-                    tijolinhos.Add(rect21);
-                }
-                if (i == 22)
-                {
-                    Tiles rect22 = new Tiles(2200, 600);
-                    tijolinhos.Add(rect22);
-                }
-                if (i == 23)
-                {
-                    Tiles rect23 = new Tiles(2300, 600);
-                    tijolinhos.Add(rect23);
-                }
-                if (i == 24)
-                {
-                    Tiles rect24 = new Tiles(2400, 600);
-                    tijolinhos.Add(rect24);
-                }
-                if (i == 25)
-                {
-                    Tiles rect25 = new Tiles(2500, 600);
-                    tijolinhos.Add(rect25);
-                }
-                if (i == 26)
-                {
-                    Tiles rect26 = new Tiles(2600, 600);
-                    tijolinhos.Add(rect26);
-                }
-                */
             }
         }     
     }
