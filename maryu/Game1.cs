@@ -18,7 +18,9 @@ namespace maryu
         SpriteBatch spriteBatch;
         Rectangle dimitri;
         Rectangle[] terra = new Rectangle[3];
+        int pulo = 25, gravidade = 1;
         bool Jump;
+        Contexto heroi = new Contexto();
 
         public Game1()
         {
@@ -73,15 +75,10 @@ namespace maryu
             }
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                Jump = true;
+                Contexto.hero.y -= pulo;
+                pulo -= gravidade;
             }
-            if (Jump)
-            {
-                Contexto.herogravy.jump (Contexto.hero, Jump);
-                Jump = Contexto.herogravy.jump(Contexto.hero, Jump);
-                Contexto.herogravy.gravidad(Contexto.hero);
-            }
-            
+
 
 
             //---COLISAO
@@ -110,9 +107,9 @@ namespace maryu
                 
                 spriteBatch.Draw(Tiles.normalbrick, t.getVector(),Color.BlueViolet);
             }
-            spriteBatch.Draw(Tiles.terratextura, terra[0], Color.White);
-            spriteBatch.Draw(Tiles.terratextura, terra[1], Color.White);
-            spriteBatch.Draw(Tiles.terratextura, terra[2], Color.White);
+            //spriteBatch.Draw(Tiles.terratextura, terra[0], Color.White);
+            //spriteBatch.Draw(Tiles.terratextura, terra[1], Color.White);
+            //spriteBatch.Draw(Tiles.terratextura, terra[2], Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

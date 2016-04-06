@@ -12,6 +12,8 @@ namespace maryu
         public float y;
 
         public Texture2D herotextura;
+        public Rectangle dimitri = new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y, 75, 150));
+
         public Personagem(int x1, int y1)
         {
             x = x1;

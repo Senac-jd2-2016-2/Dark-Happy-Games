@@ -10,7 +10,7 @@ namespace maryu
     class Contexto
     {
         public static Personagem[] enemy = new Personagem[3];
-        public static Personagem hero = new Personagem(100, 24);
+        public static Personagem hero = new Personagem(100, 500);
         public static Texture2D background;
         public static Fisica herogravy = new Fisica();
         public static Rectangle tijolos = new Rectangle(500, 500, 100, 100);
@@ -32,8 +32,12 @@ namespace maryu
             }
             */
 
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < 7; i++)
             {
+                Tiles rect1 = new Tiles(500 + (i * 50), 300);
+                tijolinhos.Add(rect1);
+
+
                 /*
                 Tiles rect = new Tiles(0, 600);
                 tijolinhos.Add(rect);
@@ -58,41 +62,46 @@ namespace maryu
                     tijolinhos.Add(rect4);
                 }
                 */
-                if (i == 5)
-                {
-                    Tiles rect5 = new Tiles(500, 400);
-                    tijolinhos.Add(rect5);
-                }
-                if (i == 6)
-                {
-                    Tiles rect6 = new Tiles(550, 400);
-                    tijolinhos.Add(rect6);
-                }
-                if (i == 7)
-                {
-                    Tiles rect7 = new Tiles(600, 400);
-                    tijolinhos.Add(rect7);
-                }
-                if (i == 8)
-                {
-                    Tiles rect8 = new Tiles(650, 400);
-                    tijolinhos.Add(rect8);
-                }
-                if (i == 9)
-                {
-                    Tiles rect9 = new Tiles(700, 500);
-                    tijolinhos.Add(rect9);
-                }
-                if (i == 10)
-                {
-                    Tiles rect10 = new Tiles(750, 500);
-                    tijolinhos.Add(rect10);
-                }
-                if (i == 11)
-                {
-                    Tiles rect11 = new Tiles(800, 500);
-                    tijolinhos.Add(rect11);
-                }
+
+
+                ////==================
+                //if (i == 5)
+                //{
+                //    Tiles rect5 = new Tiles(500, 400);
+                //    tijolinhos.Add(rect5);
+                //}
+                //if (i == 6)
+                //{
+                //    Tiles rect6 = new Tiles(550, 400);
+                //    tijolinhos.Add(rect6);
+                //}
+                //if (i == 7)
+                //{
+                //    Tiles rect7 = new Tiles(600, 400);
+                //    tijolinhos.Add(rect7);
+                //}
+                //if (i == 8)
+                //{
+                //    Tiles rect8 = new Tiles(650, 400);
+                //    tijolinhos.Add(rect8);
+                //}
+                //if (i == 9)
+                //{
+                //    Tiles rect9 = new Tiles(700, 500);
+                //    tijolinhos.Add(rect9);
+                //}
+                //if (i == 10)
+                //{
+                //    Tiles rect10 = new Tiles(750, 500);
+                //    tijolinhos.Add(rect10);
+                //}
+                //if (i == 11)
+                //{
+                //    Tiles rect11 = new Tiles(800, 500);
+                //    tijolinhos.Add(rect11);
+                //}
+                ////==================
+
                 /*
                 if (i == 12)
                 {

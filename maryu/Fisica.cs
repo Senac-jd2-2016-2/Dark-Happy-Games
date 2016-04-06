@@ -12,25 +12,13 @@ namespace maryu
         public void gravidad (Personagem x)
         {
             x.y = x.y + gravy;
-
-
         }
 
         public bool jump(Personagem x, bool jumpyn)
         {
-            float heightjump = 20;
-            x.y = x.y - 5;
+            
 
-
-            if (x.y <= heightjump)
-            {
-                x.y += 50;
-                jumpyn = false;
-
-            }
             return jumpyn;
-
-
         }
     }
 }
