@@ -10,12 +10,12 @@ namespace maryu
     class Contexto
     {
         public static Personagem[] enemy = new Personagem[3];
-        public static Personagem hero = new Personagem(100, 500);
+        public static Personagem hero = new Personagem(100, 800);
         public static Texture2D background;
         public static Fisica herogravy = new Fisica();
         public static Rectangle tijolos = new Rectangle(500, 500, 100, 100);
         public static List<Tiles> tijolinhos = new List<Tiles>();
-        public static List<Tiles> terrinha = new List<Tiles>();
+        public static List<Rectangle> terrinha = new List<Rectangle>();
 
         //>>>>>------PARA CARREGAR AS IMAGENS N SHIT------<<<<<
         public static void inicializar(ContentManager content)
@@ -35,8 +35,8 @@ namespace maryu
 
             for (int i = 0; i < 7; i++)
             {
-                Tiles rect1 = new Tiles(500 + (i * 50), 500);
-                tijolinhos.Add(rect1);
+                Tiles rect = new Tiles(500 + (i * 50), 500);
+                tijolinhos.Add(rect);
 
 
                 /*

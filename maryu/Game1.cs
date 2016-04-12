@@ -16,11 +16,10 @@ namespace maryu
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Rectangle dimitri;
         Rectangle[] terra = new Rectangle[6];
-        int pulo = 25, gravidade = 1;
+        Rectangle dimitri;
+        int pulo = 15, gravidade = 1;
         bool Jump;
-        Contexto heroi = new Contexto();
 
         public Game1()
         {
@@ -37,12 +36,14 @@ namespace maryu
             graphics.PreferredBackBufferWidth = 1200;
             graphics.PreferredBackBufferHeight = 750;
             graphics.ApplyChanges();
-            dimitri = new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y, 30, 30);
+
             terra[0] = new Rectangle(0, 600, 300, 300);
             terra[1] = new Rectangle(300, 600, 300, 300);
             terra[2] = new Rectangle(600, 600, 300, 300);
             terra[3] = new Rectangle(900, 600, 300, 300);
             terra[4] = new Rectangle(1200, 600, 300, 300);
+            terra[5] = new Rectangle(1200, 600, 300, 300);
+
             base.Initialize();
         }
        
@@ -86,8 +87,17 @@ namespace maryu
                 pulo -= gravidade;
             }
 
-            //---COLISAO
-           
+            //---COLISÃO  
+            
+                if ((dimitri.Intersects(terra[0])) || (dimitri.Intersects(terra[1])) || (dimitri.Intersects(terra[2])) || (dimitri.Intersects(terra[3])))
+                {
+                    Contexto.hero.y -= 15;
+                    Jump = false;
+                    pulo = 15;
+                }
+            
+
+            
             
 
 
@@ -100,7 +110,7 @@ namespace maryu
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             //spriteBatch.Draw(Contexto.background, new Rectangle(0,0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
-            spriteBatch.Draw(Contexto.hero.herotextura, new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y,75,150) , Color.White);
+            spriteBatch.Draw(Contexto.hero.herotextura, dimitri = new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y,75,150) , Color.White);
             /*
             foreach (Personagem p in Contexto.enemy)
             {
@@ -115,6 +125,7 @@ namespace maryu
             spriteBatch.Draw(Tiles.terratextura, terra[0], Color.White);
             spriteBatch.Draw(Tiles.terratextura, terra[1], Color.White);
             spriteBatch.Draw(Tiles.terratextura, terra[2], Color.White);
+            spriteBatch.Draw(Tiles.terratextura, terra[4], Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }
