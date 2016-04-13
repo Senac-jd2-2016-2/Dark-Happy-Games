@@ -17,8 +17,9 @@ namespace maryu
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Rectangle[] terra = new Rectangle[6];
+        Rectangle[] bricks = new Rectangle[7];
         Rectangle dimitri;
-        int pulo = 15, gravidade = 1;
+        int pulo = 20, gravidade = 1;
         bool Jump;
 
         public Game1()
@@ -37,12 +38,14 @@ namespace maryu
             graphics.PreferredBackBufferHeight = 750;
             graphics.ApplyChanges();
 
-            terra[0] = new Rectangle(0, 600, 300, 300);
-            terra[1] = new Rectangle(300, 600, 300, 300);
-            terra[2] = new Rectangle(600, 600, 300, 300);
-            terra[3] = new Rectangle(900, 600, 300, 300);
-            terra[4] = new Rectangle(1200, 600, 300, 300);
-            terra[5] = new Rectangle(1200, 600, 300, 300);
+            for (int i = 0; i < terra.Length; i++)
+            {
+                terra[i] = new Rectangle(0 + (i * 300), 600, 300, 300);
+            }
+            for (int i = 0; i < bricks.Length; i++)
+            {
+                bricks[i] = new Rectangle(500 + (i * 60), 500 ,60 ,60);
+            }
 
             base.Initialize();
         }
@@ -65,8 +68,9 @@ namespace maryu
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            Contexto.hero.y += 5;
 
-            //---MOVIMENTO DO DIMITRI
+            //--------------MOVIMENTO DO DIMITRI
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
@@ -87,14 +91,27 @@ namespace maryu
                 pulo -= gravidade;
             }
 
-            //---COLISÃO  
-            
-                if ((dimitri.Intersects(terra[0])) || (dimitri.Intersects(terra[1])) || (dimitri.Intersects(terra[2])) || (dimitri.Intersects(terra[3])))
+            //--------------COLISÃO  
+
+            for (int i = 0; i < terra.Length; i++)
+            {
+                if (dimitri.Intersects(terra[i]))
                 {
-                    Contexto.hero.y -= 15;
+                    Contexto.hero.y -= 5;
                     Jump = false;
-                    pulo = 15;
+                    pulo = 20;
                 }
+            }
+            for (int i = 0; i < bricks.Length; i++)
+            {
+                if (dimitri.Intersects(bricks[i]))
+                {
+                    Contexto.hero.y -= 5;
+                    Jump = false;
+                    pulo = 20;
+                }
+            }
+                
             
 
             
@@ -109,7 +126,7 @@ namespace maryu
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
-            //spriteBatch.Draw(Contexto.background, new Rectangle(0,0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
+            spriteBatch.Draw(Contexto.background, new Rectangle(0,0, Window.ClientBounds.Width, Window.ClientBounds.Height), Color.White);
             spriteBatch.Draw(Contexto.hero.herotextura, dimitri = new Rectangle((int)Contexto.hero.x, (int)Contexto.hero.y,75,150) , Color.White);
             /*
             foreach (Personagem p in Contexto.enemy)
@@ -117,15 +134,17 @@ namespace maryu
                 spriteBatch.Draw(p.herotextura, p.getVector(), Color.Red);
             }          
             */
-            foreach (Tiles t in Contexto.tijolinhos)
+           for (int i = 0; i < bricks.Length; i++)
             {
                 
-                spriteBatch.Draw(Tiles.normalbrick, t.getVector(),Color.BlueViolet);
+                spriteBatch.Draw(Tiles.normalbrick,bricks[i] ,Color.BlueViolet);
             }
-            spriteBatch.Draw(Tiles.terratextura, terra[0], Color.White);
-            spriteBatch.Draw(Tiles.terratextura, terra[1], Color.White);
-            spriteBatch.Draw(Tiles.terratextura, terra[2], Color.White);
-            spriteBatch.Draw(Tiles.terratextura, terra[4], Color.White);
+
+            for (int i = 0; i < terra.Length; i++)
+            {
+                spriteBatch.Draw(Tiles.terratextura, terra[i], Color.White);
+            }
+           
             spriteBatch.End();
             base.Draw(gameTime);
         }

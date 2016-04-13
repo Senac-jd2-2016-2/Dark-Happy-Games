@@ -39,7 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Contexto.cs" />
-    <Compile Include="Fisica.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Personagem.cs" />
     <Compile Include="Program.cs" />

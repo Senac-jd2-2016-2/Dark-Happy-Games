@@ -12,15 +12,13 @@ namespace maryu
         public float y;
 
         public Texture2D herotextura;
+        public static Texture2D enemitextura;
+
 
         public Personagem(int x1, int y1)
         {
             x = x1;
             y = y1;
-        }
-        public Vector2 getVector()
-        {
-            return new Vector2(x, y);
         }
         public void gohorizotal(int pass)
         {
