@@ -21,19 +21,32 @@ namespace maryu
         public void Update(Vector2 position, int xOffset, int yOffset)
         {
             if (position.X < ViewPort.Width / 2)
+            {
                 Center.X = ViewPort.Width / 2;
+            }
             else if (position.X > xOffset - (ViewPort.Width / 2))
+            {
                 Center.X = xOffset - (ViewPort.Width / 2);
-            else Center.X = position.X;
+            }
+            else
+            {
+                Center.X = position.X;
+            }
 
             if (position.Y < ViewPort.Height / 2)
+            {
                 Center.Y = ViewPort.Height / 2;
+            }
             else if (position.Y > yOffset - (ViewPort.Height / 2))
+            {
                 Center.Y = yOffset - (ViewPort.Height / 2);
-            else Center.Y = position.Y;
+            }
+            else
+            {
+                Center.Y = position.Y;
+            }
 
-            Transform = Matrix.CreateTranslation(new Vector3(-Center.X + (ViewPort.Width / 2),
-                                                             -Center.Y + (ViewPort.Height / 2), 0));
+            Transform = Matrix.CreateTranslation(new Vector3(-Center.X + (ViewPort.Width / 2), -Center.Y + (ViewPort.Height / 2), 0));
         }
     }
 }

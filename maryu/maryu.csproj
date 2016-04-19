@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Animaçao.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="Contexto.cs" />
     <Compile Include="Game1.cs" />
@@ -58,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Atores\Hero\Player.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tijolos\terra1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -67,7 +71,7 @@
     <Content Include="Content\Tijolos\terra2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Atores\Hero\russo %281%29.png">
+    <Content Include="Content\Atores\Hero\russo%281%29.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Atores\Enemigos\vine.png">

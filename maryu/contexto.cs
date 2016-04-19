@@ -1,23 +1,43 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 namespace maryu
 {
-    class Contexto
+    static class Contexto
     {
-        public static Personagem hero = new Personagem(100, 300);
-        public static Texture2D background;
+        public static bool TouchTopOf(this Rectangle r1, Rectangle r2)
+        {
+            return (r1.Bottom >= r2.Top - 1 &&
+                    r1.Bottom <= r2.Top + (r2.Height / 2) &&
+                    r1.Right >= r2.Left + r2.Width / 5 &&
+                    r1.Left <= r2.Right - r2.Width / 5);
+        }
 
-        //>>>>>------PARA CARREGAR AS IMAGENS N SHIT------<<<<<
-        public static void inicializar(ContentManager content)
-        {         
-            hero.herotextura = content.Load<Texture2D>("russo (1)");
-            background = content.Load<Texture2D>("kermit");
-            Personagem.enemitextura = content.Load<Texture2D>("vine");
-        }     
+        public static bool TouchBottomOf(this Rectangle r1, Rectangle r2)
+        {
+            return (r1.Top <= r2.Bottom + (r2.Height / 5) &&
+                    r1.Top >= r2.Bottom - 1 &&
+                    r1.Right >= r2.Left + (r2.Width / 5) &&
+                    r1.Left <= r2.Right - (r2.Width / 5));
+        }
+
+        public static bool TouchLeftOf(this Rectangle r1, Rectangle r2)
+        {
+            return (r1.Right <= r2.Right &&
+                    r1.Right >= r2.Right - 5 &&
+                    r1.Top <= r2.Bottom - (r2.Width / 4) &&
+                    r1.Bottom >= r2.Top + (r2.Width / 4));
+        }
+
+        public static bool TouchRightOf(this Rectangle r1, Rectangle r2)
+        {
+            return (r1.Left <= r2.Left &&
+                    r1.Left >= r2.Left - 5 &&
+                    r1.Top <= r2.Bottom - (r2.Width / 4) &&
+                    r1.Bottom >= r2.Top + (r2.Width / 4));
+        }
     }
 }

@@ -10,37 +10,36 @@ namespace maryu
 {
     class Personagem
     {
-        public Vector2 Position;
-        private Vector2 Velocity;
-        //public SpriteSheet spriteSheet;
+        public Vector2 Posiçao;
+        private Vector2 Velocidade;
+        public Animaçao spriteShit;
         public Rectangle Rectangle;
-        public Texture2D yes;
 
-        private bool hasJumped;
+        private bool jump;
 
         public Personagem(Vector2 position)
         {
-            Position = position;
-            //spriteSheet = new SpriteSheet(40, 51, 8);
+            Posiçao = position;
+            spriteShit = new Animaçao(40, 51, 8);
         }
 
         public void LoadContent(ContentManager Content)
         {
-            yes = Content.Load<Texture2D>("Atores/Hero/Russo");          
+            spriteShit.LoadContent(Content, "Atores/Hero/Player");
         }
 
         public void Update(GameTime gameTime)
         {
-            Position += Velocity;
+            Posiçao += Velocidade;
 
-            Rectangle = new Rectangle((int)Position.X, (int)Position.Y, 40, 51);
-            
+            Rectangle = new Rectangle((int)Posiçao.X, (int)Posiçao.Y, 40, 51);
+
             Input(gameTime);
 
-            if (Velocity.Y < 10)
-                Velocity.Y += 0.4f;
+            if (Velocidade.Y < 10)
+                Velocidade.Y += 0.4f;
 
-            //spriteSheet.Update(gameTime);
+            spriteShit.Update(gameTime);
 
         }
 
@@ -49,23 +48,23 @@ namespace maryu
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                Velocity.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
-                //spriteSheet.SetFrame(0);
+                Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
+                spriteShit.SetFrame(0);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                Velocity.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
-                //spriteSheet.SetFrame(51);
+                Velocidade.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
+                spriteShit.SetFrame(51);
             }
-            else Velocity.X = 0f;
+            else Velocidade.X = 0f;
 
-                        
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !hasJumped)
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump)
             {
-                Position.Y -= 9f;
-                Velocity.Y = -12f;
-                hasJumped = true;
+                Posiçao.Y -= 9f;
+                Velocidade.Y = -12f;
+                jump = true;
             }
 
 
@@ -73,33 +72,47 @@ namespace maryu
 
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
-            //if (Rectangle.TouchTopOf(newRectangle))
+            if (Rectangle.TouchTopOf(newRectangle))
             {
                 Rectangle.Y = newRectangle.Y - Rectangle.Height;
-                Velocity.Y = 0f;
-                hasJumped = false;
+                Velocidade.Y = 0f;
+                jump = false;
             }
 
-            //if (Rectangle.TouchLeftOf(newRectangle))
+            if (Rectangle.TouchLeftOf(newRectangle))
             {
-                Position.X = newRectangle.X - Rectangle.Width - 2;
+                Posiçao.X = newRectangle.X - Rectangle.Width - 2;
             }
-            //if (Rectangle.TouchRightOf(newRectangle))
+            if (Rectangle.TouchRightOf(newRectangle))
             {
-                Position.X = newRectangle.X + Rectangle.Width + 2;
+                Posiçao.X = newRectangle.X + Rectangle.Width + 2;
             }
-            //if (Rectangle.TouchBottomOf(newRectangle))
-                Velocity.Y = 1f;
+            if (Rectangle.TouchBottomOf(newRectangle))
+            {
+                Velocidade.Y = 1f;
+            }
 
-            if(Position.X < 0) Position.X = 0;
-            if (Position.X > xOffset - Rectangle.Width) Position.X = xOffset - Rectangle.Width;
-            if(Position.Y < 0) Velocity.Y = 1f;
-            if (Position.Y > yOffset - Rectangle.Height) Position.Y = yOffset - Rectangle.Height;
+            if (Posiçao.X < 0)
+            {
+                Posiçao.X = 0;
+            }
+            if (Posiçao.X > xOffset - Rectangle.Width)
+            {
+                Posiçao.X = xOffset - Rectangle.Width;
+            }
+            if (Posiçao.Y < 0)
+            {
+                Velocidade.Y = 1f;
+            }
+            if (Posiçao.Y > yOffset - Rectangle.Height)
+            {
+                Posiçao.Y = yOffset - Rectangle.Height;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(yes, Position, Rectangle, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);        
+            spriteBatch.Draw(spriteShit.Textuer, Posiçao, spriteShit.Rectangel, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }
 }

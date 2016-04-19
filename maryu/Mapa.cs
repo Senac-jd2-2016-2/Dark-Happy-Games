@@ -29,16 +29,20 @@ namespace maryu
                     int number = map[y, x];
 
                     if (number > 0)
+                    {
                         collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size)));
-                    Width = (x + 1) * size;
-                    Height = (y + 1) * size;
+                        Width = (x + 1) * size;
+                        Height = (y + 1) * size;
+                    }
                 }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (CollisionTiles tile in collisionTiles)
+            {
                 tile.Draw(spriteBatch);
+            }
         }
     }
 }
