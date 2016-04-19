@@ -9,19 +9,25 @@ namespace maryu
 {
     class Tiles
     {
-        public int tilesx;
-        public int tilesy;
-        public static Texture2D normalbrick;
-        public static Texture2D terratextura;
+       public Texture2D Texture;
+        public Rectangle Rectangle { get; protected set; }
 
-        public Tiles(int x1, int y1)
+        public static ContentManager Content{ protected get; set; }
+
+
+        public void Draw(SpriteBatch spriteBatch)
         {
-            tilesx = x1;
-            tilesy = y1;
+            spriteBatch.Draw(Texture, Rectangle, Color.White);
         }
-        public Vector2 getVector()
+
+    }
+
+    class CollisionTiles : Tiles
+    {
+        public CollisionTiles(int i, Rectangle newRectangle)
         {
-            return new Vector2(tilesx, tilesy);
+            Texture = Content.Load<Texture2D>("Tijolos/Terra" + i);
+            this.Rectangle = newRectangle;
         }
     }
 }

@@ -68,7 +68,7 @@ namespace maryu
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            Contexto.hero.y += 5;
+            
 
             //--------------MOVIMENTO DO DIMITRI
 
@@ -101,6 +101,10 @@ namespace maryu
                     Jump = false;
                     pulo = 20;
                 }
+                else
+                {
+                    Contexto.hero.y += 5;
+                }
             }
             for (int i = 0; i < bricks.Length; i++)
             {
@@ -110,12 +114,8 @@ namespace maryu
                     Jump = false;
                     pulo = 20;
                 }
-            }
                 
-            
-
-            
-            
+            }
 
 
 
@@ -137,7 +137,7 @@ namespace maryu
            for (int i = 0; i < bricks.Length; i++)
             {
                 
-                spriteBatch.Draw(Tiles.normalbrick,bricks[i] ,Color.BlueViolet);
+                spriteBatch.Draw(texture,bricks[i] ,Color.BlueViolet);
             }
 
             for (int i = 0; i < terra.Length; i++)

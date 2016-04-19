@@ -14,11 +14,9 @@ namespace maryu
 
         //>>>>>------PARA CARREGAR AS IMAGENS N SHIT------<<<<<
         public static void inicializar(ContentManager content)
-        {
-            Tiles.terratextura = content.Load<Texture2D>("CenarioRetoGrande");
+        {         
             hero.herotextura = content.Load<Texture2D>("russo (1)");
             background = content.Load<Texture2D>("kermit");
-            Tiles.normalbrick = content.Load<Texture2D>("brick");
             Personagem.enemitextura = content.Load<Texture2D>("vine");
         }     
     }
