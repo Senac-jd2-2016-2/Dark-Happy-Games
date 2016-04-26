@@ -12,12 +12,10 @@ namespace maryu
         public Matrix Transform { set; get; }
         private Vector2 Center;
         private Viewport ViewPort;
-
         public Camera(Viewport newViewPort)
         {
             ViewPort = newViewPort;
         }
-
         public void Update(Vector2 position, int xOffset, int yOffset)
         {
             if (position.X < ViewPort.Width / 2)
@@ -32,7 +30,6 @@ namespace maryu
             {
                 Center.X = position.X;
             }
-
             if (position.Y < ViewPort.Height / 2)
             {
                 Center.Y = ViewPort.Height / 2;
@@ -45,7 +42,6 @@ namespace maryu
             {
                 Center.Y = position.Y;
             }
-
             Transform = Matrix.CreateTranslation(new Vector3(-Center.X + (ViewPort.Width / 2), -Center.Y + (ViewPort.Height / 2), 0));
         }
     }

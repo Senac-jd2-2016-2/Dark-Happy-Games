@@ -9,19 +9,14 @@ namespace maryu
 {
     class Tiles
     {
-       public Texture2D Texture;
+        public Texture2D Texture;
         public Rectangle Rectangle { get; protected set; }
-
         public static ContentManager Content{ protected get; set; }
-
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Texture, Rectangle, Color.White);
         }
-
     }
-
     class CollisionTiles : Tiles
     {
         public CollisionTiles(int i, Rectangle newRectangle)

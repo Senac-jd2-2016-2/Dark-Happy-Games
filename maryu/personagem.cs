@@ -14,36 +14,25 @@ namespace maryu
         private Vector2 Velocidade;
         public Animaçao spriteShit;
         public Rectangle Rectangle;
-
         private bool jump;
-
         public Personagem(Vector2 position)
         {
             Posiçao = position;
             spriteShit = new Animaçao(40, 51, 8);
         }
-
         public void LoadContent(ContentManager Content)
         {
             spriteShit.LoadContent(Content, "Atores/Hero/Player");
         }
-
         public void Update(GameTime gameTime)
         {
             Posiçao += Velocidade;
-
             Rectangle = new Rectangle((int)Posiçao.X, (int)Posiçao.Y, 40, 51);
-
             Input(gameTime);
-
             if (Velocidade.Y < 10)
-                Velocidade.Y += 0.4f;
-
+               Velocidade.Y += 0.4f;
             spriteShit.Update(gameTime);
-
         }
-
-
         private void Input(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D))
@@ -57,19 +46,13 @@ namespace maryu
                 spriteShit.SetFrame(51);
             }
             else Velocidade.X = 0f;
-
-
-
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump)
             {
                 Posiçao.Y -= 9f;
                 Velocidade.Y = -12f;
                 jump = true;
             }
-
-
         }
-
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
             if (Rectangle.TouchTopOf(newRectangle))
@@ -78,7 +61,6 @@ namespace maryu
                 Velocidade.Y = 0f;
                 jump = false;
             }
-
             if (Rectangle.TouchLeftOf(newRectangle))
             {
                 Posiçao.X = newRectangle.X - Rectangle.Width - 2;
@@ -91,7 +73,6 @@ namespace maryu
             {
                 Velocidade.Y = 1f;
             }
-
             if (Posiçao.X < 0)
             {
                 Posiçao.X = 0;
@@ -109,7 +90,6 @@ namespace maryu
                 Posiçao.Y = yOffset - Rectangle.Height;
             }
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(spriteShit.Textuer, Posiçao, spriteShit.Rectangel, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
