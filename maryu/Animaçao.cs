@@ -23,13 +23,11 @@ namespace maryu
             shitSize = size;
             stayfreshTime = 0;
         }
-
         public void LoadContent(ContentManager Content, String dir)
         {
             Textuer = Content.Load<Texture2D>(dir);
             Rectangel = new Rectangle(CurrentFrame * fameSize.X, 0, fameSize.X, fameSize.Y);
         }
-
         public void SetFrame(int frame)
         {
             Rectangel = new Rectangle(CurrentFrame * fameSize.X, frame, fameSize.X, fameSize.Y);
