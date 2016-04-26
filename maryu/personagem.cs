@@ -20,19 +20,19 @@ namespace maryu
         public Personagem(Vector2 position)
         {
             Posiçao = position;
-            spriteShit = new Animaçao(40, 51, 8);
+            spriteShit = new Animaçao(109, 101, 3);
         }
 
         public void LoadContent(ContentManager Content)
         {
-            spriteShit.LoadContent(Content, "Atores/Hero/Player");
+            spriteShit.LoadContent(Content, "Atores/Hero/russo");
         }
 
         public void Update(GameTime gameTime)
         {
             Posiçao += Velocidade;
 
-            Rectangle = new Rectangle((int)Posiçao.X, (int)Posiçao.Y, 40, 51);
+            Rectangle = new Rectangle((int)Posiçao.X, (int)Posiçao.Y, 109, 101);
 
             Input(gameTime);
 
@@ -54,7 +54,7 @@ namespace maryu
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 Velocidade.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
-                spriteShit.SetFrame(51);
+                spriteShit.SetFrame(109);
             }
             else Velocidade.X = 0f;
 
