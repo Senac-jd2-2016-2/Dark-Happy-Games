@@ -16,9 +16,7 @@ namespace maryu
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         Camera camera;
-
         Mapa maapa;
         Personagem dimitri;
 
@@ -45,7 +43,7 @@ namespace maryu
             Tiles.Content = Content;
 
             camera = new Camera(GraphicsDevice.Viewport);
-
+            //------------gerar mapa (entre 0,1,2)-----------
             maapa.Generate(new int[,] {
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -57,7 +55,7 @@ namespace maryu
                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 
 
-            }, 74);
+            }, 74);//<<--------------tamanho do mapa----------------
 
 
             dimitri.LoadContent(Content);
@@ -72,7 +70,7 @@ namespace maryu
 
         protected override void Update(GameTime gameTime)
         {
-
+            //------------colisao do russo sobre os tijolos e camera-------------
             dimitri.Update(gameTime);
             foreach (CollisionTiles tile in maapa.CollisionTile)
             {

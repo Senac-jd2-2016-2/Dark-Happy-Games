@@ -19,6 +19,7 @@ namespace maryu
     }
     class CollisionTiles : Tiles
     {
+        //-------imagem dos tijolos-----
         public CollisionTiles(int i, Rectangle newRectangle)
         {
             Texture = Content.Load<Texture2D>("Tijolos/Terra" + i);
