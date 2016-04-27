@@ -19,6 +19,8 @@ namespace maryu
         Camera camera;
         Mapa maapa;
         Personagem dimitri;
+        Rectangle sas;
+        Texture2D ssa;
 
         public Game1()
         {
@@ -32,6 +34,7 @@ namespace maryu
             Window.Title = "Russian Attack 2";
             graphics.ApplyChanges();
 
+            
             maapa = new Mapa();
             dimitri = new Personagem(new Vector2(70, 390));
             base.Initialize();
@@ -47,12 +50,12 @@ namespace maryu
             maapa.Generate(new int[,] {
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,2,2,2,0,0,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-               {1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+               {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 
 
             }, 74);//<<--------------tamanho do mapa----------------
@@ -60,6 +63,7 @@ namespace maryu
 
             dimitri.LoadContent(Content);
 
+            ssa = Content.Load <Texture2D>("Atores/Enemigos/vine");
 
         }
 
@@ -70,6 +74,10 @@ namespace maryu
 
         protected override void Update(GameTime gameTime)
         {
+            if(dimitri.Posiçao.X >= 2970)
+            {
+                sas = new Rectangle(Window.ClientBounds.Width, Window.ClientBounds.Height, Window.ClientBounds.Width, Window.ClientBounds.Height);
+            }
             //------------colisao do russo sobre os tijolos e camera-------------
             dimitri.Update(gameTime);
             foreach (CollisionTiles tile in maapa.CollisionTile)
@@ -87,6 +95,7 @@ namespace maryu
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
             maapa.Draw(spriteBatch);
             dimitri.Draw(spriteBatch);
+            spriteBatch.Draw(ssa, sas, Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }
