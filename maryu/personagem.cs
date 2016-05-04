@@ -15,6 +15,7 @@ namespace maryu
         public Animaçao spriteShit;
         public Rectangle Rectangle;
         private bool jump;
+        public Vector2 Posiçaosave;
 
         public Personagem(Vector2 position)
         {
@@ -27,6 +28,7 @@ namespace maryu
         {
             spriteShit.LoadContent(Content, "Atores/Hero/russo");
         }
+        //-----------imagem do russo-----
 
         //------a spritesheet do russo-----
         public void Update(GameTime gameTime)
@@ -43,6 +45,7 @@ namespace maryu
             }
             spriteShit.Update(gameTime);
         }
+        //------a spritesheet do russo-----
 
         //-----------controles do russo-------
         private void Input(GameTime gameTime)
@@ -68,7 +71,16 @@ namespace maryu
                 Velocidade.Y = -12f;
                 jump = true;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.R) && !jump)
+            {
+                Posiçaosave = Posiçao;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.T) && !jump)
+            {
+                Posiçao = Posiçaosave;
+            }
         }
+        //-----------controles do russo-------
 
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
