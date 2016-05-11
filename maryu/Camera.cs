@@ -30,6 +30,8 @@ namespace maryu
             {
                 Center.X = position.X;
             }
+
+
             if (position.Y < ViewPort.Height / 2)
             {
                 Center.Y = ViewPort.Height / 2;
