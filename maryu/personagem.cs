@@ -16,13 +16,11 @@ namespace maryu
         public Rectangle Rectangle;
         private bool jump;
         public Vector2 Posiçaosave;
-
         public Personagem(Vector2 position)
         {
             Posiçao = position;
             spriteShit = new Animaçao(109, 101, 3);
         }
-
         //-----------imagem do russo-----
         public void LoadContent(ContentManager Content)
         {
@@ -34,11 +32,8 @@ namespace maryu
         public void Update(GameTime gameTime)
         {
             Posiçao += Velocidade;
-
             Rectangle = new Rectangle((int)Posiçao.X, (int)Posiçao.Y, 109, 101);
-
             Input(gameTime);
-
             if (Velocidade.Y < 10)
             {
                 Velocidade.Y += 0.4f;
@@ -64,7 +59,6 @@ namespace maryu
             {
                 Velocidade.X = 0f;
             }
-
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump)
             {
                 Posiçao.Y -= 9f;
@@ -103,7 +97,6 @@ namespace maryu
             {
                 Velocidade.Y = 1f;
             }
-
             if (Posiçao.X < 0)
             {
                 Posiçao.X = 0;
