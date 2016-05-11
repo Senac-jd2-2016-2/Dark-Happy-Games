@@ -92,14 +92,9 @@ namespace maryu
 
 
             }, 77);//<<--------------tamanho do mapa----------------
-
-
             dimitri.LoadContent(Content);
-
             ssa = Content.Load <Texture2D>("Atores/Enemigos/vine");
-
         }
-
         protected override void UnloadContent()
         {
 
@@ -124,7 +119,6 @@ namespace maryu
             //------------colisao do russo sobre os tijolos e camera-------------
             base.Update(gameTime);
         }
-
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
