@@ -65,6 +65,8 @@ namespace maryu
                 Velocidade.Y = -12f;
                 jump = true;
             }
+
+
             if (Keyboard.GetState().IsKeyDown(Keys.R) && !jump)
             {
                 Posiçaosave = Posiçao;
