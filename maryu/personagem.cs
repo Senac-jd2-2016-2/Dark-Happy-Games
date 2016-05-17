@@ -16,11 +16,13 @@ namespace maryu
         public Rectangle Rectangle;
         private bool jump;
         public Vector2 Posiçaosave;
+
         public Personagem(Vector2 position)
         {
             Posiçao = position;
             spriteShit = new Animaçao(109, 101, 3);
         }
+
         //-----------imagem do russo-----
         public void LoadContent(ContentManager Content)
         {

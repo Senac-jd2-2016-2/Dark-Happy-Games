@@ -20,13 +20,11 @@ namespace maryu
         }
         public static bool TouchLeftOf(this Rectangle r1, Rectangle r2)
         {
-            return (r1.Right <= r2.Right && r1.Right >= r2.Right - 2 &&
-                    r1.Top <= r2.Bottom - (r2.Width / 5) && r1.Bottom >= r2.Top + (r2.Width / 5));
+            return r1.Left <= r2.Right && ((r1.Top <= r2.Top || r1.Top >= r2.Bottom) || (r1.Bottom >= r2.Bottom || r1.Bottom <= r2.Top));
         }
         public static bool TouchRightOf(this Rectangle r1, Rectangle r2)
         {
-            return (r1.Left <= r2.Left && r1.Left >= r2.Left - 2 &&
-                    r1.Top <= r2.Bottom - (r2.Width / 5) && r1.Bottom >= r2.Top + (r2.Width / 5));
+            return r1.Right >= r2.Left && ((r1.Top <= r2.Top || r1.Top >= r2.Bottom) || (r1.Bottom >= r2.Bottom || r1.Bottom <= r2.Top));
         }
     }
 }
