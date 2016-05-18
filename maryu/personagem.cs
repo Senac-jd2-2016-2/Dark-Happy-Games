@@ -91,11 +91,11 @@ namespace maryu
 
             if (Rectangle.TouchLeftOf(newRectangle))
             {
-                Posiçao.X = newRectangle.X - Rectangle.Width - 2;
+                Posiçao.X = newRectangle.X + Rectangle.Width / 2 + 30;
             }
             if (Rectangle.TouchRightOf(newRectangle))
             {
-                Posiçao.X = newRectangle.X + Rectangle.Width + 2;
+                Posiçao.X = newRectangle.X - Rectangle.Width/2 - 30;
             }
             if (Rectangle.TouchBottomOf(newRectangle))
             {
