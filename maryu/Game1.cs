@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Content;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace maryu
         Rectangle portal;
         Rectangle[] paper = new Rectangle[4], messagem = new Rectangle[4];
         Texture2D paperimagem, fundo, messagemimagem, portalimagem;
-        
+        StreamReader load;
 
         public Game1()
         {
@@ -46,8 +47,27 @@ namespace maryu
                 paper[i] = new Rectangle(((1000*i)+50), (700*i),30, 30);
             }
 
+
+
+            string linha;
+            string[] s;
+            int[] n;
+            n = new int[2];
+
+            load = new StreamReader("data.txt");
+            while ((linha = load.ReadLine()) != null)
+            {
+                s = linha.Split('|');
+
+                for (int i = 0; i < s.Length; i++)
+                {
+                    n[i] = int.Parse(s[i]);
+                }
+            }
+            load.Close();
+
             maapa1 = new Mapa();
-            dimitri = new Personagem(new Vector2(8070, 19));
+            dimitri = new Personagem(new Vector2(n[0], n[1]));
             
             base.Initialize();
         }

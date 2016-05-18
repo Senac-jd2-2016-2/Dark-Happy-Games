@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,8 @@ namespace maryu
         public Rectangle Rectangle;
         private bool jump;
         public Vector2 Posiçaosave;
+        StreamWriter save;
+
 
         public Personagem(Vector2 position)
         {
@@ -71,12 +74,12 @@ namespace maryu
 
             if (Keyboard.GetState().IsKeyDown(Keys.R) && !jump)
             {
-                Posiçaosave = Posiçao;
+                save = new StreamWriter("data.txt");
+                save.Write(Posiçao.X + '|' + Posiçao.Y);
+
+                save.Close();
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.T) && !jump)
-            {
-                Posiçao = Posiçaosave;
-            }
+            
         }
         //-----------controles do russo-------
 
