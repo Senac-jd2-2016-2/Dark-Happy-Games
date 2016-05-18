@@ -105,7 +105,7 @@ namespace maryu
             }, 77);//<<--------------tamanho do mapa----------------
             dimitri.LoadContent(Content);
             paperimagem = Content.Load <Texture2D>("Atores/Enemigos/vine");
-            fundo = Content.Load<Texture2D>("Fundo/kermit");
+            fundo = Content.Load<Texture2D>("Fundo/FundoPronto");
             messagemimagem = Content.Load<Texture2D>("Papel/messagem0");
             portalimagem = Content.Load<Texture2D>("Atores/Enemigos/Viking");
 
