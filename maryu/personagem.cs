@@ -29,7 +29,7 @@ namespace maryu
         //-----------imagem do russo-----
         public void LoadContent(ContentManager Content)
         {
-            spriteShit.LoadContent(Content, "Atores/Hero/russo");
+            spriteShit.LoadContent(Content, "Hero/russo");
         }
         //-----------imagem do russo-----
 
@@ -70,15 +70,7 @@ namespace maryu
                 Velocidade.Y = -12f;
                 jump = true;
             }
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.R) && !jump)
-            {
-                save = new StreamWriter("data.txt");
-                save.Write(Posiçao.X + '|' + Posiçao.Y);
-
-                save.Close();
-            }
+            
             
         }
         //-----------controles do russo-------
@@ -94,11 +86,11 @@ namespace maryu
 
             if (Rectangle.TouchLeftOf(newRectangle))
             {
-                Posiçao.X = newRectangle.X + Rectangle.Width / 2 + 30;
+                Posiçao.X = newRectangle.X - Rectangle.Width / 2;
             }
             if (Rectangle.TouchRightOf(newRectangle))
             {
-                Posiçao.X = newRectangle.X - Rectangle.Width/2 - 30;
+                Posiçao.X = newRectangle.X + Rectangle.Width/2;
             }
             if (Rectangle.TouchBottomOf(newRectangle))
             {
