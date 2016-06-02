@@ -25,7 +25,6 @@ namespace maryu
             Posiçao = position;
             spriteShit = new Animaçao(109, 101, 3);
         }
-
         //-----------imagem do russo-----
         public void LoadContent(ContentManager Content)
         {
@@ -70,11 +69,8 @@ namespace maryu
                 Velocidade.Y = -12f;
                 jump = true;
             }
-            
-            
         }
         //-----------controles do russo-------
-
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {
             if (Rectangle.TouchTopOf(newRectangle))
@@ -83,7 +79,6 @@ namespace maryu
                 Velocidade.Y = 0f;
                 jump = false;
             }
-
             if (Rectangle.TouchLeftOf(newRectangle))
             {
                 Posiçao.X = newRectangle.X - Rectangle.Width / 2;
@@ -113,7 +108,6 @@ namespace maryu
                 Posiçao.Y = yOffset - Rectangle.Height;
             }
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(spriteShit.Textuer, Posiçao, spriteShit.Rectangel, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);

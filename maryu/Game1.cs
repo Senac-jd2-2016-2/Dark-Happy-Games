@@ -11,8 +11,7 @@ using System.Linq;
 using System.Text;
 
 namespace maryu
-{
-    
+{  
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
@@ -31,7 +30,6 @@ namespace maryu
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-
         protected override void Initialize()
         {
             //>>>>>--------------NOME--------------<<<<<
@@ -40,23 +38,19 @@ namespace maryu
             graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
-
             paper[0] = new Rectangle(((1000) + 50), (700), 30, 30);
             paper[1] = new Rectangle(((2000) + 50), (1000), 30, 30);
             paper[2] = new Rectangle(((5000) + 50), (400), 30, 30);
             paper[3] = new Rectangle(((7000) + 50), (700), 30, 30);
             paper[4] = new Rectangle(((10000) + 50), (900), 30, 30);
             maapa1 = new Mapa();
-            dimitri = new Personagem(new Vector2(10, 2800));
-            
+            dimitri = new Personagem(new Vector2(10, 2800));          
             base.Initialize();
         }
-
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Tiles.Content = Content;
-            
+            Tiles.Content = Content;    
             camera = new Camera(GraphicsDevice.Viewport);
             //------------gerar mapa (entre 0,1,2)-----------
             maapa1.Generate(new int[,] {
@@ -101,7 +95,6 @@ namespace maryu
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 
-
             }, 77);//<<--------------tamanho do mapa----------------
             dimitri.LoadContent(Content);
             paperimagem = Content.Load <Texture2D>("Varies/chip0");
@@ -119,14 +112,10 @@ namespace maryu
         {
 
         }
-
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            
-
             if(menu)
             {
                 menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
@@ -141,10 +130,7 @@ namespace maryu
             if(!menu)
             {
                 menuobj = new Rectangle(0,0,0,0);
-            }
-
-
-            
+            }          
             portal = new Rectangle(8070, 50, 109, 101);
             //------------criar mensagens----------------------------------------
             for (int i = 0; i < paper.Length; i++)
