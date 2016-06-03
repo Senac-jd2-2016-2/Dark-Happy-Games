@@ -20,10 +20,12 @@ namespace maryu
         Mapa maapa1;
         Personagem dimitri;
         private Rectangle background;
-        Rectangle portal, hisoria1obj, historia2obj, menuobj, fimobj;
+        Rectangle portal, historia2obj, menuobj, fimobj, clickerobj, historiacomeçoobj;
         Rectangle[] paper = new Rectangle[5], messagem = new Rectangle[4];
-        Texture2D paperimagem, fundo, messagemimagem, portalimagem, historia1imagem, historia2imagem, menuimagen, fimimagem;
-        bool menu = true, historia1 = false, game = false, historia2 = false, fim = false;
+        Texture2D paperimagem, fundo, messagemimagem, portalimagem, historiacomeçoimagem, historia2imagem, menuimagem, fimimagem, clickerimagem;
+        bool menu = true, game = false, historia2 = false, fim = false;
+        bool[] historiacomeço = new bool[5];
+        int timer = 240;
 
         public Game1()
         {
@@ -32,19 +34,27 @@ namespace maryu
         }
         protected override void Initialize()
         {
-            //>>>>>--------------NOME--------------<<<<<
+            //>>>>>-------------------------------NOME-----------------------------<<<<<
             Window.Title = "The Robot";
             graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
             graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
+
+            //>>>>>>>>-----------------------INICIAR COISASS---------------------------<<<<<<<
             paper[0] = new Rectangle(((1000) + 50), (700), 30, 30);
             paper[1] = new Rectangle(((2000) + 50), (1000), 30, 30);
             paper[2] = new Rectangle(((5000) + 50), (400), 30, 30);
             paper[3] = new Rectangle(((7000) + 50), (700), 30, 30);
             paper[4] = new Rectangle(((10000) + 50), (900), 30, 30);
             maapa1 = new Mapa();
-            dimitri = new Personagem(new Vector2(10, 2800));          
+            dimitri = new Personagem(new Vector2(10, 4800));
+  
+            for (int i = 0; i < historiacomeço.Length; i++)
+            {
+                historiacomeço[i] = false;
+            }
+
             base.Initialize();
         }
         protected override void LoadContent()
@@ -52,7 +62,7 @@ namespace maryu
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;    
             camera = new Camera(GraphicsDevice.Viewport);
-            //------------gerar mapa (entre 0,1,2)-----------
+            //-----------------------------------------------gerar mapa (entre 0,1,2)--------------------------------------------
             maapa1.Generate(new int[,] {
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -89,9 +99,9 @@ namespace maryu
                {0,0,2,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,2,2,2,0,0,2,0,0,2,0,0,2,0,0,0,2,2,2,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0},
-               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 
@@ -100,13 +110,17 @@ namespace maryu
             paperimagem = Content.Load <Texture2D>("Varies/chip0");
             fundo = Content.Load<Texture2D>("Fundo/FundoPronto");
             messagemimagem = Content.Load<Texture2D>("Messagens/messagem0");
+            historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo1");
             portalimagem = Content.Load<Texture2D>("Varies/porta");
-            menuimagen = Content.Load<Texture2D>("Fundo/menu");
+            menuimagem = Content.Load<Texture2D>("Fundo/menu");
+            clickerimagem = Content.Load<Texture2D>("Varies/clicker");
 
             for (int i = 0; i < paper.Length; i++)
             {
                 messagemimagem = Content.Load<Texture2D>("Varies/chip" + i);
             }
+            
+            
         }
         protected override void UnloadContent()
         {
@@ -116,21 +130,130 @@ namespace maryu
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            //---------------------------------------------------------------------------------menu--------------------------------------------------------------------
             if(menu)
             {
                 menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 dimitri.Posiçao.X = 10;
-                dimitri.Posiçao.Y = 2800;
+                dimitri.Posiçao.Y = 800;
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    game = true;
+                    historiacomeço[0] = true;
                     menu = false;
                 }
             }
             if(!menu)
             {
                 menuobj = new Rectangle(0,0,0,0);
-            }          
+            }
+
+            //-------------------------------------------------------------------HISTORIA COMEÇO--------------------------------------------------------------------
+            //----------------------------------------------------historia parte1--------------------------------------------------------------------
+
+            if (historiacomeço[0])
+            {
+                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo1");
+
+                --timer;
+                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+
+                if (timer <= 0)
+                {
+                    timer = 240;
+                    historiacomeço[1] = true;
+                    historiacomeço[0] = false;
+                }
+            }
+
+            //----------------------------------------------------historia parte2--------------------------------------------------------------------
+
+            if (historiacomeço[1])
+            {
+                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo2");
+                clickerobj.Height = 0;
+                clickerobj.Width = 0;
+
+                --timer;
+                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+
+                if (timer <= 0)
+                {
+                    timer = 240;
+                    historiacomeço[2] = true;
+                    historiacomeço[1] = false;
+                }
+            }
+
+            //----------------------------------------------------historia parte3--------------------------------------------------------------------
+
+            if (historiacomeço[2])
+            {
+                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo3");
+                clickerobj.Height = 0;
+                clickerobj.Width = 0;
+
+                --timer;
+                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+
+                if (timer <= 0)
+                {
+                    timer = 240;
+                    historiacomeço[3] = true;
+                    historiacomeço[2] = false;
+
+                }
+            }
+
+            //----------------------------------------------------historia parte4--------------------------------------------------------------------
+
+            if (historiacomeço[3])
+            {
+                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo4");
+                clickerobj.Height = 0;
+                clickerobj.Width = 0;
+
+                --timer;
+                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+
+                if (timer <= 0)
+                {
+                    timer = 240;
+                    historiacomeço[4] = true;
+                    historiacomeço[3] = false;
+                }
+            }
+
+            //----------------------------------------------------historia parte5--------------------------------------------------------------------
+
+            if (historiacomeço[4])
+            {
+                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo5");
+
+                --timer;
+                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+
+                if (timer <= 0)
+                {
+                    clickerobj = new Rectangle((int)-camera.Transform.Translation.X + 1600, (int)-camera.Transform.Translation.Y + 900, 30, 30);
+                }
+
+                if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
+                {
+                    timer = 240;
+                    game = true;
+                    historiacomeço[4] = false;
+                }
+            }
+            if (!historiacomeço[4])
+            {
+                clickerobj = new Rectangle(0, 0, 0, 0);
+            }
+
+            //-------------------------------------------------------------------HISTORIA COMEÇO--------------------------------------------------------------------
+
+            //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
+
             portal = new Rectangle(8070, 50, 109, 101);
             //------------criar mensagens----------------------------------------
             for (int i = 0; i < paper.Length; i++)
@@ -181,8 +304,9 @@ namespace maryu
                 game = false;
                 menu = true;
             }
-            
-            
+
+            //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
+
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)
@@ -193,16 +317,24 @@ namespace maryu
          
             if(menu)
             {
-                spriteBatch.Draw(menuimagen, menuobj, Color.White);
+                spriteBatch.Draw(menuimagem, menuobj, Color.White);
             }
+            for (int i = 0; i < historiacomeço.Length; i++)
+            {
+                if (historiacomeço[i])
+                {
+                    
+                    spriteBatch.Draw(historiacomeçoimagem, historiacomeçoobj, Color.White);
+                    spriteBatch.Draw(clickerimagem, clickerobj, Color.White);
+                }
+            }
+            
 
             if(game)
             {
-                background = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1500);
+                background = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 spriteBatch.Draw(fundo, background, Color.White);
                 maapa1.Draw(spriteBatch);
-                dimitri.Draw(spriteBatch);
-
 
                 for (int i = 0; i < paper.Length; i++)
                 {
@@ -213,6 +345,7 @@ namespace maryu
                 {
                     spriteBatch.Draw(messagemimagem, messagem[i], Color.White);
                 }
+                dimitri.Draw(spriteBatch);
                 spriteBatch.Draw(portalimagem, portal, Color.White);
             }
 
