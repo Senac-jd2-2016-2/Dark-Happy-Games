@@ -22,7 +22,7 @@ namespace maryu
         //-------imagem dos tijolos-----
         public CollisionTiles(int i, Rectangle newRectangle)
         {
-            Texture = Content.Load<Texture2D>("Tijolos/Terra" + i);
+            Texture = Content.Load<Texture2D>("Tijolos/Plataforma" + i);
             this.Rectangle = newRectangle;
         }
     }
