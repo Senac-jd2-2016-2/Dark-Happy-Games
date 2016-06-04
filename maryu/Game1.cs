@@ -103,14 +103,14 @@ namespace maryu
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-               {1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+               {1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2},
 
             }, 77);//<<--------------tamanho do mapa----------------
             dimitri.LoadContent(Content);
             paperimagem = Content.Load <Texture2D>("Varies/chip0");
             fundo = Content.Load<Texture2D>("Fundo/FundoPronto");
             messagemimagem = Content.Load<Texture2D>("Messagens/messagem0");
-            historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo1");
+            historiacomeçoimagem = Content.Load<Texture2D>("começos/começo1");
             portalimagem = Content.Load<Texture2D>("Varies/porta");
             menuimagem = Content.Load<Texture2D>("Fundo/menu");
             clickerimagem = Content.Load<Texture2D>("Varies/clicker");
@@ -132,7 +132,7 @@ namespace maryu
                 Exit();
 
             //---------------------------------------------------------------------------------menu--------------------------------------------------------------------
-            if(menu)
+            if (menu)
             {
                 menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 dimitri.Posiçao.X = 10;
@@ -143,9 +143,9 @@ namespace maryu
                     menu = false;
                 }
             }
-            if(!menu)
+            if (!menu)
             {
-                menuobj = new Rectangle(0,0,0,0);
+                menuobj = new Rectangle(0, 0, 0, 0);
             }
 
             //-------------------------------------------------------------------HISTORIA COMEÇO--------------------------------------------------------------------
@@ -153,10 +153,12 @@ namespace maryu
 
             if (historiacomeço[0])
             {
+                   
+                     
                 historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo1");
 
                 --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200); 
 
                 if (timer <= 0)
                 {
