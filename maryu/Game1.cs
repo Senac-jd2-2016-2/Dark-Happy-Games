@@ -139,8 +139,8 @@ namespace maryu
                 dimitri.Posiçao.Y = 800;
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    historiacomeço[0] = true;
                     menu = false;
+                    game = true;
                 }
             }
             if (!menu)
@@ -151,106 +151,93 @@ namespace maryu
             //-------------------------------------------------------------------HISTORIA COMEÇO--------------------------------------------------------------------
             //----------------------------------------------------historia parte1--------------------------------------------------------------------
 
-            if (historiacomeço[0])
-            {
-                   
-                     
-                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo1");
+            //if (historiacomeço[0])
+            //{                  
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo1");
+            //    --timer;
+            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200); 
+            //    if (timer <= 0)
+            //    {
+            //        timer = 240;
+            //        historiacomeço[1] = true;
+            //        historiacomeço[0] = false;
+            //    }
+            //}
+            ////----------------------------------------------------historia parte2--------------------------------------------------------------------
+            //if (historiacomeço[1])
+            //{
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo2");
+            //    clickerobj.Height = 0;
+            //    clickerobj.Width = 0;
+            //    --timer;
+            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+            //    if (timer <= 0)
+            //    {
+            //        timer = 240;
+            //        historiacomeço[2] = true;
+            //        historiacomeço[1] = false;
+            //    }
+            //}
+            ////----------------------------------------------------historia parte3--------------------------------------------------------------------
+            //if (historiacomeço[2])
+            //{
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo3");
+            //    clickerobj.Height = 0;
+            //    clickerobj.Width = 0;
+            //    --timer;
+            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+            //    if (timer <= 0)
+            //    {
+            //        timer = 240;
+            //        historiacomeço[3] = true;
+            //        historiacomeço[2] = false;
+            //    }
+            //}
 
-                --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200); 
+            ////----------------------------------------------------historia parte4--------------------------------------------------------------------
 
-                if (timer <= 0)
-                {
-                    timer = 240;
-                    historiacomeço[1] = true;
-                    historiacomeço[0] = false;
-                }
-            }
+            //if (historiacomeço[3])
+            //{
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo4");
+            //    clickerobj.Height = 0;
+            //    clickerobj.Width = 0;
 
-            //----------------------------------------------------historia parte2--------------------------------------------------------------------
+            //    --timer;
+            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-            if (historiacomeço[1])
-            {
-                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo2");
-                clickerobj.Height = 0;
-                clickerobj.Width = 0;
+            //    if (timer <= 0)
+            //    {
+            //        timer = 240;
+            //        historiacomeço[4] = true;
+            //        historiacomeço[3] = false;
+            //    }
+            //}
 
-                --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+            ////----------------------------------------------------historia parte5--------------------------------------------------------------------
 
-                if (timer <= 0)
-                {
-                    timer = 240;
-                    historiacomeço[2] = true;
-                    historiacomeço[1] = false;
-                }
-            }
+            //if (historiacomeço[4])
+            //{
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo5");
 
-            //----------------------------------------------------historia parte3--------------------------------------------------------------------
+            //    --timer;
+            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-            if (historiacomeço[2])
-            {
-                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo3");
-                clickerobj.Height = 0;
-                clickerobj.Width = 0;
+            //    if (timer <= 0)
+            //    {
+            //        clickerobj = new Rectangle((int)-camera.Transform.Translation.X + 1600, (int)-camera.Transform.Translation.Y + 900, 30, 30);
+            //    }
 
-                --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-
-                if (timer <= 0)
-                {
-                    timer = 240;
-                    historiacomeço[3] = true;
-                    historiacomeço[2] = false;
-
-                }
-            }
-
-            //----------------------------------------------------historia parte4--------------------------------------------------------------------
-
-            if (historiacomeço[3])
-            {
-                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo4");
-                clickerobj.Height = 0;
-                clickerobj.Width = 0;
-
-                --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-
-                if (timer <= 0)
-                {
-                    timer = 240;
-                    historiacomeço[4] = true;
-                    historiacomeço[3] = false;
-                }
-            }
-
-            //----------------------------------------------------historia parte5--------------------------------------------------------------------
-
-            if (historiacomeço[4])
-            {
-                historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo5");
-
-                --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-
-                if (timer <= 0)
-                {
-                    clickerobj = new Rectangle((int)-camera.Transform.Translation.X + 1600, (int)-camera.Transform.Translation.Y + 900, 30, 30);
-                }
-
-                if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
-                {
-                    timer = 240;
-                    game = true;
-                    historiacomeço[4] = false;
-                }
-            }
-            if (!historiacomeço[4])
-            {
-                clickerobj = new Rectangle(0, 0, 0, 0);
-            }
+            //    if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
+            //    {
+            //        timer = 240;
+            //        game = true;
+            //        historiacomeço[4] = false;
+            //    }
+            //}
+            //if (!historiacomeço[4])
+            //{
+            //    clickerobj = new Rectangle(0, 0, 0, 0);
+            //}
 
             //-------------------------------------------------------------------HISTORIA COMEÇO--------------------------------------------------------------------
 
