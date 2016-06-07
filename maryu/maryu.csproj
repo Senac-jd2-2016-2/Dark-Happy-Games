@@ -135,7 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Vidas.spritefont">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <!-- Specify the search path explicitly so the ResolveAssemblyReferences task picks the right ones -->

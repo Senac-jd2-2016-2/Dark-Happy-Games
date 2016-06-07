@@ -330,7 +330,7 @@ namespace maryu
                 background = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 spriteBatch.Draw(fundo, background, Color.White);
                 maapa1.Draw(spriteBatch);
-                spriteBatch.DrawString(vidas, "Vidas " + vida, new Vector2(0, 30), Color.Black);
+                spriteBatch.DrawString(vidas, "Vidas " + vida, new Vector2(0,100), Color.Black);
                 for (int i = 0; i < paper.Length; i++)
                 {
                     spriteBatch.Draw(paperimagem, paper[i], Color.White);
