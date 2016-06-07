@@ -15,7 +15,8 @@ namespace maryu
         private Vector2 Velocidade;
         public Animaçao spriteShit;
         public Rectangle Rectangle;
-        private bool jump;
+        private bool jump;      
+        public bool gameover = false;       
         public Vector2 Posiçaosave;
         StreamWriter save;
 
@@ -103,10 +104,14 @@ namespace maryu
             {
                 Velocidade.Y = 1f;
             }
-            if (Posiçao.Y > yOffset - Rectangle.Height)
-            {
-                Posiçao.Y = yOffset - Rectangle.Height;
-            }
+            //if (Posiçao.Y > yOffset - Rectangle.Height)
+            //{
+                
+            //}
+            //if (vidas == 0)
+            //{
+            //    gameover = true;
+            //}
         }
         public void Draw(SpriteBatch spriteBatch)
         {
