@@ -21,10 +21,10 @@ namespace maryu
         Personagem dimitri;
         private Rectangle background;
         Rectangle portal, historia2obj, menuobj, fimobj, clickerobj, historiacomeçoobj;
-        Rectangle[] paper = new Rectangle[5], messagem = new Rectangle[4];
-        Texture2D paperimagem, fundo, messagemimagem, portalimagem, historiacomeçoimagem, historia2imagem, menuimagem, fimimagem, clickerimagem;
+        Rectangle[] paper = new Rectangle[5], messagem = new Rectangle[4], plataformaobj = new Rectangle[4], blockersobj = new Rectangle[8];
+        Texture2D paperimagem, fundo, messagemimagem, portalimagem, historiacomeçoimagem, historia2imagem, menuimagem, fimimagem, clickerimagem, plataformaimagem;
         bool menu = true, game = false, historia2 = false, fim = false;
-        bool[] historiacomeço = new bool[5];
+        bool[] historiacomeço = new bool[5], blockers = new bool[4];
         int timer = 240;
 
         public Game1()
@@ -42,11 +42,28 @@ namespace maryu
             graphics.ApplyChanges();
 
             //>>>>>>>>-----------------------INICIAR COISASS---------------------------<<<<<<<
-            paper[0] = new Rectangle(((1000) + 50), (700), 30, 30);
-            paper[1] = new Rectangle(((2000) + 50), (1000), 30, 30);
-            paper[2] = new Rectangle(((5000) + 50), (400), 30, 30);
-            paper[3] = new Rectangle(((7000) + 50), (700), 30, 30);
-            paper[4] = new Rectangle(((10000) + 50), (900), 30, 30);
+
+            paper[0] = new Rectangle(1050, 700, 30, 30);
+            paper[1] = new Rectangle(2050, 1000, 30, 30);
+            paper[2] = new Rectangle(5050, 400, 30, 30);
+            paper[3] = new Rectangle(7050, 700, 30, 30);
+            paper[4] = new Rectangle(10050, 900, 30, 30);
+
+            for (int i = 0; i < blockers.Length; i++)
+			{
+                blockers[i] = true;
+			}
+
+            for (int i = 0; i < plataformaobj.Length; i++)
+            {
+                blockersobj[i] = new Rectangle((1050 * i), 600, 300, 77);
+                plataformaobj[i] = new Rectangle((1050 * i), 900, 300, 77);
+                blockersobj[i + 4] = new Rectangle((1050 * i), 1200, 300, 77);   
+            }
+            
+
+            
+
             maapa1 = new Mapa();
             dimitri = new Personagem(new Vector2(10, 4800));
   
@@ -109,11 +126,12 @@ namespace maryu
             dimitri.LoadContent(Content);
             paperimagem = Content.Load <Texture2D>("Varies/chip0");
             fundo = Content.Load<Texture2D>("Fundo/FundoPronto");
-            messagemimagem = Content.Load<Texture2D>("Messagens/messagem0");
+            messagemimagem = Content.Load<Texture2D>("Mensagens/mensagem0");
             historiacomeçoimagem = Content.Load<Texture2D>("começos/começo1");
             portalimagem = Content.Load<Texture2D>("Varies/porta");
             menuimagem = Content.Load<Texture2D>("Fundo/menu");
             clickerimagem = Content.Load<Texture2D>("Varies/clicker");
+            plataformaimagem = Content.Load<Texture2D>("Tijolos/moveble");
 
             for (int i = 0; i < paper.Length; i++)
             {
@@ -136,7 +154,7 @@ namespace maryu
             {
                 menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 dimitri.Posiçao.X = 10;
-                dimitri.Posiçao.Y = 800;
+                dimitri.Posiçao.Y = 300;
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
                     menu = false;
@@ -152,11 +170,13 @@ namespace maryu
             //----------------------------------------------------historia parte1--------------------------------------------------------------------
 
             //if (historiacomeço[0])
-            //{                  
-            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo1");
+            //{
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
+
             //    --timer;
-            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200); 
-            //    if (timer <= 0)
+            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+
+            //    if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
             //    {
             //        timer = 240;
             //        historiacomeço[1] = true;
@@ -166,12 +186,14 @@ namespace maryu
             ////----------------------------------------------------historia parte2--------------------------------------------------------------------
             //if (historiacomeço[1])
             //{
-            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo2");
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo2");
             //    clickerobj.Height = 0;
             //    clickerobj.Width = 0;
+
             //    --timer;
             //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-            //    if (timer <= 0)
+
+            //    if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
             //    {
             //        timer = 240;
             //        historiacomeço[2] = true;
@@ -181,12 +203,14 @@ namespace maryu
             ////----------------------------------------------------historia parte3--------------------------------------------------------------------
             //if (historiacomeço[2])
             //{
-            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo3");
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo3");
             //    clickerobj.Height = 0;
             //    clickerobj.Width = 0;
+
             //    --timer;
             //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-            //    if (timer <= 0)
+
+            //    if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
             //    {
             //        timer = 240;
             //        historiacomeço[3] = true;
@@ -198,14 +222,14 @@ namespace maryu
 
             //if (historiacomeço[3])
             //{
-            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo4");
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo4");
             //    clickerobj.Height = 0;
             //    clickerobj.Width = 0;
 
             //    --timer;
             //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-            //    if (timer <= 0)
+            //    if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
             //    {
             //        timer = 240;
             //        historiacomeço[4] = true;
@@ -217,7 +241,7 @@ namespace maryu
 
             //if (historiacomeço[4])
             //{
-            //    historiacomeçoimagem = Content.Load<Texture2D>("Historias/começo5");
+            //    historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo5");
 
             //    --timer;
             //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
@@ -249,8 +273,13 @@ namespace maryu
             {
                 if (dimitri.Rectangle.Intersects(paper[i]))
                 {
+                    --timer;
                     messagem[i] = new Rectangle(paper[i].X - 400, paper[i].Y - 400, 450, 450);
-                    messagemimagem = Content.Load<Texture2D>("Messagens/messagem" + i);
+                    messagemimagem = Content.Load<Texture2D>("Mensagens/mensagem" + i);
+                    if(timer <= 0)
+                    {
+                        messagem[i] = new Rectangle(0,0,0,0);
+                    }
                 }
             }
             //------------criar mensagens----------------------------------------
@@ -286,14 +315,43 @@ namespace maryu
                 dimitri.Collision(tile.Rectangle, maapa1.Width, maapa1.Height);
                 camera.Update(dimitri.Posiçao, maapa1.Width, maapa1.Height);
             }
-            //------------colisao do russo sobre os tijolos e camera-------------
 
             if (Keyboard.GetState().IsKeyDown(Keys.H))
             {
                 game = false;
                 menu = true;
             }
+            for (int i = 0; i < plataformaobj.Length; i++)
+            {
+                if (dimitri.Rectangle.Intersects(plataformaobj[i]))
+                {
+                    dimitri.Posiçao.Y -= 10.3f;
+                    dimitri.jump = false;
+                }    
+            }
+            
+            //------------colisao do russo sobre os tijolos e camera-------------
+            //------------------------------------plataformas moveis------------------------------------------------------------------
+            //for (int i = 0; i < plataformaobj.Length; i++)
+            //{
+            //    if (plataformaobj[i].Intersects(blockersobj[i]))
+            //    {
+            //        blockers[i] = false;
+            //    }
+            //    if (plataformaobj[i].Intersects(blockersobj[i+4]))
+            //    {
+            //        blockers[i] = true;
+            //    }
 
+            //    if (blockers[i])
+            //    {
+            //        plataformaobj[i].Y -= 2;
+            //    }
+            //    if (!blockers[i])
+            //    {
+            //        plataformaobj[i].Y += 2;
+            //    }    
+            //}
             //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
 
             base.Update(gameTime);
@@ -324,7 +382,10 @@ namespace maryu
                 background = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 spriteBatch.Draw(fundo, background, Color.White);
                 maapa1.Draw(spriteBatch);
-
+                for (int i = 0; i < plataformaobj.Length; i++)
+                {
+                    spriteBatch.Draw(plataformaimagem, plataformaobj[i], Color.White);    
+                }
                 for (int i = 0; i < paper.Length; i++)
                 {
                     spriteBatch.Draw(paperimagem, paper[i], Color.White);

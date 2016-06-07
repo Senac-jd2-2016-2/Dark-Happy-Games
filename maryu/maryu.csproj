@@ -59,19 +59,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\começos\começo1.png">
+    <Content Include="Content\Começos\começo1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\começos\começo2.png">
+    <Content Include="Content\Começos\começo2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\começos\começo3.png">
+    <Content Include="Content\Começos\começo3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\começos\começo4.png">
+    <Content Include="Content\Começos\começo4.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\começos\começo5.png">
+    <Content Include="Content\Começos\começo5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Fundo\menu.png">
@@ -83,11 +83,14 @@
     <Content Include="Content\Fundo\FundoPronto.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tijolos\moveble.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tijolos\Plataforma1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tijolos\Plataforma2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Varies\chip0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -110,16 +113,16 @@
     <Content Include="Content\Varies\porta.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Messagens\messagem3.jpg">
+    <Content Include="Content\Mensagens\mensagem3.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Messagens\messagem2.jpg">
+    <Content Include="Content\Mensagens\mensagem2.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Messagens\messagem1.jpg">
+    <Content Include="Content\Mensagens\mensagem1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Messagens\messagem0.jpg">
+    <Content Include="Content\Mensagens\mensagem0.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tijolos\terra1.png">

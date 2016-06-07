@@ -15,9 +15,8 @@ namespace maryu
         private Vector2 Velocidade;
         public Animaçao spriteShit;
         public Rectangle Rectangle;
-        private bool jump;
-        public Vector2 Posiçaosave;
-        StreamWriter save;
+        public bool jump;
+        private int timerjump = 20;
 
 
         public Personagem(Vector2 position)
