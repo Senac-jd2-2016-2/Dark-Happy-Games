@@ -17,7 +17,9 @@ namespace maryu
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Camera camera;
+        Personagem position, size;
         Mapa maapa1;
+        Rectangle findeljueguito;
         Personagem dimitri;
         private Rectangle background;
         Rectangle portal, historia2obj, menuobj, fimobj, clickerobj, historiacomeçoobj;
@@ -26,6 +28,10 @@ namespace maryu
         bool menu = true, game = false, historia2 = false, fim = false;
         bool[] historiacomeço = new bool[5], blockers = new bool[4];
         int timer = 240;
+        public int vida = 2;
+        SpriteFont vidas;
+        public bool gameover = false;
+        public Texture2D gameoverscreen;
 
         public Game1()
         {
@@ -66,6 +72,8 @@ namespace maryu
 
             maapa1 = new Mapa();
             dimitri = new Personagem(new Vector2(10, 4800));
+          findeljueguito = new Rectangle(0, 0,Window.ClientBounds.Width, Window.ClientBounds.Height+100);
+  
   
             for (int i = 0; i < historiacomeço.Length; i++)
             {
@@ -116,21 +124,23 @@ namespace maryu
                {0,0,2,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,2,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,2,2,2,0,0,0,0,0,0,0,2,2,2,0,0,2,0,0,2,0,0,2,0,0,0,2,2,2,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0},
+               {0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
-               {1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2},
+               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2},
+               {0,0,0,0,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,0,0,0,0,0,0,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2},
 
             }, 77);//<<--------------tamanho do mapa----------------
             dimitri.LoadContent(Content);
             paperimagem = Content.Load <Texture2D>("Varies/chip0");
+            vidas = Content.Load<SpriteFont>("Vidas");
             fundo = Content.Load<Texture2D>("Fundo/FundoPronto");
             messagemimagem = Content.Load<Texture2D>("Mensagens/mensagem0");
             historiacomeçoimagem = Content.Load<Texture2D>("começos/começo1");
             portalimagem = Content.Load<Texture2D>("Varies/porta");
             menuimagem = Content.Load<Texture2D>("Fundo/menu");
             clickerimagem = Content.Load<Texture2D>("Varies/clicker");
+            gameoverscreen = Content.Load<Texture2D>("GAME OVER");
             plataformaimagem = Content.Load<Texture2D>("Tijolos/moveble");
 
             for (int i = 0; i < paper.Length; i++)
@@ -170,11 +180,11 @@ namespace maryu
             //----------------------------------------------------historia parte1--------------------------------------------------------------------
 
             //if (historiacomeço[0])
-            //{
+            //{                  
             //    historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
 
             //    --timer;
-            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+            //    historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200); 
 
             //    if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
             //    {
@@ -282,6 +292,16 @@ namespace maryu
                     }
                 }
             }
+            if (position.Posiçao > size.yOffset - position.Rectangle.Height)
+            {
+                vida--;
+                position.Posiçao.Y = 100;
+                position.Posiçao.X = 100;
+            }
+            if (vida <= 0)
+            {
+                gameover = true;
+            }
             //------------criar mensagens----------------------------------------
 
             //------------colisao do russo sobre os tijolos e camera-------------
@@ -316,6 +336,9 @@ namespace maryu
                 camera.Update(dimitri.Posiçao, maapa1.Width, maapa1.Height);
             }
 
+            //Puzzles da primeira fase
+
+
             if (Keyboard.GetState().IsKeyDown(Keys.H))
             {
                 game = false;
@@ -329,7 +352,7 @@ namespace maryu
                     dimitri.jump = false;
                 }    
             }
-            
+
             //------------colisao do russo sobre os tijolos e camera-------------
             //------------------------------------plataformas moveis------------------------------------------------------------------
             //for (int i = 0; i < plataformaobj.Length; i++)
@@ -382,10 +405,7 @@ namespace maryu
                 background = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 spriteBatch.Draw(fundo, background, Color.White);
                 maapa1.Draw(spriteBatch);
-                for (int i = 0; i < plataformaobj.Length; i++)
-                {
-                    spriteBatch.Draw(plataformaimagem, plataformaobj[i], Color.White);    
-                }
+
                 for (int i = 0; i < paper.Length; i++)
                 {
                     spriteBatch.Draw(paperimagem, paper[i], Color.White);
@@ -398,7 +418,10 @@ namespace maryu
                 dimitri.Draw(spriteBatch);
                 spriteBatch.Draw(portalimagem, portal, Color.White);
             }
-
+            if (gameover)
+            {
+                spriteBatch.Draw(gameoverscreen, findeljueguito, Color.White);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }

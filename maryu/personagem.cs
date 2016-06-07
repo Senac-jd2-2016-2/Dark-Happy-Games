@@ -14,7 +14,11 @@ namespace maryu
         public Vector2 Posiçao;
         private Vector2 Velocidade;
         public Animaçao spriteShit;
-        public Rectangle Rectangle;
+        public Rectangle Rectangle;    
+       
+        public Vector2 Posiçaosave;
+        StreamWriter save;
+        Game1 vidinha = new Game1();
         public bool jump;
         private int timerjump = 20;
 
@@ -28,6 +32,7 @@ namespace maryu
         public void LoadContent(ContentManager Content)
         {
             spriteShit.LoadContent(Content, "Hero/russo");
+            
         }
         //-----------imagem do russo-----
 
@@ -104,8 +109,12 @@ namespace maryu
             }
             if (Posiçao.Y > yOffset - Rectangle.Height)
             {
-                Posiçao.Y = yOffset - Rectangle.Height;
+                vidinha.vida--;
+                Posiçao.Y = 100;
+                Posiçao.X = 100;
             }
+            
+            
         }
         public void Draw(SpriteBatch spriteBatch)
         {
