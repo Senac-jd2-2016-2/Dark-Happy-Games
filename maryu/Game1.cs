@@ -27,7 +27,7 @@ namespace maryu
         bool menu = true, game = false, historia2 = false, fim = false, gameover = false;
         bool[] historiacomeço = new bool[5], blockers = new bool[4];
         int timer = 240;
-        SoundEffect click, iron, walking;
+        public static SoundEffect click, iron, walking, porta1, porta2;
         public static int vida = 2;
         SpriteFont vidas;
 
@@ -139,6 +139,7 @@ namespace maryu
             gameoverscreen = Content.Load<Texture2D>("Fundo/GAME OVER");
             plataformaimagem = Content.Load<Texture2D>("Tijolos/moveble");
             click = Content.Load<SoundEffect>("Sons/SFX/clique");
+            walking = Content.Load<SoundEffect>("Sons/SFX/Robo andando");
             for (int i = 0; i < chips.Length; i++)
             {
                 mensagemimagem = Content.Load<Texture2D>("Varies/chip" + i);

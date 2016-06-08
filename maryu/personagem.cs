@@ -46,20 +46,25 @@ namespace maryu
         //-----------controles do russo-------
         private void Input(GameTime gameTime)
         {
+            
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                 spriteShit.SetFrame(0);
+                Game1.walking.Play();
             }
+                
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 Velocidade.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                 spriteShit.SetFrame(109);
             }
+                
             else
             {
                 Velocidade.X = 0f;
             }
+            
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump)
             {
                 Posiçao.Y -= 9f;

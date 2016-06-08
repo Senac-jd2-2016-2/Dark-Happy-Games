@@ -19,9 +19,33 @@
 /processorParam:TextureFormat=Compressed
 /build:Vidas.spritefont
 
-#begin clique.wav
+#begin Sons/SFX/clique.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:clique.wav
+/build:Sons/SFX/clique.wav
+
+#begin Sons/SFX/iron door.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sons/SFX/iron door.wav
+
+#begin Sons/SFX/iron door 2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sons/SFX/iron door 2.wav
+
+#begin Sons/SFX/metal.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sons/SFX/metal.wav
+
+#begin Sons/SFX/Robo andando.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sons/SFX/Robo andando.wav
 
