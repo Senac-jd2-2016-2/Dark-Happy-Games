@@ -27,7 +27,7 @@ namespace maryu
         bool menu = true, game = false, historia2 = false, fim = false, gameover = false;
         bool[] historiacomeço = new bool[5], blockers = new bool[4];
         int timer = 240;
-        public int vida = 2;
+        public static int vida = 2;
         SpriteFont vidas;
 
         public Game1()
@@ -397,7 +397,7 @@ namespace maryu
                 background = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 spriteBatch.Draw(fundo, background, Color.White);
                 maapa1.Draw(spriteBatch);
-
+                spriteBatch.DrawString(vidas, "Vidas:" + vida, new Vector2(100, 100), Color.Black);
                 for (int i = 0; i < paper.Length; i++)
                 {
                     spriteBatch.Draw(paperimagem, paper[i], Color.White);

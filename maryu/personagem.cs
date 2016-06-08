@@ -15,7 +15,6 @@ namespace maryu
         private Vector2 Velocidade;
         public Animaçao spriteShit;
         public Rectangle Rectangle;
-        Game1 vidinha = new Game1();
         public bool jump;
 
         public Personagem(Vector2 position)
@@ -103,7 +102,7 @@ namespace maryu
             }
             if (Posiçao.Y > yOffset - Rectangle.Height)
             {
-                vidinha.vida--;
+                Game1.vida = Game1.vida - 1;
                 Posiçao.Y = 100;
                 Posiçao.X = 100;
             }
