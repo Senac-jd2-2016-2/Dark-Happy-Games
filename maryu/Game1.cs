@@ -27,6 +27,7 @@ namespace maryu
         bool menu = true, game = false, historia2 = false, fim = false, gameover = false;
         bool[] historiacomeço = new bool[5], blockers = new bool[4];
         int timer = 240;
+        SoundEffect click, iron, walking;
         public static int vida = 2;
         SpriteFont vidas;
 
@@ -79,6 +80,7 @@ namespace maryu
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
+            
             camera = new Camera(GraphicsDevice.Viewport);
             //-----------------------------------------------gerar mapa (entre 0,1,2)--------------------------------------------
             maapa1.Generate(new int[,] {
@@ -136,7 +138,7 @@ namespace maryu
             clickerimagem = Content.Load<Texture2D>("Varies/clicker");
             gameoverscreen = Content.Load<Texture2D>("Fundo/GAME OVER");
             plataformaimagem = Content.Load<Texture2D>("Tijolos/moveble");
-
+            click = Content.Load<SoundEffect>("Sons/SFX/clique");
             for (int i = 0; i < chips.Length; i++)
             {
                 mensagemimagem = Content.Load<Texture2D>("Varies/chip" + i);
@@ -279,12 +281,14 @@ namespace maryu
                 if (C45510.Rectangle.Intersects(chips[i]))
                 {
                     --timer;
+                    
                     mensagem[i] = new Rectangle(chips[i].X - 400, chips[i].Y - 400, 450, 450);
                     mensagemimagem = Content.Load<Texture2D>("Mensagens/mensagem" + i);
                     if (timer <= 0)
                     {
                         mensagem[i] = new Rectangle(0, 0, 0, 0);
                     }
+                    click.Play();
                 }
             }
 

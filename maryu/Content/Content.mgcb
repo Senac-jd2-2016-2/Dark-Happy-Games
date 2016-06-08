@@ -19,3 +19,9 @@
 /processorParam:TextureFormat=Compressed
 /build:Vidas.spritefont
 
+#begin clique.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:clique.wav
+
