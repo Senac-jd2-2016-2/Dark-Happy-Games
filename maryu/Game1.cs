@@ -19,19 +19,16 @@ namespace maryu
         Camera camera;
         Personagem position, size;
         Mapa maapa1;
-        Rectangle findeljueguito;
-        Personagem dimitri;
-        private Rectangle background;
-        Rectangle portal, historia2obj, menuobj, fimobj, clickerobj, historiacomeçoobj;
+        Personagem C45510;
+        Rectangle background;
+        Rectangle tank, historia2obj, menuobj, fimobj, clickerobj, historiacomeçoobj, findeljueguito;
         Rectangle[] paper = new Rectangle[5], messagem = new Rectangle[4], plataformaobj = new Rectangle[4], blockersobj = new Rectangle[8];
-        Texture2D paperimagem, fundo, messagemimagem, portalimagem, historiacomeçoimagem, historia2imagem, menuimagem, fimimagem, clickerimagem, plataformaimagem;
-        bool menu = true, game = false, historia2 = false, fim = false;
+        Texture2D paperimagem, fundo, messagemimagem, portalimagem, historiacomeçoimagem, historia2imagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen;
+        bool menu = true, game = false, historia2 = false, fim = false, gameover = false;
         bool[] historiacomeço = new bool[5], blockers = new bool[4];
         int timer = 240;
         public int vida = 2;
         SpriteFont vidas;
-        public bool gameover = false;
-        public Texture2D gameoverscreen;
 
         public Game1()
         {
@@ -48,6 +45,7 @@ namespace maryu
             graphics.ApplyChanges();
 
             //>>>>>>>>-----------------------INICIAR COISASS---------------------------<<<<<<<
+            tank = new Rectangle(8070, 50, 109, 101);
 
             paper[0] = new Rectangle(1050, 700, 30, 30);
             paper[1] = new Rectangle(2050, 1000, 30, 30);
@@ -71,8 +69,8 @@ namespace maryu
             
 
             maapa1 = new Mapa();
-            dimitri = new Personagem(new Vector2(10, 4800));
-          findeljueguito = new Rectangle(0, 0,Window.ClientBounds.Width, Window.ClientBounds.Height+100);
+            C45510 = new Personagem(new Vector2(10, 4800));
+            findeljueguito = new Rectangle(0, 0,Window.ClientBounds.Width, Window.ClientBounds.Height+100);
   
   
             for (int i = 0; i < historiacomeço.Length; i++)
@@ -131,7 +129,7 @@ namespace maryu
                {0,0,0,0,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,0,0,0,0,0,0,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2},
 
             }, 77);//<<--------------tamanho do mapa----------------
-            dimitri.LoadContent(Content);
+            C45510.LoadContent(Content);
             paperimagem = Content.Load <Texture2D>("Varies/chip0");
             vidas = Content.Load<SpriteFont>("Vidas");
             fundo = Content.Load<Texture2D>("Fundo/FundoPronto");
@@ -163,8 +161,8 @@ namespace maryu
             if (menu)
             {
                 menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-                dimitri.Posiçao.X = 10;
-                dimitri.Posiçao.Y = 300;
+                C45510.Posiçao.X = 10;
+                C45510.Posiçao.Y = 300;
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
                     menu = false;
@@ -277,11 +275,11 @@ namespace maryu
 
             //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
 
-            portal = new Rectangle(8070, 50, 109, 101);
+            
             //------------criar mensagens----------------------------------------
             for (int i = 0; i < paper.Length; i++)
             {
-                if (dimitri.Rectangle.Intersects(paper[i]))
+                if (C45510.Rectangle.Intersects(paper[i]))
                 {
                     --timer;
                     messagem[i] = new Rectangle(paper[i].X - 400, paper[i].Y - 400, 450, 450);
@@ -291,12 +289,6 @@ namespace maryu
                         messagem[i] = new Rectangle(0,0,0,0);
                     }
                 }
-            }
-            if (position.Posiçao > size.yOffset - position.Rectangle.Height)
-            {
-                vida--;
-                position.Posiçao.Y = 100;
-                position.Posiçao.X = 100;
             }
             if (vida <= 0)
             {
@@ -308,53 +300,54 @@ namespace maryu
             if (game)
             {
                 
-                dimitri.Update(gameTime);
+                C45510.Update(gameTime);
             }
             if (!game)
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.D))
                 {
-                    dimitri.Posiçao.X = dimitri.Posiçao.X - 3;
+                    C45510.Posiçao.X = C45510.Posiçao.X - 3;
                 }
                 else if (Keyboard.GetState().IsKeyDown(Keys.A))
                 {
-                    dimitri.Posiçao.X = dimitri.Posiçao.X + 3;
+                    C45510.Posiçao.X = C45510.Posiçao.X + 3;
                 }
                 else
                 {
-                    dimitri.Posiçao.X = 0f;
+                    C45510.Posiçao.X = 0f;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Space))
                 {
-                    dimitri.Posiçao.Y += 9f;
-                    dimitri.Posiçao.Y = +12f;
+                    C45510.Posiçao.Y += 9f;
+                    C45510.Posiçao.Y = +12f;
                 }
             }
             foreach (CollisionTiles tile in maapa1.CollisionTile)
             {
-                dimitri.Collision(tile.Rectangle, maapa1.Width, maapa1.Height);
-                camera.Update(dimitri.Posiçao, maapa1.Width, maapa1.Height);
+                C45510.Collision(tile.Rectangle, maapa1.Width, maapa1.Height);
+                camera.Update(C45510.Posiçao, maapa1.Width, maapa1.Height);
             }
-
-            //Puzzles da primeira fase
-
 
             if (Keyboard.GetState().IsKeyDown(Keys.H))
             {
                 game = false;
                 menu = true;
             }
-            for (int i = 0; i < plataformaobj.Length; i++)
-            {
-                if (dimitri.Rectangle.Intersects(plataformaobj[i]))
-                {
-                    dimitri.Posiçao.Y -= 10.3f;
-                    dimitri.jump = false;
-                }    
-            }
+            
 
             //------------colisao do russo sobre os tijolos e camera-------------
+
             //------------------------------------plataformas moveis------------------------------------------------------------------
+
+            for (int i = 0; i < plataformaobj.Length; i++)
+            {
+                if (C45510.Rectangle.Intersects(plataformaobj[i]))
+                {
+                    C45510.Posiçao.Y -= 10.3f;
+                    C45510.jump = false;
+                }
+            }
+
             //for (int i = 0; i < plataformaobj.Length; i++)
             //{
             //    if (plataformaobj[i].Intersects(blockersobj[i]))
@@ -375,6 +368,7 @@ namespace maryu
             //        plataformaobj[i].Y += 2;
             //    }    
             //}
+
             //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
 
             base.Update(gameTime);
@@ -393,12 +387,10 @@ namespace maryu
             {
                 if (historiacomeço[i])
                 {
-                    
                     spriteBatch.Draw(historiacomeçoimagem, historiacomeçoobj, Color.White);
                     spriteBatch.Draw(clickerimagem, clickerobj, Color.White);
                 }
             }
-            
 
             if(game)
             {
@@ -415,8 +407,8 @@ namespace maryu
                 {
                     spriteBatch.Draw(messagemimagem, messagem[i], Color.White);
                 }
-                dimitri.Draw(spriteBatch);
-                spriteBatch.Draw(portalimagem, portal, Color.White);
+                C45510.Draw(spriteBatch);
+                spriteBatch.Draw(portalimagem, tank, Color.White);
             }
             if (gameover)
             {

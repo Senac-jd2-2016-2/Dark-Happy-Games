@@ -14,14 +14,9 @@ namespace maryu
         public Vector2 Posiçao;
         private Vector2 Velocidade;
         public Animaçao spriteShit;
-        public Rectangle Rectangle;    
-       
-        public Vector2 Posiçaosave;
-        StreamWriter save;
+        public Rectangle Rectangle;
         Game1 vidinha = new Game1();
         public bool jump;
-        private int timerjump = 20;
-
 
         public Personagem(Vector2 position)
         {
@@ -31,8 +26,7 @@ namespace maryu
         //-----------imagem do russo-----
         public void LoadContent(ContentManager Content)
         {
-            spriteShit.LoadContent(Content, "Hero/russo");
-            
+            spriteShit.LoadContent(Content, "Hero/russo");     
         }
         //-----------imagem do russo-----
 
