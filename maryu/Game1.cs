@@ -11,19 +11,18 @@ using System.Linq;
 using System.Text;
 
 namespace maryu
-{  
+{
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         Camera camera;
-        Personagem position, size;
         Mapa maapa1;
         Personagem C45510;
-        Rectangle background;
-        Rectangle tank, historia2obj, menuobj, fimobj, clickerobj, historiacomeçoobj, findeljueguito;
-        Rectangle[] paper = new Rectangle[5], messagem = new Rectangle[4], plataformaobj = new Rectangle[4], blockersobj = new Rectangle[8];
-        Texture2D paperimagem, fundo, messagemimagem, portalimagem, historiacomeçoimagem, historia2imagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen;
+        Rectangle tank, historia2obj, menuobj, fimobj, clickerobj, historiacomeçoobj, background, findeljueguito;
+        Rectangle[] chips = new Rectangle[5], mensagem = new Rectangle[4], plataformaobj = new Rectangle[4], blockersobj = new Rectangle[8];
+        Texture2D chipsimagem, fundo, mensagemimagem, tankimagem, historiacomeçoimagem, historia2imagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen;
         bool menu = true, game = false, historia2 = false, fim = false, gameover = false;
         bool[] historiacomeço = new bool[5], blockers = new bool[4];
         int timer = 240;
@@ -47,32 +46,27 @@ namespace maryu
             //>>>>>>>>-----------------------INICIAR COISASS---------------------------<<<<<<<
             tank = new Rectangle(8070, 50, 109, 101);
 
-            paper[0] = new Rectangle(1050, 700, 30, 30);
-            paper[1] = new Rectangle(2050, 1000, 30, 30);
-            paper[2] = new Rectangle(5050, 400, 30, 30);
-            paper[3] = new Rectangle(7050, 700, 30, 30);
-            paper[4] = new Rectangle(10050, 900, 30, 30);
+            chips[0] = new Rectangle(1050, 700, 30, 30);
+            chips[1] = new Rectangle(2050, 1000, 30, 30);
+            chips[2] = new Rectangle(5050, 400, 30, 30);
+            chips[3] = new Rectangle(7050, 700, 30, 30);
+            chips[4] = new Rectangle(10050, 900, 30, 30);
 
-            for (int i = 0; i < blockers.Length; i++)
-			{
-                blockers[i] = true;
-			}
+            //for (int i = 0; i < blockers.Length; i++)
+            //{
+            //    blockers[i] = true;
+            //}
 
-            for (int i = 0; i < plataformaobj.Length; i++)
-            {
-                blockersobj[i] = new Rectangle((1050 * i), 600, 300, 77);
-                plataformaobj[i] = new Rectangle((1050 * i), 900, 300, 77);
-                blockersobj[i + 4] = new Rectangle((1050 * i), 1200, 300, 77);   
-            }
-            
-
-            
+            //for (int i = 0; i < plataformaobj.Length; i++)
+            //{
+            //    blockersobj[i] = new Rectangle((1050 * i), 600, 300, 77);
+            //    plataformaobj[i] = new Rectangle((1050 * i), 900, 300, 77);
+            //    blockersobj[i + 4] = new Rectangle((1050 * i), 1200, 300, 77);   
+            //}
 
             maapa1 = new Mapa();
             C45510 = new Personagem(new Vector2(10, 4800));
-            findeljueguito = new Rectangle(0, 0,Window.ClientBounds.Width, Window.ClientBounds.Height+100);
-  
-  
+
             for (int i = 0; i < historiacomeço.Length; i++)
             {
                 historiacomeço[i] = false;
@@ -83,7 +77,7 @@ namespace maryu
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Tiles.Content = Content;    
+            Tiles.Content = Content;
             camera = new Camera(GraphicsDevice.Viewport);
             //-----------------------------------------------gerar mapa (entre 0,1,2)--------------------------------------------
             maapa1.Generate(new int[,] {
@@ -130,23 +124,23 @@ namespace maryu
 
             }, 77);//<<--------------tamanho do mapa----------------
             C45510.LoadContent(Content);
-            paperimagem = Content.Load <Texture2D>("Varies/chip0");
+            chipsimagem = Content.Load<Texture2D>("Varies/chip0");
             vidas = Content.Load<SpriteFont>("Vidas");
-            fundo = Content.Load<Texture2D>("Fundo/FundoPronto");
-            messagemimagem = Content.Load<Texture2D>("Mensagens/mensagem0");
+            fundo = Content.Load<Texture2D>("Fundo/Sol");
+            mensagemimagem = Content.Load<Texture2D>("Mensagens/mensagem0");
             historiacomeçoimagem = Content.Load<Texture2D>("começos/começo1");
-            portalimagem = Content.Load<Texture2D>("Varies/porta");
+            tankimagem = Content.Load<Texture2D>("Varies/Barril");
             menuimagem = Content.Load<Texture2D>("Fundo/menu");
             clickerimagem = Content.Load<Texture2D>("Varies/clicker");
-            gameoverscreen = Content.Load<Texture2D>("GAME OVER");
+            gameoverscreen = Content.Load<Texture2D>("Fundo/GAME OVER");
             plataformaimagem = Content.Load<Texture2D>("Tijolos/moveble");
 
-            for (int i = 0; i < paper.Length; i++)
+            for (int i = 0; i < chips.Length; i++)
             {
-                messagemimagem = Content.Load<Texture2D>("Varies/chip" + i);
+                mensagemimagem = Content.Load<Texture2D>("Varies/chip" + i);
             }
-            
-            
+
+
         }
         protected override void UnloadContent()
         {
@@ -275,18 +269,18 @@ namespace maryu
 
             //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
 
-            
+
             //------------criar mensagens----------------------------------------
-            for (int i = 0; i < paper.Length; i++)
+            for (int i = 0; i < chips.Length; i++)
             {
-                if (C45510.Rectangle.Intersects(paper[i]))
+                if (C45510.Rectangle.Intersects(chips[i]))
                 {
                     --timer;
-                    messagem[i] = new Rectangle(paper[i].X - 400, paper[i].Y - 400, 450, 450);
-                    messagemimagem = Content.Load<Texture2D>("Mensagens/mensagem" + i);
-                    if(timer <= 0)
+                    mensagem[i] = new Rectangle(chips[i].X - 400, chips[i].Y - 400, 450, 450);
+                    mensagemimagem = Content.Load<Texture2D>("Mensagens/mensagem" + i);
+                    if (timer <= 0)
                     {
-                        messagem[i] = new Rectangle(0,0,0,0);
+                        mensagem[i] = new Rectangle(0, 0, 0, 0);
                     }
                 }
             }
@@ -299,7 +293,7 @@ namespace maryu
             //------------colisao do russo sobre os tijolos e camera-------------
             if (game)
             {
-                
+
                 C45510.Update(gameTime);
             }
             if (!game)
@@ -333,21 +327,19 @@ namespace maryu
                 game = false;
                 menu = true;
             }
-            
 
             //------------colisao do russo sobre os tijolos e camera-------------
 
             //------------------------------------plataformas moveis------------------------------------------------------------------
 
-            for (int i = 0; i < plataformaobj.Length; i++)
-            {
-                if (C45510.Rectangle.Intersects(plataformaobj[i]))
-                {
-                    C45510.Posiçao.Y -= 10.3f;
-                    C45510.jump = false;
-                }
-            }
-
+            //for (int i = 0; i < plataformaobj.Length; i++)
+            //{
+            //    if (C45510.Rectangle.Intersects(plataformaobj[i]))
+            //    {
+            //        C45510.Posiçao.Y -= 10.3f;
+            //        C45510.jump = false;
+            //    }
+            //}
             //for (int i = 0; i < plataformaobj.Length; i++)
             //{
             //    if (plataformaobj[i].Intersects(blockersobj[i]))
@@ -378,8 +370,8 @@ namespace maryu
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
-         
-            if(menu)
+
+            if (menu)
             {
                 spriteBatch.Draw(menuimagem, menuobj, Color.White);
             }
@@ -392,28 +384,31 @@ namespace maryu
                 }
             }
 
-            if(game)
+            if (game)
             {
-                background = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                background = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1800);
                 spriteBatch.Draw(fundo, background, Color.White);
                 maapa1.Draw(spriteBatch);
                 spriteBatch.DrawString(vidas, "Vidas:" + vida, new Vector2(100, 100), Color.Black);
-                for (int i = 0; i < paper.Length; i++)
-                {
-                    spriteBatch.Draw(paperimagem, paper[i], Color.White);
-                }
 
-                for (int i = 0; i < messagem.Length; i++)
+                for (int i = 0; i < chips.Length; i++)
                 {
-                    spriteBatch.Draw(messagemimagem, messagem[i], Color.White);
+                    spriteBatch.Draw(chipsimagem, chips[i], Color.White);
+                }
+                for (int i = 0; i < mensagem.Length; i++)
+                {
+                    spriteBatch.Draw(mensagemimagem, mensagem[i], Color.White);
                 }
                 C45510.Draw(spriteBatch);
-                spriteBatch.Draw(portalimagem, tank, Color.White);
+                spriteBatch.Draw(tankimagem, tank, Color.White);
             }
+
             if (gameover)
             {
+                findeljueguito = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height + 100);
                 spriteBatch.Draw(gameoverscreen, findeljueguito, Color.White);
             }
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

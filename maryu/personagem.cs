@@ -25,7 +25,7 @@ namespace maryu
         //-----------imagem do russo-----
         public void LoadContent(ContentManager Content)
         {
-            spriteShit.LoadContent(Content, "Hero/russo");     
+            spriteShit.LoadContent(Content, "Hero/russo");
         }
         //-----------imagem do russo-----
 
@@ -82,7 +82,7 @@ namespace maryu
             }
             if (Rectangle.TouchRightOf(newRectangle))
             {
-                Posiçao.X = newRectangle.X + Rectangle.Width/2;
+                Posiçao.X = newRectangle.X + Rectangle.Width / 2;
             }
             if (Rectangle.TouchBottomOf(newRectangle))
             {
@@ -106,8 +106,6 @@ namespace maryu
                 Posiçao.Y = 100;
                 Posiçao.X = 100;
             }
-            
-            
         }
         public void Draw(SpriteBatch spriteBatch)
         {
