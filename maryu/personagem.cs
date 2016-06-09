@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
@@ -46,30 +47,37 @@ namespace maryu
         //-----------controles do russo-------
         private void Input(GameTime gameTime)
         {
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            if(Game1.game)
             {
-                Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
-                spriteShit.SetFrame(0);
-                Game1.walking.Play();
-            }
-                
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                Velocidade.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
-                spriteShit.SetFrame(109);
-            }
-                
-            else
-            {
-                Velocidade.X = 0f;
-            }
-            
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump)
-            {
-                Posiçao.Y -= 9f;
-                Velocidade.Y = -12f;
-                jump = true;
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && Game1.pause == false)
+                {
+                    Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
+                    spriteShit.SetFrame(0);
+                    //Game1.walking.Play();
+                }
+
+                else if (Keyboard.GetState().IsKeyDown(Keys.A) && Game1.pause == false)
+                {
+                    Velocidade.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
+                    spriteShit.SetFrame(109);
+                    //Game1.walking.Play();
+                }
+
+                else
+                {
+                    Velocidade.X = 0f;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump && Game1.pause == false)
+                {
+                    Posiçao.Y -= 9f;
+                    Velocidade.Y = -12f;
+                    jump = true;
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.P))
+                {
+                    Game1.pause = true;
+                }
             }
         }
         //-----------controles do russo-------
