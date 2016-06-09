@@ -116,8 +116,8 @@ namespace maryu
             if (Posiçao.Y > yOffset - Rectangle.Height)
             {
                 Game1.vida = Game1.vida - 1;
-                Posiçao.Y = 100;
                 Posiçao.X = 100;
+                Posiçao.Y = 2900;
             }
         }
         public void Draw(SpriteBatch spriteBatch)

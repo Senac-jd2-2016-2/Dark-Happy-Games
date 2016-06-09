@@ -20,15 +20,15 @@ namespace maryu
         Camera camera;
         Mapa maapa1;
         Personagem C45510;
-        Rectangle tank, historia2obj, menuobj, fimobj, clickerobj, historiacomeçoobj, background, findeljueguito, manuelobj, pauseobj;
+        Rectangle tank, historiafinalobj, menuobj, fimobj, clickerobj, historiacomeçoobj, background, findeljueguito, manuelobj, pauseobj;
         Rectangle[] chips = new Rectangle[5], mensagem = new Rectangle[4], plataformaobj = new Rectangle[4], blockersobj = new Rectangle[8];
-        Texture2D chipsimagem, fundo, mensagemimagem, tankimagem, historiacomeçoimagem, historia2imagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen, manuelimagem, pauseimagem;
+        Texture2D chipsimagem, fundo, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen, manuelimagem, pauseimagem;
         Vector2 vidaobj;
         public static bool game = false, pause = false;
-        bool menu = true, historia2 = false, fim = false, manuel = false, gameover = false;
-        bool[] historiacomeço = new bool[5], blockers = new bool[4];
-        int timer = 240;
-        public static SoundEffect click, iron, walking, porta1, porta2;
+        bool menu = true, fim = false, manuel = false, gameover = false, musica;
+        bool[] historiacomeço = new bool[5], blockers = new bool[4], historiafinal = new bool[5];
+        int timer = 30;
+        public static SoundEffect click, iron, walking, porta1, porta2, music;
         public static int vida = 2;
         SpriteFont vidas;
 
@@ -106,13 +106,13 @@ namespace maryu
                {5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {4,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {4,0,5,5,0,0,1,2,0,0,0,0,0,0,0,0,0,0,1,2,1,2,0,0,0,0,1,0,0,8,0,0,0,0,8,0,0,0,8,8,8,8,8,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-               {4,0,4,5,5,0,0,0,0,0,8,0,0,0,0,8,0,0,0,0,0,3,2,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+               {4,0,4,5,5,0,0,0,0,8,0,0,0,0,0,8,0,0,0,0,0,3,2,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,2,3,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,8,8,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,8,8},
                {5,5,4,0,0,0,0,0,0,0,0,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,0,0,0,0,0,0,0,0,0,0,0,8,8,8,0,0,8,8,8,8,8,8,8,8,8,8,8,8},
                {5,5,5,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,0,0,8,8,8,8,8,8,8,8,8,8,8,8},
                {0,0,0,0,0,0,0,0,0,0,1,0,4,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,1,2,1,2,1,2,1,2,1,2},
                {0,0,0,0,0,0,0,0,0,1,3,0,4,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,2,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,1,2,1,2,1,2,1,2,1,2},
-               {1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,0,0,0,0,0,0,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,0,0,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2},
+               {1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,0,0,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,0,0,0,0,0,0,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,0,0,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2},
 
             }, 77);//<<---------tamanho do map
             //------carregar imagens n shit----------
@@ -131,6 +131,7 @@ namespace maryu
             pauseimagem = Content.Load<Texture2D>("Fundo/pause");
             click = Content.Load<SoundEffect>("Sons/SFX/clique");
             walking = Content.Load<SoundEffect>("Sons/SFX/Robo andando");
+            music = Content.Load<SoundEffect>("music");
             for (int i = 0; i < chips.Length; i++)
             {
                 mensagemimagem = Content.Load<Texture2D>("Varies/chip" + i);
@@ -150,13 +151,16 @@ namespace maryu
             //---------------------------------------------------------------------------------menu--------------------------------------------------------------------
             if (menu)
             {
+                --timer;
                 menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-                C45510.Posiçao.X = 19000;
-                C45510.Posiçao.Y = 1000;
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                C45510.Posiçao.X = 100;
+                C45510.Posiçao.Y = 2900;
+                vida = 2;
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && timer <= 0)
                 {
                     menu = false;
-                    game = true;
+                    timer = 30;
+                    historiacomeço[0] = true;
                 }
             }
             if (!menu)
@@ -175,9 +179,9 @@ namespace maryu
                 --timer;
                 historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-                if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 120;
+                    timer = 30;
                     historiacomeço[1] = true;
                     historiacomeço[0] = false;
                 }
@@ -190,9 +194,9 @@ namespace maryu
                 --timer;
                 historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-                if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 120;
+                    timer = 30;
                     historiacomeço[2] = true;
                     historiacomeço[1] = false;
                 }
@@ -205,9 +209,9 @@ namespace maryu
                 --timer;
                 historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-                if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 120;
+                    timer = 30;
                     historiacomeço[3] = true;
                     historiacomeço[2] = false;
                 }
@@ -222,9 +226,9 @@ namespace maryu
                 --timer;
                 historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-                if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 120;
+                    timer = 30;
                     historiacomeço[4] = true;
                     historiacomeço[3] = false;
                 }
@@ -244,9 +248,9 @@ namespace maryu
                     clickerobj = new Rectangle((int)-camera.Transform.Translation.X + 1600, (int)-camera.Transform.Translation.Y + 900, 30, 30);
                 }
 
-                if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 120;
+                    timer = 30;
                     manuel = true;
                     historiacomeço[4] = false;
                 }
@@ -265,12 +269,12 @@ namespace maryu
                 --timer;
                 manuelobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-                C45510.Posiçao.X = 19000;
-                C45510.Posiçao.Y = 1000;
+                C45510.Posiçao.X = 100;
+                C45510.Posiçao.Y = 2900;
 
-                if ((Keyboard.GetState().IsKeyDown(Keys.Space)) && timer <= 0)
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 120;
+                    timer = 30;
                     game = true;
                     manuel = false;
                 }
@@ -279,6 +283,15 @@ namespace maryu
             //-------------------------------------------------------------------manual-------------------------------------------------------------------------
 
             //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
+
+            if(musica)
+            {
+                music.Play();
+            }
+            else if(!musica)
+            {
+                music.Play();
+            }
 
             //------------criar mensagens----------------------------------------
 
@@ -353,9 +366,11 @@ namespace maryu
             //---------------------------------------------------------------------gameover----------------------------------------------------------------------------
             if(gameover)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     gameover = false;
+                    C45510.Posiçao.X = 100;
+                    C45510.Posiçao.Y = 2900;
                     menu = true;
                 }
             }
@@ -412,7 +427,7 @@ namespace maryu
 
             if (gameover)
             {
-                findeljueguito = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height + 100);
+                findeljueguito = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1800);
                 spriteBatch.Draw(gameoverscreen, findeljueguito, Color.White);
             }
 
