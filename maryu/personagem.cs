@@ -53,7 +53,13 @@ namespace maryu
                 {
                     Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                     spriteShit.SetFrame(0);
-                    //Game1.walking.Play();
+                    bool testesom = false;
+                    SoundEffectInstance test = Game1.walking.CreateInstance();
+                    if (Keyboard.GetState().IsKeyDown(Keys.D) && Game1.pause == false && test.State == SoundState.Stopped)
+                    {
+                        test.Play();
+                    }
+                    
                 }
 
                 else if (Keyboard.GetState().IsKeyDown(Keys.A) && Game1.pause == false)
