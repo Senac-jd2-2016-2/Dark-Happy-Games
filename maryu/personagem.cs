@@ -52,14 +52,7 @@ namespace maryu
                 if (Keyboard.GetState().IsKeyDown(Keys.D) && Game1.pause == false)
                 {
                     Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
-                    spriteShit.SetFrame(0);
-                    bool testesom = false;
-                    SoundEffectInstance test = Game1.walking.CreateInstance();
-                    if (Keyboard.GetState().IsKeyDown(Keys.D) && Game1.pause == false && test.State == SoundState.Stopped)
-                    {
-                        test.Play();
-                    }
-                    
+                    spriteShit.SetFrame(0);                  
                 }
 
                 else if (Keyboard.GetState().IsKeyDown(Keys.A) && Game1.pause == false)
@@ -95,14 +88,14 @@ namespace maryu
                 Velocidade.Y = 0f;
                 jump = false;
             }
-            if (Rectangle.TouchLeftOf(newRectangle))
-            {
-                Posiçao.X = newRectangle.X - Rectangle.Width / 2;
-            }
-            if (Rectangle.TouchRightOf(newRectangle))
-            {
-                Posiçao.X = newRectangle.X + Rectangle.Width / 2;
-            }
+            //if (Rectangle.TouchLeftOf(newRectangle))
+            //{
+            //    Posiçao.X = newRectangle.X - Rectangle.Width / 2;
+            //}
+            //if (Rectangle.TouchRightOf(newRectangle))
+            //{
+            //    Posiçao.X = newRectangle.X + Rectangle.Width / 2;
+            //}
             if (Rectangle.TouchBottomOf(newRectangle))
             {
                 Velocidade.Y = 1f;
@@ -119,7 +112,7 @@ namespace maryu
             {
                 Velocidade.Y = 1f;
             }
-            if (Posiçao.Y > yOffset - Rectangle.Height)
+            if (Posiçao.Y > yOffset - Rectangle.Height + 40)
             {
                 Game1.vida = Game1.vida - 1;
                 Posiçao.X = 100;

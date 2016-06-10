@@ -42,7 +42,7 @@ namespace maryu
             //>>>>>-------------------------------NOME-----------------------------<<<<<
             Window.Title = "The Robot";
             graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
-            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
+            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height-60;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
@@ -129,9 +129,9 @@ namespace maryu
             plataformaimagem = Content.Load<Texture2D>("Tijolos/moveble");
             manuelimagem = Content.Load<Texture2D>("Fundo/manual");
             pauseimagem = Content.Load<Texture2D>("Fundo/pause");
-            click = Content.Load<SoundEffect>("Sons/SFX/clique");
-            walking = Content.Load<SoundEffect>("Sons/SFX/Robo andando");
-            music = Content.Load<SoundEffect>("music");
+            //click = Content.Load<SoundEffect>("Sons/SFX/clique");
+            //walking = Content.Load<SoundEffect>("Sons/SFX/Robo andando");
+            //music = Content.Load<SoundEffect>("music");
             for (int i = 0; i < chips.Length; i++)
             {
                 mensagemimagem = Content.Load<Texture2D>("Varies/chip" + i);
@@ -274,7 +274,7 @@ namespace maryu
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 120;
                     game = true;
                     manuel = false;
                 }
@@ -284,14 +284,14 @@ namespace maryu
 
             //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
 
-            if(musica)
-            {
-                music.Play();
-            }
-            else if(!musica)
-            {
-                music.Play();
-            }
+            //if(musica)
+            //{
+            //    music.Play();
+            //}
+            //else if(!musica)
+            //{
+            //    music.Play();
+            //}
 
             //------------criar mensagens----------------------------------------
 
@@ -299,13 +299,14 @@ namespace maryu
             {
                 if (C45510.Rectangle.Intersects(chips[i]))
                 {
-                    --timer;
+                    
                     mensagem[i] = new Rectangle(chips[i].X - 400, chips[i].Y - 400, 450, 450);
                     mensagemimagem = Content.Load<Texture2D>("Mensagens/mensagem" + i);
-                    if (timer <= 0)
-                    {
-                        mensagem[i] = new Rectangle(0, 0, 0, 0);
-                    }
+                    
+                    //else if (timer <= 0)
+                    //{
+                    //    mensagem[i] = new Rectangle(0, 0, 0, 0);
+                    //}
                     //click.Play();
                 }
             }
