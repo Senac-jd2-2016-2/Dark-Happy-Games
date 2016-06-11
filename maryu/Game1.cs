@@ -18,6 +18,8 @@ namespace maryu
         SpriteBatch spriteBatch;
 
         Camera camera;
+       // Song backgroundsong;
+       // bool songstart = false;
         Mapa maapa1;
         Personagem C45510;
         Rectangle tank, historiafinalobj, menuobj, fimobj, clickerobj, historiacomeçoobj, background, findeljueguito, manuelobj, pauseobj;
@@ -119,15 +121,17 @@ namespace maryu
             C45510.LoadContent(Content);
             chipsimagem = Content.Load<Texture2D>("Varies/chip0");
             vidas = Content.Load<SpriteFont>("Vidas");
+           // backgroundsong = Content.Load<Song>("music");
+           // MediaPlayer.IsRepeating = true;
             fundo = Content.Load<Texture2D>("Fundo/Sol");
             mensagemimagem = Content.Load<Texture2D>("Mensagens/mensagem0");
             historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
             tankimagem = Content.Load<Texture2D>("Varies/Barril");
-            menuimagem = Content.Load<Texture2D>("Fundo/menu");
+            menuimagem = Content.Load<Texture2D>("Menus, Telas e Afins/menu");
             clickerimagem = Content.Load<Texture2D>("Varies/clicker");
-            gameoverscreen = Content.Load<Texture2D>("Fundo/GAME OVER");
+            gameoverscreen = Content.Load<Texture2D>("Menus, Telas e Afins/gameover");
             plataformaimagem = Content.Load<Texture2D>("Tijolos/moveble");
-            manuelimagem = Content.Load<Texture2D>("Fundo/manual");
+            manuelimagem = Content.Load<Texture2D>("Menus, Telas e Afins/howtoplay");
             pauseimagem = Content.Load<Texture2D>("Fundo/pause");
             //click = Content.Load<SoundEffect>("Sons/SFX/clique");
             //walking = Content.Load<SoundEffect>("Sons/SFX/Robo andando");
@@ -294,7 +298,15 @@ namespace maryu
             //}
 
             //------------criar mensagens----------------------------------------
+            //if (!songstart)
+            //{
+                
+            //    MediaPlayer.Play(backgroundsong);
+            //    songstart = true; 
+            //}
 
+
+            //MediaPlayer.Play(backgroundsong);
             for (int i = 0; i < chips.Length; i++)
             {
                 if (C45510.Rectangle.Intersects(chips[i]))
