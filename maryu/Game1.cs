@@ -27,6 +27,7 @@ namespace maryu
         Texture2D chipsimagem, fundo, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen, manuelimagem, pauseimagem;
         Vector2 vidaobj;
         public static bool game = false, pause = false;
+        bool gamewin = false;
         bool menu = true, fim = false, manuel = false, gameover = false, musica;
         bool[] historiacomeço = new bool[5], blockers = new bool[4], historiafinal = new bool[5];
         int timer = 30;
