@@ -22,9 +22,9 @@ namespace maryu
        // bool songstart = false;
         Mapa maapa1;
         Personagem C45510;
-        Rectangle tank, historiafinalobj, menuobj, fimobj, clickerobj, historiacomeçoobj, background, findeljueguito, manuelobj, pauseobj;
+        Rectangle tank, historiafinalobj, menuobj, fimobj, clickerobj, historiacomeçoobj, background, findeljueguito, manuelobj, pauseobj, ganioulejueguito;
         Rectangle[] chips = new Rectangle[5], mensagem = new Rectangle[4], plataformaobj = new Rectangle[4], blockersobj = new Rectangle[8];
-        Texture2D chipsimagem, fundo, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen, manuelimagem, pauseimagem;
+        Texture2D chipsimagem, fundo, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen, manuelimagem, pauseimagem, gamewinscreen;
         Vector2 vidaobj;
         public static bool game = false, pause = false;
         bool gamewin = false;
@@ -34,6 +34,7 @@ namespace maryu
         public static SoundEffect click, iron, walking, porta1, porta2, music;
         public static int vida = 2;
         SpriteFont vidas;
+
 
         public Game1()
         {
@@ -131,6 +132,7 @@ namespace maryu
             menuimagem = Content.Load<Texture2D>("Menus, Telas e Afins/menu");
             clickerimagem = Content.Load<Texture2D>("Varies/clicker");
             gameoverscreen = Content.Load<Texture2D>("Menus, Telas e Afins/gameover");
+            gamewinscreen = Content.Load<Texture2D>("Menus, Telas e Afins/Fimdejogo");
             plataformaimagem = Content.Load<Texture2D>("Tijolos/moveble");
             manuelimagem = Content.Load<Texture2D>("Menus, Telas e Afins/howtoplay");
             pauseimagem = Content.Load<Texture2D>("Fundo/pause");
@@ -332,7 +334,7 @@ namespace maryu
             }
             if(C45510.Rectangle.Intersects(tank))
             {
-                gameover = true;
+                gamewin = true;
                 game = false;
             }
 
@@ -375,6 +377,7 @@ namespace maryu
 
             //--------------------------------pause------------------------------
 
+           
             //---------------------------------------------------------------------GAME--------------------------------------------------------------------------------
 
             //---------------------------------------------------------------------gameover----------------------------------------------------------------------------
@@ -443,6 +446,11 @@ namespace maryu
             {
                 findeljueguito = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1800);
                 spriteBatch.Draw(gameoverscreen, findeljueguito, Color.White);
+            }
+            if (gamewin)
+            {
+                ganioulejueguito = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1800);
+                spriteBatch.Draw(gamewinscreen, ganioulejueguito, Color.White);
             }
 
             spriteBatch.End();

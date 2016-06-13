@@ -117,8 +117,9 @@ namespace maryu
                 Game1.vida = Game1.vida - 1;
                 Posiçao.X = 100;
                 Posiçao.Y = 2900;
-            }
+            }       
         }
+        
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(spriteShit.Textuer, Posiçao, spriteShit.Rectangel, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
