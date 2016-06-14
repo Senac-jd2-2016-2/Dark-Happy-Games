@@ -50,7 +50,7 @@ namespace maryu
 
         Rectangle tank, historiafinalobj, menuobj, fimobj, clickerobj, historiacomeçoobj, background, findeljueguito, manuelobj, pauseobj, ganioulejueguito;
 
-        Rectangle[] chips = new Rectangle[11], mensagem = new Rectangle[11], plataformaobj = new Rectangle[4], blockersobj = new Rectangle[8];
+        Rectangle[] chips = new Rectangle[5], mensagem = new Rectangle[4], plataformaobj = new Rectangle[4], blockersobj = new Rectangle[8];
 
         Texture2D chipsimagem, fundo, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, fimimagem, clickerimagem, plataformaimagem, gameoverscreen, manuelimagem, pauseimagem, gamewinscreen;
 
@@ -126,7 +126,7 @@ namespace maryu
 
             chips[4] = new Rectangle(10050, 900, 30, 30);
 
-            chips[5] = new Rectangle(200, 2900, 30, 30);
+            //chips[5] = new Rectangle(200, 2900, 30, 30);
 
 
 
@@ -324,7 +324,7 @@ namespace maryu
 
             C45510.LoadContent(Content);
 
-            chipsimagem = Content.Load<Texture2D>("Varies/chips");
+            chipsimagem = Content.Load<Texture2D>("Varies/chip0");
 
             vidas = Content.Load<SpriteFont>("Vidas");
 
@@ -334,7 +334,7 @@ namespace maryu
 
             fundo = Content.Load<Texture2D>("Fundo/Sol");
 
-            mensagemimagem = Content.Load<Texture2D>("Mensagens/texto1");
+            mensagemimagem = Content.Load<Texture2D>("Mensagens/mensagem0");
 
             historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
 
@@ -364,7 +364,7 @@ namespace maryu
 
             {
 
-                mensagemimagem = Content.Load<Texture2D>("Varies/chips");
+                mensagemimagem = Content.Load<Texture2D>("Varies/chip"+ i);
 
             }
 
@@ -728,7 +728,7 @@ namespace maryu
 
                     mensagem[i] = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
-                    mensagemimagem = Content.Load<Texture2D>("Mensagens/texto" + i);
+                    mensagemimagem = Content.Load<Texture2D>("Mensagens/mensagem" + i);
 
 
 

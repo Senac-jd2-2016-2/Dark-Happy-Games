@@ -74,6 +74,7 @@
     <Content Include="Content\Começos\começo5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Fundo\fundo.jpg" />
     <Content Include="Content\Fundo\pause.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
