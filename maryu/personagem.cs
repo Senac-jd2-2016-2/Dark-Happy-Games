@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -48,15 +47,15 @@ namespace maryu
         //-----------controles do russo-------
         private void Input(GameTime gameTime)
         {
-            if(Game1.game)
+            if(Game1.gamebool)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && Game1.pause == false)
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && Game1.pausebool == false)
                 {
                     Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                     spriteShit.SetFrame(0);                  
                 }
 
-                else if (Keyboard.GetState().IsKeyDown(Keys.A) && Game1.pause == false)
+                else if (Keyboard.GetState().IsKeyDown(Keys.A) && Game1.pausebool == false)
                 {
                     Velocidade.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                     spriteShit.SetFrame(109);
@@ -68,7 +67,7 @@ namespace maryu
                     Velocidade.X = 0f;
                 }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump && Game1.pause == false)
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump && Game1.pausebool == false)
                 {
                     Posiçao.Y -= 9f;
                     Velocidade.Y = -12f;
@@ -76,7 +75,7 @@ namespace maryu
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.P))
                 {
-                    Game1.pause = true;
+                    Game1.pausebool = true;
                 }
             }
         }

@@ -49,9 +49,3 @@
 /processorParam:Quality=Best
 /build:Sons/SFX/Robo andando.wav
 
-#begin The Desolate Hope OST - Menu.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:The Desolate Hope OST - Menu.mp3
-
