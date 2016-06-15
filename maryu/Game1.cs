@@ -183,9 +183,8 @@ namespace maryu
             fimimagem = Content.Load<Texture2D>("Menus, Telas e Afins/Fimdejogo");
             manuelimagem = Content.Load<Texture2D>("Menus, Telas e Afins/howtoplay");
             pauseimagem = Content.Load<Texture2D>("Menus, Telas e Afins/Pause");
-
-            //click = Content.Load<SoundEffect>("Sons/SFX/clique");
-            //walking = Content.Load<SoundEffect>("Sons/SFX/Robo andando");C:\Users\Aluno.PC-XXXXX\Source\Repos\Dark-Happy-Games\maryu\Content\Fundo\Sol.png
+            clickeffect = Content.Load<SoundEffect>("Sons/SFX/clique");
+            walkingeffect = Content.Load<SoundEffect>("Sons/SFX/Robo andando");
 
             //------carregar imagens n shit----------
 
@@ -357,9 +356,7 @@ namespace maryu
                         mensagemimagem = Content.Load<Texture2D>("Mensagens/texto" + i);
                         personmovebool = false;
                         chipsobj[i] = new Rectangle(0, 0, 0, 0);
-
-                        //click.Play();
-
+                        
                         if (!C45510.Rectangle.Intersects(chipsobj[i]))
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
@@ -429,7 +426,7 @@ namespace maryu
                         personmovebool = false;
                         chipsobj[i] = new Rectangle(0, 0, 0, 0);
 
-                        //click.Play();
+                    
                     }
                     if (!C45510.Rectangle.Intersects(chipsobj[i]))
                     {
@@ -442,6 +439,7 @@ namespace maryu
                 }
                 if (C45510.Rectangle.Intersects(alavanca1) && Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
+                    clickeffect.Play();
                     levercoisada = true;
                 }
                 //if (C45510.Rectangle.Intersects(alavanca2) && Keyboard.GetState().IsKeyDown(Keys.Enter))
