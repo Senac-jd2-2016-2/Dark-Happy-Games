@@ -49,13 +49,13 @@ namespace maryu
         {
             if(Game1.gamebool)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && Game1.pausebool == false)
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && Game1.pausebool == false && Game1.personmovebool == true)
                 {
                     Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                     spriteShit.SetFrame(0);                  
                 }
 
-                else if (Keyboard.GetState().IsKeyDown(Keys.A) && Game1.pausebool == false)
+                else if (Keyboard.GetState().IsKeyDown(Keys.A) && Game1.pausebool == false && Game1.personmovebool == true)
                 {
                     Velocidade.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                     spriteShit.SetFrame(109);
@@ -67,13 +67,13 @@ namespace maryu
                     Velocidade.X = 0f;
                 }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump && Game1.pausebool == false)
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && !jump && Game1.pausebool == false && Game1.personmovebool == true)
                 {
                     Posiçao.Y -= 9f;
                     Velocidade.Y = -12f;
                     jump = true;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.P))
+                if (Keyboard.GetState().IsKeyDown(Keys.P) && Game1.personmovebool == true)
                 {
                     Game1.pausebool = true;
                 }
