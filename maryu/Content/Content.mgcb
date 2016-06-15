@@ -49,3 +49,9 @@
 /processorParam:Quality=Best
 /build:Sons/SFX/Robo andando.wav
 
+#begin Sons/Disintegrating - myuump3.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sons/Disintegrating - myuump3.mp3
+
