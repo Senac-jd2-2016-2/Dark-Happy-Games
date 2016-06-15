@@ -167,8 +167,8 @@ namespace maryu
             hearthimagem[0] = Content.Load<Texture2D>("Varies/S1");
             hearthimagem[1] = Content.Load<Texture2D>("Varies/S1");
             amensagemimagem = Content.Load<Texture2D>("Varies/thewater");
-            backgroundsong = Content.Load<Song>("The Desolate Hope OST - Menu");
-            MediaPlayer.IsRepeating = true;           
+            //backgroundsong = Content.Load<Song>("Sons/Disintegrating");
+            //MediaPlayer.IsRepeating = true;           
             backgroundimagem = Content.Load<Texture2D>("Fundo/Sol");
             mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");
             lever1= Content.Load<Texture2D>("Varies/Lever");
@@ -520,7 +520,7 @@ namespace maryu
             
             //if (!songstart)
             //{
-            //    MediaPlayer.Play(backgroundsong);
+             //   MediaPlayer.Play(backgroundsong);
             //    songstart = true; 
             //}
 
