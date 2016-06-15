@@ -28,6 +28,10 @@ namespace maryu
         Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
         Texture2D chipsimagem, backgroundimagem, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, clickerimagem, gameoverimagem, manuelimagem, pauseimagem, fimimagem, amensagemimagem;
         Texture2D[] hearthimagem = new Texture2D[2];
+        Texture2D lever1, lever2;
+        Rectangle alavanca1 = new Rectangle();
+        Rectangle alavanca2 = new Rectangle();
+        bool levercoisada = false;
         Vector2 vidavector, chipsvector;
         public static bool gamebool = false, pausebool = false, personmovebool = false;
         bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase1bool = false, fase2bool = true, songstartbool = false;
@@ -36,9 +40,7 @@ namespace maryu
         public static SoundEffect clickeffect, ironeffect, walkingeffect, porta1effect, porta2effect;
         public static int vida = 2, chipsget = 0;
         SpriteFont hudfont;
-
         public Game1()
-
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -64,7 +66,8 @@ namespace maryu
             chipsobj[4] = new Rectangle(10050, 900, 30, 30);
             chipsobj[5] = new Rectangle(400, 2900, 30, 30);
             chipsobj[6] = new Rectangle(400, 1900, 30, 30);
-
+            alavanca1 = new Rectangle(7500, 400, 50, 50);
+            alavanca2 = new Rectangle(7500, 400, 50, 50);
             maapa2 = new Mapa();
             maapa1 = new Mapa();
             C45510 = new Personagem(new Vector2(19000, 4800));
@@ -170,6 +173,8 @@ namespace maryu
             
             backgroundimagem = Content.Load<Texture2D>("Fundo/Sol");
             mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");
+            lever1= Content.Load<Texture2D>("Varies/Lever");
+            lever2 = Content.Load<Texture2D>("Varies/Lever2");
             historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
             tankimagem = Content.Load<Texture2D>("Varies/Barril");
             menuimagem = Content.Load<Texture2D>("Menus, Telas e Afins/menu");
@@ -180,7 +185,7 @@ namespace maryu
             pauseimagem = Content.Load<Texture2D>("Menus, Telas e Afins/Pause");
 
             //click = Content.Load<SoundEffect>("Sons/SFX/clique");
-            //walking = Content.Load<SoundEffect>("Sons/SFX/Robo andando");
+            //walking = Content.Load<SoundEffect>("Sons/SFX/Robo andando");C:\Users\Aluno.PC-XXXXX\Source\Repos\Dark-Happy-Games\maryu\Content\Fundo\Sol.png
 
             //------carregar imagens n shit----------
 
@@ -405,7 +410,7 @@ namespace maryu
 
                 //------------colisao do russo sobre os tijolos e camera mapa1-------------
             }
-
+            
             //---------------------------------------------------------------fase1-----------------------------------------------------------------
 
             //---------------------------------------------------------------fase2-----------------------------------------------------------------
@@ -435,7 +440,15 @@ namespace maryu
                         }
                     }
                 }
+                if (C45510.Rectangle.Intersects(alavanca1) && Keyboard.GetState().IsKeyDown(Keys.Enter))
+                {
+                    levercoisada = true;
+                }
+                //if (C45510.Rectangle.Intersects(alavanca2) && Keyboard.GetState().IsKeyDown(Keys.Enter))
+                //{
+                //    levercoisada = false;
 
+                //}
                 //------------criar mensagens----------------------------------------
 
                 //---------------------HUD---------------
@@ -726,7 +739,15 @@ namespace maryu
 
                     spriteBatch.DrawString(hudfont, "Vidas: ", vidavector, Color.Black);
                     spriteBatch.DrawString(hudfont, "Chips: " + chipsget + "/" + chipsobj.Length, chipsvector, Color.Black);
+                    if (levercoisada == false)
+                    {
 
+                        spriteBatch.Draw(lever1, alavanca1, Color.White);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(lever2, alavanca2, Color.White);
+                    }
                     spriteBatch.Draw(chipsimagem, chiphudobj, Color.White);
 
                     for (int i = 0; i < hearthobj.Length; i++)
@@ -735,7 +756,7 @@ namespace maryu
                     }
 
                     spriteBatch.Draw(tankimagem, tankobj, Color.White);
-
+                    
                     for (int i = 0; i < mensagemobj.Length; i++)
                     {
                         spriteBatch.Draw(mensagemimagem, mensagemobj[i], Color.White);
@@ -747,6 +768,7 @@ namespace maryu
                 {
                     spriteBatch.Draw(pauseimagem, pauseobj, Color.White);
                 }
+               
             }
 
             if (gameoverbool)
