@@ -171,8 +171,9 @@ namespace maryu
             hearthimagem[0] = Content.Load<Texture2D>("Varies/S1");
             hearthimagem[1] = Content.Load<Texture2D>("Varies/S1");
             amensagemimagem = Content.Load<Texture2D>("Varies/thewater");
-            //backgroundsong = Content.Load<Song>("Sons/Disintegrating");
-            //MediaPlayer.IsRepeating = true;           
+            backgroundsong = Content.Load<Song>("Sons/Disintegratingwav.wav");
+            MediaPlayer.Play(backgroundsong);           
+            backgroundimagem = Content.Load<Texture2D>("Fundo/Sol");         
             backgroundimagem = Content.Load<Texture2D>("Fundo/Fabrica");
             mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");
             lever1= Content.Load<Texture2D>("Varies/Lever");
@@ -199,7 +200,7 @@ namespace maryu
         protected override void Update(GameTime gameTime)
         {
 
-            
+
 
             //---------------------------------------------------------------------------------menu--------------------------------------------------------------------
 
@@ -440,7 +441,7 @@ namespace maryu
                         }
                     }
                 }
-                
+
                 //------------criar mensagens----------------------------------------
 
                 //---------------------HUD---------------

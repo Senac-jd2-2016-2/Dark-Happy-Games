@@ -152,7 +152,10 @@
     <Content Include="Content\Sons\Disintegrating - myuump3.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Sons\Disintegrating.wav">
+    <Content Include="Content\Sons\Disintegrating.wma">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sons\Disintegratingwav.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sons\SFX\clique.wav">
