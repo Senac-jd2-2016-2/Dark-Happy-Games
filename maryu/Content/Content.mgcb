@@ -55,3 +55,15 @@
 /processorParam:Quality=Best
 /build:Sons/Disintegrating - myuump3.mp3
 
+#begin Sons/Disintegratingwav.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sons/Disintegratingwav.wav
+
+#begin Sons/Disintegrating.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sons/Disintegrating.wma
+
