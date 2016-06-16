@@ -76,6 +76,10 @@ namespace maryu
             {
                 historiacomeçobool[i] = false;
             }
+            for (int i = 0; i < historiafinalbool.Length; i++)
+            {
+                historiafinalbool[i] = false;
+            }
 
             base.Initialize();
         }
@@ -169,7 +173,7 @@ namespace maryu
             amensagemimagem = Content.Load<Texture2D>("Varies/thewater");
             //backgroundsong = Content.Load<Song>("Sons/Disintegrating");
             //MediaPlayer.IsRepeating = true;           
-            backgroundimagem = Content.Load<Texture2D>("Fundo/Sol");
+            backgroundimagem = Content.Load<Texture2D>("Fundo/Fabrica");
             mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");
             lever1= Content.Load<Texture2D>("Varies/Lever");
             lever2 = Content.Load<Texture2D>("Varies/Lever2");
@@ -195,8 +199,7 @@ namespace maryu
         protected override void Update(GameTime gameTime)
         {
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            
 
             //---------------------------------------------------------------------------------menu--------------------------------------------------------------------
 
@@ -215,6 +218,8 @@ namespace maryu
                     gamebool = true;
                     fase2bool = true;
                 }
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape) && timer < 30)
+                    Exit();
             }
 
             if (!menubool)
@@ -435,16 +440,7 @@ namespace maryu
                         }
                     }
                 }
-                if (C45510.Rectangle.Intersects(alavanca1) && Keyboard.GetState().IsKeyDown(Keys.Enter))
-                {
-                    clickeffect.Play();
-                    levercoisada = true;
-                }
-                //if (C45510.Rectangle.Intersects(alavanca2) && Keyboard.GetState().IsKeyDown(Keys.Enter))
-                //{
-                //    levercoisada = false;
-
-                //}
+                
                 //------------criar mensagens----------------------------------------
 
                 //---------------------HUD---------------
@@ -490,12 +486,16 @@ namespace maryu
                     gamebool = false;
                 }
 
+                
+
                 if (C45510.Rectangle.Intersects(tankobj))
                 {
                     historiafinalbool[0] = true;
+                    tankobj = new Rectangle(0, 0, 0, 0);
                     timer = 30;
+                    fase2bool = false;
                     gamebool = false;
-                    tankobj = new Rectangle(0,0,0,0);
+                    
                 }
 
                 //------------colisao do russo sobre os tijolos e camera mapa2-------------
@@ -516,7 +516,7 @@ namespace maryu
 
             //---------------------------------------------------------------fase2-----------------------------------------------------------------
 
-            //-------------------------------------------------------INICIAR A MUSICA-------------------------------------------------------
+            //-------------------------------------------------------SONS-------------------------------------------------------
             
             //if (!songstart)
             //{
@@ -524,7 +524,19 @@ namespace maryu
             //    songstart = true; 
             //}
 
-            //-------------------------------------------------------INICIAR A MUSICA-------------------------------------------------------
+            if (C45510.Rectangle.Intersects(alavanca1) && Keyboard.GetState().IsKeyDown(Keys.Enter))
+            {
+                clickeffect.Play();
+                levercoisada = true;
+            }
+
+            //if (C45510.Rectangle.Intersects(alavanca2) && Keyboard.GetState().IsKeyDown(Keys.Enter))
+            //{
+            //    levercoisada = false;
+
+            //}
+
+            //-------------------------------------------------------SONS-------------------------------------------------------
       
 
             //--------------------------------pause------------------------------
@@ -626,7 +638,7 @@ namespace maryu
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 40;
                     fimbool = true;
                     historiafinalbool[4] = false;
                 }
@@ -638,7 +650,11 @@ namespace maryu
 
             if(fimbool)
             {
-                
+                timer--;
+                C45510.Posiçao.X = 7000;
+                C45510.Posiçao.Y = 100;
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && timer < 30)
+                    Exit();
             }
 
             //---------------------------------------------------------------------Fim----------------------------------------------------------------------------
@@ -735,15 +751,16 @@ namespace maryu
 
                     spriteBatch.DrawString(hudfont, "Vidas: ", vidavector, Color.Black);
                     spriteBatch.DrawString(hudfont, "Chips: " + chipsget + "/" + chipsobj.Length, chipsvector, Color.Black);
+                    
                     if (levercoisada == false)
                     {
-
                         spriteBatch.Draw(lever1, alavanca1, Color.White);
                     }
                     else
                     {
                         spriteBatch.Draw(lever2, alavanca2, Color.White);
                     }
+
                     spriteBatch.Draw(chipsimagem, chiphudobj, Color.White);
 
                     for (int i = 0; i < hearthobj.Length; i++)
@@ -784,7 +801,7 @@ namespace maryu
 
             if (fimbool)
             {
-                fimobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 1800, 1600);
+                fimobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                 spriteBatch.Draw(fimimagem, fimobj, Color.White);
             }
 
