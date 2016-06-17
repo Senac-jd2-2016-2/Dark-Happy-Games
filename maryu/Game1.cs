@@ -204,8 +204,8 @@ namespace maryu
             {
                 --timer;
                 menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-                C45510.Posiçao.X = 7000;
-                C45510.Posiçao.Y = 100;
+                C45510.Posiçao.X = 100;
+                C45510.Posiçao.Y = 2900;
                 vida = 2;
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter) && timer <= 0)
                 {
