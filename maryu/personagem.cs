@@ -26,7 +26,7 @@ namespace maryu
         //-----------imagem do russo-----
         public void LoadContent(ContentManager Content)
         {
-            spriteShit.LoadContent(Content, "Hero/russo");
+            spriteShit.LoadContent(Content, "Hero/roboo");
         }
         //-----------imagem do russo-----
 

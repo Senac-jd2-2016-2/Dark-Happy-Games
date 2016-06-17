@@ -28,10 +28,6 @@ namespace maryu
         Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
         Texture2D chipsimagem, backgroundimagem, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, clickerimagem, gameoverimagem, manuelimagem, pauseimagem, fimimagem, amensagemimagem;
         Texture2D[] hearthimagem = new Texture2D[2];
-        Texture2D lever1, lever2;
-        Rectangle alavanca1 = new Rectangle();
-        Rectangle alavanca2 = new Rectangle();
-        bool levercoisada = false;
         Vector2 vidavector, chipsvector;
         public static bool gamebool = false, pausebool = false, personmovebool = false;
         bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase1bool = false, fase2bool = true, songstartbool = false;
@@ -61,13 +57,17 @@ namespace maryu
 
             chipsobj[0] = new Rectangle(1050, 700, 30, 30);
             chipsobj[1] = new Rectangle(2050, 1000, 30, 30);
-            chipsobj[2] = new Rectangle(5050, 400, 30, 30);
+            chipsobj[2] = new Rectangle(5050, 90, 30, 30);
             chipsobj[3] = new Rectangle(7050, 700, 30, 30);
             chipsobj[4] = new Rectangle(10050, 900, 30, 30);
-            chipsobj[5] = new Rectangle(400, 2900, 30, 30);
-            chipsobj[6] = new Rectangle(400, 1900, 30, 30);
-            alavanca1 = new Rectangle(7500, 400, 50, 50);
-            alavanca2 = new Rectangle(7500, 400, 50, 50);
+            chipsobj[5] = new Rectangle(600, 100, 30, 30);
+            chipsobj[6] = new Rectangle(4050, 800, 30, 30);
+            chipsobj[7] = new Rectangle(10050, 1000, 30, 30);
+            chipsobj[8] = new Rectangle(500, 400, 30, 30);
+            chipsobj[9] = new Rectangle(500, 800, 30, 30);
+            chipsobj[10] = new Rectangle(8070, 800, 30, 30);
+            
+
             maapa2 = new Mapa();
             maapa1 = new Mapa();
             C45510 = new Personagem(new Vector2(19000, 4800));
@@ -171,13 +171,9 @@ namespace maryu
             hearthimagem[0] = Content.Load<Texture2D>("Varies/S1");
             hearthimagem[1] = Content.Load<Texture2D>("Varies/S1");
             amensagemimagem = Content.Load<Texture2D>("Varies/thewater");
-            backgroundsong = Content.Load<Song>("Sons/Disintegratingwav.wav");
-            MediaPlayer.Play(backgroundsong);           
-            backgroundimagem = Content.Load<Texture2D>("Fundo/Sol");         
+            backgroundsong = Content.Load<Song>("Sons/Disintegratingwav.wav");     
             backgroundimagem = Content.Load<Texture2D>("Fundo/Fabrica");
             mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");
-            lever1= Content.Load<Texture2D>("Varies/Lever");
-            lever2 = Content.Load<Texture2D>("Varies/Lever2");
             historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
             tankimagem = Content.Load<Texture2D>("Varies/Barril");
             menuimagem = Content.Load<Texture2D>("Menus, Telas e Afins/menu");
@@ -213,11 +209,12 @@ namespace maryu
                 vida = 2;
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter) && timer <= 0)
                 {
-                    menubool = false;
+                    songstartbool = true;
                     timer = 30;
                     historiacomeçobool[0] = false;
                     gamebool = true;
                     fase2bool = true;
+                    menubool = false;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape) && timer < 30)
                     Exit();
@@ -427,6 +424,7 @@ namespace maryu
                         mensagemobj[i] = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                         mensagemimagem = Content.Load<Texture2D>("Mensagens/texto" + i);
                         chipsget++;
+                        clickeffect.Play();
                         personmovebool = false;
                         chipsobj[i] = new Rectangle(0, 0, 0, 0);
 
@@ -504,6 +502,11 @@ namespace maryu
                 if (gamebool)
                 {
                     C45510.Update(gameTime);
+                    if(songstartbool)
+                    {
+                        //MediaPlayer.Play(backgroundsong);
+                        songstartbool = false;
+                    }
                 }
 
                 foreach (CollisionTiles tile in maapa2.CollisionTile)
@@ -516,28 +519,6 @@ namespace maryu
             }
 
             //---------------------------------------------------------------fase2-----------------------------------------------------------------
-
-            //-------------------------------------------------------SONS-------------------------------------------------------
-            
-            //if (!songstart)
-            //{
-             //   MediaPlayer.Play(backgroundsong);
-            //    songstart = true; 
-            //}
-
-            if (C45510.Rectangle.Intersects(alavanca1) && Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-                clickeffect.Play();
-                levercoisada = true;
-            }
-
-            //if (C45510.Rectangle.Intersects(alavanca2) && Keyboard.GetState().IsKeyDown(Keys.Enter))
-            //{
-            //    levercoisada = false;
-
-            //}
-
-            //-------------------------------------------------------SONS-------------------------------------------------------
       
 
             //--------------------------------pause------------------------------
@@ -753,14 +734,6 @@ namespace maryu
                     spriteBatch.DrawString(hudfont, "Vidas: ", vidavector, Color.Black);
                     spriteBatch.DrawString(hudfont, "Chips: " + chipsget + "/" + chipsobj.Length, chipsvector, Color.Black);
                     
-                    if (levercoisada == false)
-                    {
-                        spriteBatch.Draw(lever1, alavanca1, Color.White);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw(lever2, alavanca2, Color.White);
-                    }
 
                     spriteBatch.Draw(chipsimagem, chiphudobj, Color.White);
 
