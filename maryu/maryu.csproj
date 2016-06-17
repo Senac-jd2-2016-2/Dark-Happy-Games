@@ -242,6 +242,9 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\timer.spritefont">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Content\Vidas.spritefont">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

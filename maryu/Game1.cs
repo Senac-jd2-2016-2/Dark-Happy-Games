@@ -30,16 +30,14 @@ namespace maryu
         Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
         Texture2D chipsimagem, backgroundimagem, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, clickerimagem, gameoverimagem, manuelimagem, pauseimagem, fimimagem, amensagemimagem;
         Texture2D[] hearthimagem = new Texture2D[2];
-        Rectangle alavanca1 = new Rectangle();
-        Rectangle alavanca2 = new Rectangle();
-        Vector2 vidavector, chipsvector;
+        Vector2 vidavector, chipsvector, timervector;
         public static bool gamebool = false, pausebool = false, personmovebool = false;
         bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase1bool = false, fase2bool = true, songstartbool = false;
         bool[] historiacomeçobool = new bool[5], historiafinalbool = new bool[5], mensagembool = new bool[11];
         int timer = 30;
         public static SoundEffect clickeffect, ironeffect, walkingeffect, porta1effect, porta2effect;
         public static int vida = 2, chipsget = 0;
-        SpriteFont hudfont;
+        SpriteFont hudfont, timerfont;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -375,6 +373,7 @@ namespace maryu
                 //------------criar mensagens----------------------------------------
 
                 vidavector = new Vector2(backgroundobj.X, backgroundobj.Y);
+                timervector = new Vector2(backgroundobj.X, backgroundobj.Y + 100);
                 chipsvector = new Vector2((backgroundobj.X + backgroundobj.X - 200), backgroundobj.Y);
 
                 for (int i = 0; i < hearthobj.Length; i++)
@@ -420,7 +419,25 @@ namespace maryu
             if (fase2bool)
             {
                 //------------criar mensagens----------------------------------------
+                //---------------------timer---------------------------------------
+                int counter = 1;
+                int limit = 50;
+                float countDuration = 2f; 
+                float currentTime = 0f;
 
+                currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;  
+
+                if (currentTime >= countDuration)
+                {
+                    counter++;
+                    currentTime -= countDuration; 
+                    
+                }
+                if (counter >= limit)
+                {
+                    counter = 0;
+                    gamebool = false;
+                }
                 for (int i = 0; i < chipsobj.Length; i++)
                 {
                     if(C45510.Rectangle.Intersects(chipsobj[i]))
@@ -741,6 +758,7 @@ namespace maryu
                     C45510.Draw(spriteBatch);
 
                     spriteBatch.DrawString(hudfont, "Vidas: ", vidavector, Color.Black);
+                    spriteBatch.DrawString(timerfont, "Tempo: " + timer,timervector, Color.Black);
                     spriteBatch.DrawString(hudfont, "Chips: " + chipsget + "/" + chipsobj.Length, chipsvector, Color.Black);
                     spriteBatch.Draw(chipsimagem, chiphudobj, Color.White);
 
