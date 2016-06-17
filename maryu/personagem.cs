@@ -53,14 +53,14 @@ namespace maryu
                 {
                     Velocidade.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                     spriteShit.SetFrame(0);
-                    //Game1.walkingeffect.Play();
+                    
                 }
 
                 else if (Keyboard.GetState().IsKeyDown(Keys.A) && Game1.pausebool == false && Game1.personmovebool == true)
                 {
                     Velocidade.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                     spriteShit.SetFrame(109);
-                    //Game1.walkingeffect.Play();
+                  
                 }
 
                 else

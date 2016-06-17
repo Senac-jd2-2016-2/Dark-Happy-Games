@@ -28,10 +28,8 @@ namespace maryu
         Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
         Texture2D chipsimagem, backgroundimagem, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, clickerimagem, gameoverimagem, manuelimagem, pauseimagem, fimimagem, amensagemimagem;
         Texture2D[] hearthimagem = new Texture2D[2];
-        Texture2D lever1, lever2;
         Rectangle alavanca1 = new Rectangle();
         Rectangle alavanca2 = new Rectangle();
-        bool levercoisada = false;
         Vector2 vidavector, chipsvector;
         public static bool gamebool = false, pausebool = false, personmovebool = false;
         bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase1bool = false, fase2bool = true, songstartbool = false;
@@ -173,11 +171,9 @@ namespace maryu
             amensagemimagem = Content.Load<Texture2D>("Varies/thewater");
             backgroundsong = Content.Load<Song>("Sons/Disintegratingwav.wav");
             MediaPlayer.Play(backgroundsong);           
-            backgroundimagem = Content.Load<Texture2D>("Fundo/Sol");         
+           // backgroundimagem = Content.Load<Texture2D>("Fundo/Sol");         
             backgroundimagem = Content.Load<Texture2D>("Fundo/Fabrica");
-            mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");
-            lever1= Content.Load<Texture2D>("Varies/Lever");
-            lever2 = Content.Load<Texture2D>("Varies/Lever2");
+            mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");            
             historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
             tankimagem = Content.Load<Texture2D>("Varies/Barril");
             menuimagem = Content.Load<Texture2D>("Menus, Telas e Afins/menu");
@@ -359,8 +355,7 @@ namespace maryu
                         mensagemobj[i] = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                         mensagemimagem = Content.Load<Texture2D>("Mensagens/texto" + i);
                         personmovebool = false;
-                        chipsobj[i] = new Rectangle(0, 0, 0, 0);
-                        
+                        chipsobj[i] = new Rectangle(0, 0, 0, 0);                      
                         if (!C45510.Rectangle.Intersects(chipsobj[i]))
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
@@ -429,7 +424,7 @@ namespace maryu
                         chipsget++;
                         personmovebool = false;
                         chipsobj[i] = new Rectangle(0, 0, 0, 0);
-
+                        clickeffect.Play();
                     
                     }
                     if (!C45510.Rectangle.Intersects(chipsobj[i]))
@@ -518,24 +513,7 @@ namespace maryu
             //---------------------------------------------------------------fase2-----------------------------------------------------------------
 
             //-------------------------------------------------------SONS-------------------------------------------------------
-            
-            //if (!songstart)
-            //{
-             //   MediaPlayer.Play(backgroundsong);
-            //    songstart = true; 
-            //}
-
-            if (C45510.Rectangle.Intersects(alavanca1) && Keyboard.GetState().IsKeyDown(Keys.Enter))
-            {
-                clickeffect.Play();
-                levercoisada = true;
-            }
-
-            //if (C45510.Rectangle.Intersects(alavanca2) && Keyboard.GetState().IsKeyDown(Keys.Enter))
-            //{
-            //    levercoisada = false;
-
-            //}
+                     
 
             //-------------------------------------------------------SONS-------------------------------------------------------
       
@@ -752,16 +730,6 @@ namespace maryu
 
                     spriteBatch.DrawString(hudfont, "Vidas: ", vidavector, Color.Black);
                     spriteBatch.DrawString(hudfont, "Chips: " + chipsget + "/" + chipsobj.Length, chipsvector, Color.Black);
-                    
-                    if (levercoisada == false)
-                    {
-                        spriteBatch.Draw(lever1, alavanca1, Color.White);
-                    }
-                    else
-                    {
-                        spriteBatch.Draw(lever2, alavanca2, Color.White);
-                    }
-
                     spriteBatch.Draw(chipsimagem, chiphudobj, Color.White);
 
                     for (int i = 0; i < hearthobj.Length; i++)
