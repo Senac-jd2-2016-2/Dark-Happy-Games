@@ -28,6 +28,8 @@ namespace maryu
         Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
         Texture2D chipsimagem, backgroundimagem, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, clickerimagem, gameoverimagem, manuelimagem, pauseimagem, fimimagem, amensagemimagem;
         Texture2D[] hearthimagem = new Texture2D[2];
+        Rectangle alavanca1 = new Rectangle();
+        Rectangle alavanca2 = new Rectangle();
         Vector2 vidavector, chipsvector;
         public static bool gamebool = false, pausebool = false, personmovebool = false;
         bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase1bool = false, fase2bool = true, songstartbool = false;
@@ -171,7 +173,7 @@ namespace maryu
             hearthimagem[0] = Content.Load<Texture2D>("Varies/S1");
             hearthimagem[1] = Content.Load<Texture2D>("Varies/S1");
             amensagemimagem = Content.Load<Texture2D>("Varies/thewater");
-            backgroundsong = Content.Load<Song>("Sons/Disintegratingwav.wav");     
+            backgroundsong = Content.Load<Song>("Sons/Disintegratingwav.wav");
             backgroundimagem = Content.Load<Texture2D>("Fundo/Fabrica");
             mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");
             historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
@@ -204,8 +206,8 @@ namespace maryu
             {
                 --timer;
                 menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
-                C45510.Posiçao.X = 7000;
-                C45510.Posiçao.Y = 100;
+                C45510.Posiçao.X = 100;
+                C45510.Posiçao.Y = 2900;
                 vida = 2;
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter) && timer <= 0)
                 {
@@ -357,7 +359,6 @@ namespace maryu
                         mensagemimagem = Content.Load<Texture2D>("Mensagens/texto" + i);
                         personmovebool = false;
                         chipsobj[i] = new Rectangle(0, 0, 0, 0);
-                        
                         if (!C45510.Rectangle.Intersects(chipsobj[i]))
                         {
                             if (Keyboard.GetState().IsKeyDown(Keys.Enter))
@@ -427,7 +428,7 @@ namespace maryu
                         clickeffect.Play();
                         personmovebool = false;
                         chipsobj[i] = new Rectangle(0, 0, 0, 0);
-
+                        clickeffect.Play();
                     
                     }
                     if (!C45510.Rectangle.Intersects(chipsobj[i]))
@@ -519,7 +520,7 @@ namespace maryu
             }
 
             //---------------------------------------------------------------fase2-----------------------------------------------------------------
-      
+
 
             //--------------------------------pause------------------------------
 
@@ -733,8 +734,6 @@ namespace maryu
 
                     spriteBatch.DrawString(hudfont, "Vidas: ", vidavector, Color.Black);
                     spriteBatch.DrawString(hudfont, "Chips: " + chipsget + "/" + chipsobj.Length, chipsvector, Color.Black);
-                    
-
                     spriteBatch.Draw(chipsimagem, chiphudobj, Color.White);
 
                     for (int i = 0; i < hearthobj.Length; i++)
