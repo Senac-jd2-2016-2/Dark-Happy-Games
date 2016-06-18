@@ -89,18 +89,7 @@ namespace maryu
                 Velocidade.Y = 0f;
                 jump = false;
             }
-            //if (Rectangle.TouchLeftOf(newRectangle))
-            //{
-            //    Posiçao.X = newRectangle.X - Rectangle.Width / 2;
-            //}
-            //if (Rectangle.TouchRightOf(newRectangle))
-            //{
-            //    Posiçao.X = newRectangle.X + Rectangle.Width / 2;
-            //}
-            //if (Rectangle.TouchBottomOf(newRectangle))
-            //{
-            //    Velocidade.Y = 1f;
-            //}
+            
             if (Posiçao.X < 0)
             {
                 Posiçao.X = 0;
