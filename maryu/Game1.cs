@@ -22,20 +22,20 @@ namespace maryu
         SpriteBatch spriteBatch;
         Camera camera;
         Song backgroundsong;
-        Mapa maapa2;
+        Mapa maapa;
         Personagem C45510;
         Rectangle tankobj, historiafinalobj, menuobj, clickerobj, historiacomeçoobj, backgroundobj, gameoverobj, manuelobj, pauseobj, fimobj, chiphudobj, vidahudobj, amensagemobj;
-        Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
         Texture2D chipsimagem, backgroundimagem, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, clickerimagem, gameoverimagem, manuelimagem, pauseimagem, fimimagem, amensagemimagem, chiphudimagem, vidahudimagem;
+        int timer = 30, chipsget = 0;
+        bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase1bool = true, songstartbool = false;
+        Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
         Texture2D[] hearthimagem = new Texture2D[2];
-        Vector2 vidavector, chipsvector;
-        public static bool gamebool = false, pausebool = false, personmovebool = false;
-        bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase2bool = true, songstartbool = false;
         bool[] historiacomeçobool = new bool[5], historiafinalbool = new bool[5], mensagembool = new bool[11];
-        int timer = 30;
+        public static bool gamebool = false, pausebool = false, personmovebool = false;
         public static SoundEffect clickeffect, ironeffect, walkingeffect, porta1effect, porta2effect;
-        public static int vida = 2, chipsget = 0;
+        public static int vida = 2;
         SpriteFont hudfont;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -68,7 +68,7 @@ namespace maryu
             chipsobj[10] = new Rectangle(8070, 2550, 30, 30);
             
             songstartbool = true;
-            maapa2 = new Mapa();
+            maapa = new Mapa();
             C45510 = new Personagem(new Vector2(19000, 4800));
 
             for (int i = 0; i < historiacomeçobool.Length; i++)
@@ -85,7 +85,6 @@ namespace maryu
 
         protected override void LoadContent()
         {
-
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
 
@@ -93,10 +92,10 @@ namespace maryu
 
             //-----------------------------------------------gerar mapa2--------------------------------------------
 
-            maapa2.Generate(new int[,] {
+            maapa.Generate(new int[,] {
                {5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,5},
                {6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
-               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5},
+               {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5},
                {0,0,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,4,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0},
                {8,0,0,0,0,0,0,0,0,4,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0,0,0,1,2,1,2,1,2,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0},
@@ -108,7 +107,7 @@ namespace maryu
                {0,0,0,0,0,0,8,0,0,0,0,0,3,2,1,2,1,2,0,0,0,0,0,0,0,0,0,0,8,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,8,0,0,0,8,0,0,8,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,8,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0},
-               {8,8,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,5},
+               {2,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,5},
                {0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,1,2,2,1,2,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,5,5},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,3,1,2,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,0},
                {0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,2,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,5,5,5,5,0,4,0},
@@ -171,9 +170,6 @@ namespace maryu
 
         protected override void Update(GameTime gameTime)
         {
-
-
-
             //---------------------------------------------------------------------------------menu--------------------------------------------------------------------
             if(Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
@@ -192,7 +188,7 @@ namespace maryu
                     timer = 30;
                     historiacomeçobool[0] = false;
                     gamebool = true;
-                    fase2bool = true;
+                    fase1bool = true;
                     menubool = false;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape) && timer < 30)
@@ -312,9 +308,9 @@ namespace maryu
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 120;
+                    timer = 30;
                     gamebool = true;
-                    fase2bool = true;
+                    fase1bool = true;
                     manuelbool = false;
                 }
             }
@@ -325,28 +321,10 @@ namespace maryu
 
             //---------------------------------------------------------------fase2-----------------------------------------------------------------
 
-            if (fase2bool)
+            if (fase1bool)
             {
                 //------------criar mensagens----------------------------------------
-                //---------------------timer---------------------------------------
-                int counter = 1;
-                int limit = 50;
-                float countDuration = 2f; 
-                float currentTime = 0f;
-
-                currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;  
-
-                if (currentTime >= countDuration)
-                {
-                    counter++;
-                    currentTime -= countDuration; 
-                    
-                }
-                if (counter >= limit)
-                {
-                    counter = 0;
-                    gamebool = false;
-                }
+                
                 for (int i = 0; i < chipsobj.Length; i++)
                 {
                     if(C45510.Rectangle.Intersects(chipsobj[i]))
@@ -358,8 +336,8 @@ namespace maryu
                         personmovebool = false;
                         chipsobj[i] = new Rectangle(0, 0, 0, 0);
                         clickeffect.Play();
-                    
                     }
+
                     if (!C45510.Rectangle.Intersects(chipsobj[i]))
                     {
                         if (Keyboard.GetState().IsKeyDown(Keys.Enter))
@@ -372,12 +350,30 @@ namespace maryu
 
                 //------------criar mensagens----------------------------------------
 
+
+                //---------------------timer---------------------------------------
+
+                int counter = 1;
+                int limit = 50;
+                float countDuration = 2f;
+                float currentTime = 0f;
+
+                currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (currentTime >= countDuration)
+                {
+                    counter++;
+                    currentTime -= countDuration;
+                }
+                if (counter >= limit)
+                {
+                    counter = 0;
+                    gamebool = false;
+                }
+                //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                //que diabos é isso? quem fez isso pra vc?
+
                 //---------------------HUD---------------
-
-                
-                
-
-
 
                 if (vida == 2)
                 {
@@ -396,21 +392,18 @@ namespace maryu
                     tankobj = new Rectangle(8070, 50, 89, 111);
                 }
    
-
                 if (vida <= 0)
                 {
                     gameoverbool = true;
                     gamebool = false;
                 }
 
-                
-
                 if (C45510.Rectangle.Intersects(tankobj))
                 {
                     historiafinalbool[0] = true;
                     tankobj = new Rectangle(0, 0, 0, 0);
                     timer = 30;
-                    fase2bool = false;
+                    fase1bool = false;
                     gamebool = false;
                     
                 }
@@ -427,10 +420,10 @@ namespace maryu
                     }
                 }
 
-                foreach (CollisionTiles tile in maapa2.CollisionTile)
+                foreach (CollisionTiles tile in maapa.CollisionTile)
                 {
-                    C45510.Collision(tile.Rectangle, maapa2.Width, maapa2.Height);
-                    camera.Update(C45510.Posiçao, maapa2.Width, maapa2.Height);
+                    C45510.Collision(tile.Rectangle, maapa.Width, maapa.Height);
+                    camera.Update(C45510.Posiçao, maapa.Width, maapa.Height);
                 }
 
                 //------------colisao do russo sobre os tijolos e camera mapa2-------------
@@ -538,7 +531,7 @@ namespace maryu
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 40;
+                    timer = 30;
                     fimbool = true;
                     historiafinalbool[4] = false;
                 }
@@ -587,7 +580,7 @@ namespace maryu
             if (fimbool)
             {
                 timer--;
-                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && timer < 30)
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && timer <= 0)
                     Exit();
             }
 
@@ -639,18 +632,16 @@ namespace maryu
             if (gamebool)
             {
                 
-                if(fase2bool)
+                if(fase1bool)
                 {
                     backgroundobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
                     spriteBatch.Draw(backgroundimagem, backgroundobj, Color.White);
-                    maapa2.Draw(spriteBatch);
+                    maapa.Draw(spriteBatch);
 
                     for (int i = 0; i < chipsobj.Length; i++)
                     {
                         spriteBatch.Draw(chipsimagem, chipsobj[i], Color.White);
                     }
-
-                    C45510.Draw(spriteBatch);
 
                     vidahudobj = new Rectangle((int)-camera.Transform.Translation.X + 40, (int)-camera.Transform.Translation.Y, 340, 100);
                     spriteBatch.Draw(vidahudimagem,vidahudobj,Color.White);
@@ -670,18 +661,19 @@ namespace maryu
                     chiphudobj = new Rectangle((int)-camera.Transform.Translation.X + 1630, (int)-camera.Transform.Translation.Y, 240, 100);
                     spriteBatch.Draw(chiphudimagem, chiphudobj, Color.White);
 
-                    chipsvector = new Vector2((int)-camera.Transform.Translation.X + 1730, (int)-camera.Transform.Translation.Y + 20); 
+                    Vector2 chipsvector = new Vector2((int)-camera.Transform.Translation.X + 1730, (int)-camera.Transform.Translation.Y + 20); 
                     spriteBatch.DrawString(hudfont, chipsget + "/" + chipsobj.Length, chipsvector, Color.DarkGreen);
 
                     for (int i = 0; i < hearthobj.Length; i++)
                     {
                         spriteBatch.Draw(hearthimagem[i], hearthobj[i], Color.White);
                     }
-
-                    spriteBatch.Draw(tankimagem, tankobj, Color.White);
-
+                    
                     amensagemobj = new Rectangle((int)-camera.Transform.Translation.X + 500, (int)-camera.Transform.Translation.Y, 1000, 100);
                     spriteBatch.Draw(amensagemimagem, amensagemobj, Color.White);
+
+                    spriteBatch.Draw(tankimagem, tankobj, Color.White);
+                    C45510.Draw(spriteBatch);
 
                     for (int i = 0; i < mensagemobj.Length; i++)
                     {
