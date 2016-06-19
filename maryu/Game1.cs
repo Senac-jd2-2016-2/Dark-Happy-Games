@@ -24,17 +24,18 @@ namespace maryu
         Song backgroundsong;
         Mapa maapa;
         Personagem C45510;
-        Rectangle tankobj, historiafinalobj, menuobj, clickerobj, historiacomeçoobj, backgroundobj, gameoverobj, manuelobj, pauseobj, fimobj, chiphudobj, vidahudobj, amensagemobj;
-        Texture2D chipsimagem, backgroundimagem, mensagemimagem, tankimagem, historiacomeçoimagem, historiafinalimagem, menuimagem, clickerimagem, gameoverimagem, manuelimagem, pauseimagem, fimimagem, amensagemimagem, chiphudimagem, vidahudimagem;
+        Rectangle tankobj, historiafinalobj, menuobj, clickerobj, historiacomeçoobj, backgroundobj, gameoverobj, manuelobj, pauseobj, fimobj, chiphudobj, vidahudobj, amensagemobj, creditosobj;
+        Texture2D chipsimagem, backgroundimagem, mensagemimagem, tankimagem, menuimagem, clickerimagem, gameoverimagem, manuelimagem, pauseimagem, fimimagem, amensagemimagem, chiphudimagem, vidahudimagem;
         int timer = 30, chipsget = 0;
-        bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase1bool = true, songstartbool = false;
-        Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
-        Texture2D[] hearthimagem = new Texture2D[2];
-        bool[] historiacomeçobool = new bool[5], historiafinalbool = new bool[5], mensagembool = new bool[11];
-        public static bool gamebool = false, pausebool = false, personmovebool = false;
-        public static SoundEffect clickeffect, ironeffect, walkingeffect, porta1effect, porta2effect;
-        public static int vida = 2;
+        bool menubool = true, manuelbool = false, gameoverbool = false, fimbool = false, fase1bool = true, songstartbool = true;
+        SoundEffect clickeffect;
         SpriteFont hudfont;
+        Rectangle[] chipsobj = new Rectangle[11], mensagemobj = new Rectangle[11], hearthobj = new Rectangle[2];
+        Texture2D[] hearthimagem = new Texture2D[2], historiacomeçoimagem = new Texture2D[8], historiafinalimagem = new Texture2D[6], creditosimagem = new Texture2D[2];
+        bool[] historiacomeçobool = new bool[8], historiafinalbool = new bool[6], mensagembool = new bool[11], creditosbool = new bool[2];
+        public static bool gamebool = false, pausebool = false, personmovebool = false;
+        public static int vida = 2;
+        
 
         public Game1()
         {
@@ -49,7 +50,7 @@ namespace maryu
 
             Window.Title = "The Robot";
             graphics.PreferredBackBufferWidth = GraphicsDevice.DisplayMode.Width;
-            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height - 60;
+            graphics.PreferredBackBufferHeight = GraphicsDevice.DisplayMode.Height;
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
@@ -66,8 +67,7 @@ namespace maryu
             chipsobj[8] = new Rectangle(950, 2650, 30, 30);
             chipsobj[9] = new Rectangle(2680, 2700, 30, 30);
             chipsobj[10] = new Rectangle(8070, 2550, 30, 30);
-            
-            songstartbool = true;
+
             maapa = new Mapa();
             C45510 = new Personagem(new Vector2(19000, 4800));
 
@@ -96,13 +96,13 @@ namespace maryu
                {5,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,5},
                {6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5},
-               {0,0,5,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0},
+               {0,0,0,5,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,4,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0},
-               {8,0,0,0,0,0,0,0,0,4,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0,0,0,1,2,1,2,1,2,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,4,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0,0,0,1,2,1,2,1,2,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,4,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,5,0,0,0,0,0,0,0},
-               {0,0,8,0,0,0,0,0,1,2,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,1,2,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,3,2,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,8,0,8,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,0,8,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,8,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,0,0,0,8,0,0,0,0,0,3,2,1,2,1,2,0,0,0,0,0,0,0,0,0,0,8,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,8,0,0,0,8,0,0,8,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
                {0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,5,5,5,5,0,0},
@@ -146,10 +146,24 @@ namespace maryu
             hearthimagem[0] = Content.Load<Texture2D>("Varies/S1");
             hearthimagem[1] = Content.Load<Texture2D>("Varies/S1");
             amensagemimagem = Content.Load<Texture2D>("Varies/mensagem2");
-            backgroundsong = Content.Load<Song>("Sons/Disintegratingwav.wav");
             backgroundimagem = Content.Load<Texture2D>("Fundo/Fabrica");
             mensagemimagem = Content.Load<Texture2D>("Mensagens/texto0");
-            historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
+
+            for (int i = 0; i < historiacomeçoimagem.Length; i++)
+            {
+                historiacomeçoimagem[i] = Content.Load<Texture2D>("Começos/Começo" + (i + 1));
+            }
+
+            for (int i = 0; i < historiafinalimagem.Length; i++)
+            {
+                historiafinalimagem[i] = Content.Load<Texture2D>("Finais/Final" + (i + 1));
+            }
+
+            for (int i = 0; i < creditosimagem.Length; i++)
+            {
+                creditosimagem[i] = Content.Load<Texture2D>("Menus, Telas e Afins/creditos" + (i+1));
+            }
+
             tankimagem = Content.Load<Texture2D>("Varies/Barril");
             menuimagem = Content.Load<Texture2D>("Menus, Telas e Afins/menu");
             clickerimagem = Content.Load<Texture2D>("Varies/clicker");
@@ -158,7 +172,8 @@ namespace maryu
             manuelimagem = Content.Load<Texture2D>("Menus, Telas e Afins/howtoplay");
             pauseimagem = Content.Load<Texture2D>("Menus, Telas e Afins/Pause");
             clickeffect = Content.Load<SoundEffect>("Sons/SFX/clique");
-            walkingeffect = Content.Load<SoundEffect>("Sons/SFX/Robo andando");
+            backgroundsong = Content.Load<Song>("Sons/Disintegratingwav.wav");
+            MediaPlayer.IsRepeating = true;
 
             //------carregar imagens n shit----------
 
@@ -170,25 +185,26 @@ namespace maryu
 
         protected override void Update(GameTime gameTime)
         {
-            //---------------------------------------------------------------------------------menu--------------------------------------------------------------------
-            if(Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    Exit();
+            //---------------------------------------------------------------------------------menu--------------------------------------------------------------------          
+
+            if (songstartbool)
+            {
+                MediaPlayer.Play(backgroundsong);
+                songstartbool = false;
+            }
 
             if (menubool)
             {
                 --timer;
-                menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                menuobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
                 C45510.Posiçao.X = 2350;
                 C45510.Posiçao.Y = 1000;
                 chipsget = 0;
                 vida = 2;
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter) && timer <= 0)
                 {
-                    songstartbool = true;
                     timer = 30;
-                    historiacomeçobool[0] = false;
-                    gamebool = true;
-                    fase1bool = true;
+                    historiacomeçobool[0] = true;
                     menubool = false;
                 }
                 if (Keyboard.GetState().IsKeyDown(Keys.Escape) && timer < 30)
@@ -208,13 +224,12 @@ namespace maryu
 
             if (historiacomeçobool[0])
             {
-                historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo1");
                 --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     historiacomeçobool[1] = true;
                     historiacomeçobool[0] = false;
                 }
@@ -224,13 +239,11 @@ namespace maryu
 
             if (historiacomeçobool[1])
             {
-                historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo2");
                 --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     historiacomeçobool[2] = true;
                     historiacomeçobool[1] = false;
                 }
@@ -240,13 +253,11 @@ namespace maryu
 
             if (historiacomeçobool[2])
             {
-                historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo3");
                 --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     historiacomeçobool[3] = true;
                     historiacomeçobool[2] = false;
                 }
@@ -256,13 +267,11 @@ namespace maryu
 
             if (historiacomeçobool[3])
             {
-                historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo4");
                 --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     historiacomeçobool[4] = true;
                     historiacomeçobool[3] = false;
                 }
@@ -272,9 +281,49 @@ namespace maryu
 
             if (historiacomeçobool[4])
             {
-                historiacomeçoimagem = Content.Load<Texture2D>("Começos/começo5");
                 --timer;
-                historiacomeçoobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
+                {
+                    timer = 50;
+                    historiacomeçobool[5] = true;
+                    historiacomeçobool[4] = false;
+                }
+            }
+
+            //----------------------------------------------------historia parte6--------------------------------------------------------------------
+
+            if (historiacomeçobool[5])
+            {
+                --timer;
+
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
+                {
+                    timer = 50;
+                    historiacomeçobool[6] = true;
+                    historiacomeçobool[5] = false;
+                }
+            }
+
+            //----------------------------------------------------historia parte7--------------------------------------------------------------------
+
+            if (historiacomeçobool[6])
+            {
+                --timer;
+
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
+                {
+                    timer = 50;
+                    historiacomeçobool[7] = true;
+                    historiacomeçobool[6] = false;
+                }
+            }
+
+            //----------------------------------------------------historia parte8--------------------------------------------------------------------
+
+            if (historiacomeçobool[7])
+            {
+                --timer;
 
                 if (timer <= 0)
                 {
@@ -283,15 +332,15 @@ namespace maryu
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     manuelbool = true;
-                    historiacomeçobool[4] = false;
+                    historiacomeçobool[7] = false;
                 }
-            }
 
-            if (!historiacomeçobool[4])
-            {
-                clickerobj = new Rectangle(0, 0, 0, 0);
+                if (!historiacomeçobool[7])
+                {
+                    clickerobj = new Rectangle(0, 0, 0, 0);
+                }
             }
 
             //-------------------------------------------------------------------HISTORIA COMEÇO-------------------------------------------------------------<<<<<<
@@ -301,7 +350,7 @@ namespace maryu
             if (manuelbool)
             {
                 --timer;
-                manuelobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                manuelobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
 
                 C45510.Posiçao.X = 100;
                 C45510.Posiçao.Y = 2900;
@@ -319,7 +368,7 @@ namespace maryu
 
             //---------------------------------------------------------------------GAME------------------------------------------------------------------------<<<<<<<
 
-            //---------------------------------------------------------------fase2-----------------------------------------------------------------
+            //---------------------------------------------------------------fase1-----------------------------------------------------------------
 
             if (fase1bool)
             {
@@ -329,13 +378,12 @@ namespace maryu
                 {
                     if(C45510.Rectangle.Intersects(chipsobj[i]))
                     {
-                        mensagemobj[i] = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                        mensagemobj[i] = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
                         mensagemimagem = Content.Load<Texture2D>("Mensagens/texto" + i);
                         chipsget++;
                         clickeffect.Play();
                         personmovebool = false;
                         chipsobj[i] = new Rectangle(0, 0, 0, 0);
-                        clickeffect.Play();
                     }
 
                     if (!C45510.Rectangle.Intersects(chipsobj[i]))
@@ -349,29 +397,6 @@ namespace maryu
                 }
 
                 //------------criar mensagens----------------------------------------
-
-
-                //---------------------timer---------------------------------------
-
-                int counter = 1;
-                int limit = 50;
-                float countDuration = 2f;
-                float currentTime = 0f;
-
-                currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-                if (currentTime >= countDuration)
-                {
-                    counter++;
-                    currentTime -= countDuration;
-                }
-                if (counter >= limit)
-                {
-                    counter = 0;
-                    gamebool = false;
-                }
-                //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                //que diabos é isso? quem fez isso pra vc?
 
                 //---------------------HUD---------------
 
@@ -413,11 +438,7 @@ namespace maryu
                 if (gamebool)
                 {
                     C45510.Update(gameTime);
-                    if(songstartbool)
-                    {
-                        MediaPlayer.Play(backgroundsong);
-                        songstartbool = false;
-                    }
+                    
                 }
 
                 foreach (CollisionTiles tile in maapa.CollisionTile)
@@ -436,7 +457,7 @@ namespace maryu
 
             if (pausebool)
             {
-                pauseobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                pauseobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
 
                 if (Keyboard.GetState().IsKeyDown(Keys.H))
                 {
@@ -461,13 +482,12 @@ namespace maryu
 
             if (historiafinalbool[0])
             {
-                historiafinalimagem = Content.Load<Texture2D>("Finais/começo1");
                 --timer;
-                historiafinalobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                historiafinalobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     historiafinalbool[1] = true;
                     historiafinalbool[0] = false;
                 }
@@ -477,13 +497,11 @@ namespace maryu
 
             if (historiafinalbool[1])
             {
-                historiafinalimagem = Content.Load<Texture2D>("Finais/começo2");
                 --timer;
-                historiafinalobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     historiafinalbool[2] = true;
                     historiafinalbool[1] = false;
                 }
@@ -493,13 +511,11 @@ namespace maryu
 
             if (historiafinalbool[2])
             {
-                historiafinalimagem = Content.Load<Texture2D>("Finais/começo3");
                 --timer;
-                historiafinalobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     historiafinalbool[3] = true;
                     historiafinalbool[2] = false;
                 }
@@ -509,13 +525,11 @@ namespace maryu
 
             if (historiafinalbool[3])
             {
-                historiafinalimagem = Content.Load<Texture2D>("Finais/começo4");
                 --timer;
-                historiafinalobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
+                    timer = 50;
                     historiafinalbool[4] = true;
                     historiafinalbool[3] = false;
                 }
@@ -525,15 +539,37 @@ namespace maryu
 
             if (historiafinalbool[4])
             {
-                historiafinalimagem = Content.Load<Texture2D>("Finais/começo5");
                 --timer;
-                historiafinalobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
 
                 if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
                 {
-                    timer = 30;
-                    fimbool = true;
+                    timer = 50;
+                    historiafinalbool[5] = true;
                     historiafinalbool[4] = false;
+                }
+            }
+
+            //----------------------------------------------------historia parte6--------------------------------------------------------------------
+
+            if (historiafinalbool[5])
+            {
+                --timer;
+
+                if (timer <= 0)
+                {
+                    clickerobj = new Rectangle((int)-camera.Transform.Translation.X + 1600, (int)-camera.Transform.Translation.Y + 900, 30, 30);
+                }
+
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
+                {
+                    timer = 50;
+                    creditosbool[0] = true;
+                    historiafinalbool[5] = false;
+                }
+
+                if (!historiafinalbool[5])
+                {
+                    clickerobj = new Rectangle(0, 0, 0, 0);
                 }
             }
 
@@ -543,35 +579,33 @@ namespace maryu
 
             //------------------------1º--------------------
 
-            //if (historiafinalbool[3])
-            //{
-            //    historiafinalimagem = Content.Load<Texture2D>("Finais/começo4");
-            //    --timer;
-            //    historiafinalobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+            if (creditosbool[0])
+            {
+                --timer;
+                creditosobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
 
-            //    if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
-            //    {
-            //        timer = 30;
-            //        historiafinalbool[4] = true;
-            //        historiafinalbool[3] = false;
-            //    }
-            //}
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
+                {
+                    timer = 30;
+                    creditosbool[1] = true;
+                    creditosbool[0] = false;
+                }
+            }
 
             //-------------------------2º--------------------
 
-            //if (historiafinalbool[3])
-            //{
-            //    historiafinalimagem = Content.Load<Texture2D>("Finais/começo4");
-            //    --timer;
-            //    historiafinalobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+            if (creditosbool[1])
+            {
+                --timer;
+                creditosobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
 
-            //    if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
-            //    {
-            //        timer = 30;
-            //        historiafinalbool[4] = true;
-            //        historiafinalbool[3] = false;
-            //    }
-            //}
+                if ((Keyboard.GetState().IsKeyDown(Keys.Enter)) && timer <= 0)
+                {
+                    timer = 30;
+                    fimbool = true;
+                    creditosbool[1] = false;
+                }
+            }
 
             //-------------------------------------------------CREDITOS--------------------------------------------------------------------------------
 
@@ -619,7 +653,7 @@ namespace maryu
             {
                 if (historiacomeçobool[i])
                 {
-                    spriteBatch.Draw(historiacomeçoimagem, historiacomeçoobj, Color.White);
+                    spriteBatch.Draw(historiacomeçoimagem[i], historiacomeçoobj, Color.White);
                     spriteBatch.Draw(clickerimagem, clickerobj, Color.White);
                 }
             }
@@ -634,7 +668,7 @@ namespace maryu
                 
                 if(fase1bool)
                 {
-                    backgroundobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                    backgroundobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
                     spriteBatch.Draw(backgroundimagem, backgroundobj, Color.White);
                     maapa.Draw(spriteBatch);
 
@@ -690,7 +724,7 @@ namespace maryu
 
             if (gameoverbool)
             {
-                gameoverobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                gameoverobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
                 spriteBatch.Draw(gameoverimagem, gameoverobj, Color.White);
             }
 
@@ -698,14 +732,23 @@ namespace maryu
             {
                 if (historiafinalbool[i])
                 {
-                    spriteBatch.Draw(historiafinalimagem, historiafinalobj, Color.White);
-                    spriteBatch.Draw(clickerimagem, clickerobj, Color.White);
+                    spriteBatch.Draw(historiafinalimagem[i], historiafinalobj, Color.White);
                 }
             }
 
+            for (int i = 0; i < creditosbool.Length; i++)
+            {
+                if(creditosbool[i])
+                {
+                    spriteBatch.Draw(creditosimagem[i], creditosobj, Color.White);
+                }
+            }
+
+            spriteBatch.Draw(clickerimagem, clickerobj, Color.White);
+
             if (fimbool)
             {
-                fimobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, 2000, 1200);
+                fimobj = new Rectangle((int)-camera.Transform.Translation.X, (int)-camera.Transform.Translation.Y, GraphicsDevice.DisplayMode.Width, GraphicsDevice.DisplayMode.Height);
                 spriteBatch.Draw(fimimagem, fimobj, Color.White);
             }
 
